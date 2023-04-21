@@ -1,0 +1,26 @@
+.Calculateur {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    .Item {
+        min-height: 400px;
+        min-width: 300px;
+        max-width: 100%;
+        flex: 1;
+        &:nth-child(1) {
+            background-color: aqua;
+        }
+        &:nth-child(2) {
+            background-color: aliceblue;
+            flex: 2;
+        }
+        &:nth-child(3) {
+            background-color: aquamarine;
+        }
+    }
+}

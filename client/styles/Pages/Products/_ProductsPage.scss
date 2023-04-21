@@ -1,0 +1,12 @@
+.ProductPage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    @import "./Imports/1. Title Bar";
+    @import "./Imports/2.\ Calculateur";
+}

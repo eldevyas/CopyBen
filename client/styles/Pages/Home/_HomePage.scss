@@ -1,0 +1,12 @@
+.HomePage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    @import "./Imports/1.\ First\ Section";
+    @import "./Imports/2.\ Second\ Section";
+    @import "./Imports/3.\ Third\ Section";
+}
