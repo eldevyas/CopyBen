@@ -1,3 +1,9 @@
-import react from "react";
+import React from 'react' ; 
 
-let Number: string = "";
+export default function Products() {
+  return (
+    <div>
+       <h1>hello world</h1>
+    </div>
+  )
+}
