@@ -2,8 +2,7 @@ import React from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import Slider from "react-slick";
-import { baseUrl } from "./config";
+
 
 export default function Page() {
     return (
@@ -29,14 +28,7 @@ export default function Page() {
             </div>
             <div className="Calculateur">
                 <div className="Item Info">
-                const settings = {
-                dots: true,
-                fade: true,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1
-    };
+                
                 </div>
                 <div className="Item App">
                     <div className="Left">
