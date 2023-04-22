@@ -42,11 +42,11 @@ export default function Page() {
                         <div className="FirstDiv">
                             <label className="lab">Quantité</label>
                             <select className="BasicInput">
-                                <option value="">2500</option>
-                                <option value="">5000</option>
-                                <option value="">10000</option>
-                                <option value="">15000</option>
-                                <option value="">20000</option>
+                                <option className="Option" value="">2500</option>
+                                <option className="Option" value="">5000</option>
+                                <option className="Option" value="">10000</option>
+                                <option className="Option" value="">15000</option>
+                                <option className="Option" value="">20000</option>
                             </select>
 
                         </div>
@@ -59,8 +59,8 @@ export default function Page() {
                         <div className="FirstDiv">
                             <label className="lab">Impression</label>
                             <select className="BasicInput">
-                                <option value="">Recto Verso </option>
-                                <option value="">Recto</option>
+                                <option className="Option" value="">Recto Verso </option>
+                                <option className="Option" value="">Recto</option>
 
                             </select>
                         </div>
@@ -74,48 +74,33 @@ export default function Page() {
                             <select className="BasicInput">
                                 <option className="Option" value="">oui</option>
                                 <option className="Option" value="">non</option>
-
                             </select>
                         </div>
 
                         <div className="FirstDiv FixedDiv">
                             <div className="YellowSection">
-                                <p className="YellowSectionParag">Total HT:1 347,81Dh</p>
+                                <p className="YellowSectionParag">Total HT : 1 347,81Dh</p>
                                 <p className="LittlePar">Prix unitaire 0,54</p>
-
                             </div>
                         </div>
-
-                        <div>
-                            <p>more informations</p>
-                            <details>
-                                <summary className="ButtonHide"></summary>
-
-                                <select className="BasicInput">
-                                    <option className="OptinLiver">Livraison gratuite</option>
-                                </select>
-                            </details>
-
-
-                        </div>
-                        <hr className="HR" />
-
-                        <div>
-                            <p className="lab">Télécharger ou recevoir des messages </p>
-                            <details>
-                                <summary className="ButtonHide"></summary>
-                                <input className="BasicInput" type="email" placeholder="email" />
-                            </details>
-
-
-                        </div>
-
-
+                    </div>
+                    <div>
+                        <details>
+                            <summary className="ButtonHide">more informations</summary>
+                            <select className="BasicInput">
+                                <option className="OptinLiver">Livraison gratuite</option>
+                            </select>
+                        </details>
+                    </div>
+                    {/* <hr className="HR" /> */}
+                    <div>
+                        <details>
+                            <summary className="ButtonHide">Télécharger ou recevoir des messages</summary>
+                            <input className="BasicInput" type="email" placeholder="email" />
+                        </details>
 
 
                     </div>
-
-
                 </div>
                 <div className="Item Actions">
                     div3
