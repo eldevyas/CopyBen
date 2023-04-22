@@ -117,8 +117,28 @@ export default function Page() {
                     
                 </div>
                 <div className="Item Actions">
-                    div3
+                    <div>
+                    <p className="H3Style">Etape2 : Personnaliser et commander</p> 
+                    </div>
+                    <div>
+                    <button className="BlackButton">Passer Commande  Envoyer fichier en ligneou plus tard par mail ici</button>
+                    </div>
+                    <div>
+                    <button className="PinkButton">Choisir un design modifiable en ligne</button>
+                    </div>
+                    <div>
+                    <button className="GreyButton">Choisir un design modifiable en ligne</button>
+                    </div>
+                    <div>
+                    <button className="YellowButton">Besoin d'aide pour le design ou pour une modification ?</button>
+                    </div>
+                    <div>
+                    <button className="BlueButton">Demander un devis sur mesure ?</button>
+                    </div>
                 </div>
+            </div>
+            <div>
+              <hr />
             </div>
         </div>
     );

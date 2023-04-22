@@ -20,7 +20,7 @@
             flex: 2;
         }
         &:nth-child(3) {
-            background-color: aquamarine;
+            background-color:white;
         }
     }
     .h1{
@@ -100,6 +100,64 @@
     }
     .OptinLiver{
         font-weight: bold;
+    }
+    .H3Style{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: x-large;
+        color: grey;
+        margin-bottom: 5%;
+    }
+    .BlackButton{
+        width: 90%;
+        height: 90px;
+        font-weight: bold;
+        color: white;
+        background-color: black;
+        font-size: large;
+        margin-bottom: 1rem;
+    }
+    .PinkButton{
+        width: 90%;
+        height: 90px;
+        font-weight: bold;
+        color: white;
+        background-color: rgb(255, 0, 140);
+        font-size: large;
+       
+        margin-bottom: 1rem;
+    }
+    .GreyButton{
+        width: 90%;
+        height: 90px;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        background-color: rgb(197, 196, 196);
+        font-size: large;
+      
+        margin-bottom: 1rem;
+    }
+    .YellowButton{
+        width: 90%;
+        height: 200px;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        background-color: rgb(245, 253, 15);
+        font-size: large;
+      
+        margin-bottom: 1rem;
+    }
+    .BlueButton{
+        width: 90%;
+        height: 90px;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+        background-color: rgb(71, 111, 255);
+        font-size: large;
+      
+        margin-bottom: 1rem;
+    }
+    .LittleStyleP{
+        font-size: medium;
     }
    
 }
