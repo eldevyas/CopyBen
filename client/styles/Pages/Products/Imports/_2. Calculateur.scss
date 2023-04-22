@@ -13,14 +13,93 @@
         max-width: 100%;
         flex: 1;
         &:nth-child(1) {
-            background-color: aqua;
+            background-color: rgb(200, 192, 192);
         }
         &:nth-child(2) {
-            background-color: aliceblue;
+            background-color: white;
             flex: 2;
         }
         &:nth-child(3) {
             background-color: aquamarine;
         }
     }
+    .h1{
+        color: grey;
+        font-family:'Courier New', Courier, monospace;
+        margin-bottom:15px ;
+    }
+    .p{
+        background-color: black;
+        color: white;
+        width: 32%;
+        height: 18px;
+        border-radius: 1rem;
+        margin-bottom: 25px;
+
+    }
+       
+  
+    .lab{
+        font-weight: bold;
+        margin-bottom: 1rem;
+       
+    }
+    .BasicInput{
+        width: 95%;
+        border-radius: 1rem;
+        height: 2rem;
+        margin-bottom: 1rem;
+        
+    }
+    .Option{
+        color: grey;
+    }
+    .YellowSection{
+        background-color: yellow;
+        width:95%;
+        height: 75px;
+        margin-bottom: 3rem;
+    }
+    .YellowSectionParag{
+        font-weight: bold;
+        font-size:x-large;
+        float: right;
+       
+    }
+    .LittlePar{
+        font-size: small;
+        color: grey;
+        margin-top: 2rem;
+        float: right;
+        margin-right: 15px;
+        
+    }
+    .FirstDiv{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .HR{
+        margin-bottom: 3rem;
+    }
+    .StyleP{
+        margin-left: 25rem;
+        font-weight: bold;
+        font-size: x-large;
+    }
+    .Left{
+        margin-left: 15px;
+    }
+    .ButtonHide{
+        background-color: grey;
+        color: rgb(5, 5, 5);
+        width: 2%;
+        height: 1%;
+       
+       float: right;
+    }
+    .OptinLiver{
+        font-weight: bold;
+    }
+   
 }
