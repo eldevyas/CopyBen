@@ -12,7 +12,7 @@
     align-items: stretch;
     width: 100%;
     &__TopBar {
-        background-color: #fcfcfc;
+        background-color: $C2;
         position: relative;
         width: 100%;
         height: auto;
@@ -45,9 +45,128 @@
                 }
                 &:hover {
                     cursor: pointer;
-                    background-color: aquamarine;
+                    background-color: $C3;
                     color: #fff;
                 }
+            }
+        }
+    }
+    &__Main {
+        position: relative;
+        min-height: 50px;
+        width: 100%;
+        background-color: #eee;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        padding: 1rem;
+        &__Logo {
+            position: relative;
+            min-width: 200px;
+            min-height: 50px;
+            height: 100%;
+            background-color: transparent;
+            .LogoImage {
+                position: relative;
+                width: 100%;
+                height: auto;
+                max-height: 50px;
+                object-fit: contain;
+            }
+            transition: all .3s ease;
+            cursor: pointer;
+            &:hover {
+                transform: scale(105%);
+            }
+            &:active {
+                transform: scale(95%);
+            }
+        }
+        &__Search {
+            position: relative;
+            width: 100%;
+            min-height: 50px;
+            // background-color: $C4;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            &__Bar {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                &__Input {
+                    position: relative;
+                    flex: 1;
+                    padding: 1rem 2rem;
+                    padding-left: 3.5rem;
+                    font-size: 1rem;
+                    border: none;
+                    border-radius: 1rem;
+                    border: none;
+                    outline: none;
+                }
+                &__Button {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    border-radius: 1rem;
+                    height: 100%;
+                    width: auto;
+                    aspect-ratio: 1/1;
+                }
+            }
+        }
+        &__Contact {
+            position: relative;
+            min-width: 200px;
+            min-height: 50px;
+            // background-color: $C5;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            &__Icon {
+                position: relative;
+                svg {
+                    font-size: 2rem;
+                }
+            }
+            &__Numbers {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 0rem;
+                &__Number {
+                    font-size: 1rem;
+                    font-weight: 900;
+                    transition: all .3s ease;
+                    &:hover {
+                        color: $C4;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    &__Navigation {
+        position: relative;
+        width: 100%;
+        // min-height: 50px;
+        background-color: $C1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__Links {
+            position: relative;
+            &__Link {
+                font-family: inherit;
+                position: relative;
+                height: 100%;
+                font-size: 0.85rem;
+                font-weight: bold;
             }
         }
     }
