@@ -27,7 +27,9 @@ export default function Page() {
             </div>
             <div className="Calculateur">
                 <div className="Item Info"></div>
-                <div className="Item App"></div>
+                <div className="Item App">
+                    
+                </div>
                 <div className="Item Actions"></div>
             </div>
         </div>
