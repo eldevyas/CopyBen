@@ -2,8 +2,7 @@ import React from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import SimpleSlider from '../slider/SimpleSlider';
-
+import SimpleSlider from "../slider/SimpleSlider";
 
 export default function Page() {
     return (
@@ -34,10 +33,17 @@ export default function Page() {
                 <div className="Item App">
                     <div className="Left">
                         <h1 className="h1">Etape 1 : Calculateur de prix </h1>
-                        <p className="p">Prix dégressifs selon la quantité et l'impression</p>
+                        <p className="p">
+                            Prix dégressifs selon la quantité et l'impression
+                        </p>
                         <div className="FirstDiv">
                             <label className="lab">Taille</label>
-                            <input className="BasicInput" type="text" value={"A4 -29,7 * 21cm"} disabled />
+                            <input
+                                className="BasicInput"
+                                type="text"
+                                value={"A4 -29,7 * 21cm"}
+                                disabled
+                            />
                         </div>
                         <div className="FirstDiv">
                             <label className="lab">Quantité</label>
@@ -48,12 +54,16 @@ export default function Page() {
                                 <option value="">15000</option>
                                 <option value="">20000</option>
                             </select>
-
                         </div>
 
                         <div className="FirstDiv">
                             <label className="lab">Papier</label>
-                            <input className="BasicInput" type="text" value={"135 gr - Couché"} disabled />
+                            <input
+                                className="BasicInput"
+                                type="text"
+                                value={"135 gr - Couché"}
+                                disabled
+                            />
                         </div>
 
                         <div className="FirstDiv">
@@ -61,28 +71,41 @@ export default function Page() {
                             <select className="BasicInput">
                                 <option value="">Recto Verso </option>
                                 <option value="">Recto</option>
-
                             </select>
                         </div>
 
                         <div className="FirstDiv">
-                            <label className="lab" >Délais de livraison prévisionnel -- Super Promo A4</label>
-                            <input className="BasicInput" type="text" value={"Stantard > 5 à 7 jours ouvrés"} disabled />
+                            <label className="lab">
+                                Délais de livraison prévisionnel -- Super Promo
+                                A4
+                            </label>
+                            <input
+                                className="BasicInput"
+                                type="text"
+                                value={"Stantard > 5 à 7 jours ouvrés"}
+                                disabled
+                            />
                         </div>
                         <div className="FirstDiv">
-                            <label className="lab">Vous avez besoin de conception pour ce produit ?</label>
+                            <label className="lab">
+                                Vous avez besoin de conception pour ce produit ?
+                            </label>
                             <select className="BasicInput">
-                                <option className="Option" value="">oui</option>
-                                <option className="Option" value="">non</option>
-
+                                <option className="Option" value="">
+                                    oui
+                                </option>
+                                <option className="Option" value="">
+                                    non
+                                </option>
                             </select>
                         </div>
 
                         <div className="FirstDiv FixedDiv">
                             <div className="YellowSection">
-                                <p className="YellowSectionParag">Total HT:1 347,81Dh</p>
+                                <p className="YellowSectionParag">
+                                    Total HT:1 347,81Dh
+                                </p>
                                 <p className="LittlePar">Prix unitaire 0,54</p>
-
                             </div>
                         </div>
 
@@ -92,34 +115,30 @@ export default function Page() {
                                 <summary className="ButtonHide"></summary>
 
                                 <select className="BasicInput">
-                                    <option className="OptinLiver">Livraison gratuite</option>
+                                    <option className="OptinLiver">
+                                        Livraison gratuite
+                                    </option>
                                 </select>
                             </details>
-
-
                         </div>
                         <hr className="HR" />
 
                         <div>
-                            <p className="lab">Télécharger ou recevoir des messages </p>
+                            <p className="lab">
+                                Télécharger ou recevoir des messages{" "}
+                            </p>
                             <details>
                                 <summary className="ButtonHide"></summary>
-                                <input className="BasicInput" type="email" placeholder="email" />
+                                <input
+                                    className="BasicInput"
+                                    type="email"
+                                    placeholder="email"
+                                />
                             </details>
-
-
                         </div>
-
-
-
-
                     </div>
-
-
                 </div>
-                <div className="Item Actions">
-                    div3
-                </div>
+                <div className="Item Actions">div3</div>
             </div>
         </div>
     );
