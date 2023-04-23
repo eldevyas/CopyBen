@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-
+import Image from 'next/image';
+import myImg from '../../public/illumy.png';
 
 
 export default class SimpleSlider extends Component {
@@ -17,27 +18,36 @@ export default class SimpleSlider extends Component {
       autoplaySpeed: 2000,
       cssEase: "linear"
     };
+
+    const myStl = {
+      'text-align': 'center'
+    }
+
+    const con = {
+      'display': 'block',
+      'margin': 'auto'
+    }
     return (
-      <div>
-        <h2>Auto Play</h2>
+      <div style={myStl}>
+        <h2>Tferj hna</h2>
         <Slider {...settings}>
-          <div className="con">
-            <h3>1</h3>
+          <div>
+            <Image style={con} src={myImg} alt="pro" width={300} height={300} />
           </div>
           <div className="con">
-            <h3>2</h3>
+          <Image style={con} src={myImg} alt="pro" width={300} height={300}/>
           </div>
           <div className="con">
-            <h3>3</h3>
+          <Image style={con} src={myImg} alt="pro" width={300} height={300}/>
           </div>
           <div className="con">
-            <h3>4</h3>
+          <Image style={con} src={myImg} alt="pro" width={300} height={300}/>
           </div>
           <div className="con">
-            <h3>5</h3>
+          <Image style={con} src={myImg} alt="pro" width={300} height={300}/>
           </div>
           <div className="con">
-            <h3>6</h3>
+          <Image style={con} src={myImg} alt="pro" width={300} height={300}/>
           </div>
         </Slider>
       </div>
