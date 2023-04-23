@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -6,6 +6,10 @@ import SimpleSlider from '../slider/SimpleSlider';
 
 
 export default function Page() {
+
+    const [quantite, setQuantite] = useState(2500);
+    const price = quantite*0.54;
+    // console.log(quantite)
     return (
         <div className="ProductPage">
             <div className="TitleBar">
@@ -32,23 +36,23 @@ export default function Page() {
                     <SimpleSlider />
                 </div>
                 <div className="Item App">
+                    <form>
                     <div className="Left">
                         <h1 className="h1">Etape 1 : Calculateur de prix </h1>
-                        <p className="p">Prix dégressifs selon la quantité et l'impression</p>
+                        <p className="p">Prix dégressifs selon la quantité et l&apos;impression</p>
                         <div className="FirstDiv">
                             <label className="lab">Taille</label>
                             <input className="BasicInput" type="text" value={"A4 -29,7 * 21cm"} disabled />
                         </div>
                         <div className="FirstDiv">
                             <label className="lab">Quantité</label>
-                            <select className="BasicInput">
-                                <option className="Option" value="">2500</option>
-                                <option className="Option" value="">5000</option>
-                                <option className="Option" value="">10000</option>
-                                <option className="Option" value="">15000</option>
-                                <option className="Option" value="">20000</option>
+                            <select onChange={(e)=>setQuantite(parseInt(e.target.value))} className="BasicInput">
+                                <option className="Option" value="2500">2500</option>
+                                <option className="Option" value="5000">5000</option>
+                                <option className="Option" value="10000">10000</option>
+                                <option className="Option" value="15000">15000</option>
+                                <option className="Option" value="20000">20000</option>
                             </select>
-
                         </div>
 
                         <div className="FirstDiv">
@@ -61,7 +65,6 @@ export default function Page() {
                             <select className="BasicInput">
                                 <option className="Option" value="">Recto Verso </option>
                                 <option className="Option" value="">Recto</option>
-
                             </select>
                         </div>
 
@@ -79,7 +82,7 @@ export default function Page() {
 
                         <div className="FirstDiv FixedDiv">
                             <div className="YellowSection">
-                                <p className="YellowSectionParag">Total HT : 1 347,81Dh</p>
+                                <p className="YellowSectionParag">Total HT : {price.toFixed(2)} Dh</p>
                                 <p className="LittlePar">Prix unitaire 0,54</p>
                             </div>
                         </div>
@@ -98,9 +101,8 @@ export default function Page() {
                             <summary className="ButtonHide">Télécharger ou recevoir des messages</summary>
                             <input className="BasicInput" type="email" placeholder="email" />
                         </details>
-
-
                     </div>
+                    </form>
                 </div>
                 <div className="Item Actions">
                     <div>
