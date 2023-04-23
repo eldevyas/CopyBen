@@ -102,6 +102,8 @@ export default function Page() {
                             <input className="BasicInput" type="email" placeholder="email" />
                         </details>
                     </div>
+
+                    <button className="btn" type="submit">Envoyer la commande</button>
                     </form>
                 </div>
                 <div className="Item Actions">

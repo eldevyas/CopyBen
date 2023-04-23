@@ -31,12 +31,13 @@
         margin-bottom:15px;
     }
     .p{
-        background-color: rgb(223, 218, 71);
+        background-color: rgb(225, 225, 28);
         color: rgb(187, 67, 23);
         width: fit-content;
         padding: .5rem;
         border-radius: .5rem;
         margin-bottom: 25px;
+        font-weight: 600;
     }
        
     .lab{
@@ -177,5 +178,20 @@
     .LittleStyleP{
         font-size: medium;
     }
-   
+    .btn{
+        display: block;
+        margin: 1rem auto;
+        padding: .6rem 1rem;
+        cursor: pointer;
+        font-size: 1.2rem;
+        background-color: rgb(225, 225, 28);
+        outline: none;
+        border: none;
+        font-weight: 700;
+        border-radius: .4rem;
+        transition: .2s linear;
+        &:hover{
+        background-color: rgb(179, 179, 20);
+        }
+    }
 }
