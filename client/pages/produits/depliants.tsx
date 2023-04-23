@@ -38,13 +38,7 @@ export default function Page() {
                     <form>
                     <div className="Left">
                         <h1 className="h1">Etape 1 : Calculateur de prix </h1>
-<<<<<<< HEAD
-                        <p className="p">
-                            Prix dégressifs selon la quantité et l'impression
-                        </p>
-=======
                         <p className="p">Prix dégressifs selon la quantité et l&apos;impression</p>
->>>>>>> 82b84eb23841ec21b44876913f06ad578b3ad265
                         <div className="FirstDiv">
                             <label className="lab">Taille</label>
                             <input
@@ -78,13 +72,8 @@ export default function Page() {
                         <div className="FirstDiv">
                             <label className="lab">Impression</label>
                             <select className="BasicInput">
-<<<<<<< HEAD
-                                <option value="">Recto Verso </option>
-                                <option value="">Recto</option>
-=======
                                 <option className="Option" value="">Recto Verso </option>
                                 <option className="Option" value="">Recto</option>
->>>>>>> 82b84eb23841ec21b44876913f06ad578b3ad265
                             </select>
                         </div>
 
@@ -105,59 +94,13 @@ export default function Page() {
                                 Vous avez besoin de conception pour ce produit ?
                             </label>
                             <select className="BasicInput">
-<<<<<<< HEAD
-                                <option className="Option" value="">
-                                    oui
-                                </option>
-                                <option className="Option" value="">
-                                    non
-                                </option>
-=======
                                 <option className="Option" value="">oui</option>
                                 <option className="Option" value="">non</option>
->>>>>>> 82b84eb23841ec21b44876913f06ad578b3ad265
                             </select>
                         </div>
 
                         <div className="FirstDiv FixedDiv">
                             <div className="YellowSection">
-<<<<<<< HEAD
-                                <p className="YellowSectionParag">
-                                    Total HT:1 347,81Dh
-                                </p>
-                                <p className="LittlePar">Prix unitaire 0,54</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p>more informations</p>
-                            <details>
-                                <summary className="ButtonHide"></summary>
-
-                                <select className="BasicInput">
-                                    <option className="OptinLiver">
-                                        Livraison gratuite
-                                    </option>
-                                </select>
-                            </details>
-                        </div>
-                        <hr className="HR" />
-
-                        <div>
-                            <p className="lab">
-                                Télécharger ou recevoir des messages{" "}
-                            </p>
-                            <details>
-                                <summary className="ButtonHide"></summary>
-                                <input
-                                    className="BasicInput"
-                                    type="email"
-                                    placeholder="email"
-                                />
-                            </details>
-                        </div>
-                    </div>
-=======
                                 <p className="YellowSectionParag">Total HT : {price.toFixed(2)} Dh</p>
                                 <p className="LittlePar">Prix unitaire 0,54</p>
                             </div>
@@ -201,7 +144,6 @@ export default function Page() {
                     <div>
                     <button className="BlueButton">Demander un devis sur mesure ?</button>
                     </div>
->>>>>>> 82b84eb23841ec21b44876913f06ad578b3ad265
                 </div>
                 <div className="Item Actions">div3</div>
             </div>
