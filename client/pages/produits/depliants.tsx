@@ -102,6 +102,7 @@ export default function Page() {
                             <input className="BasicInput" type="email" placeholder="email" />
                         </details>
                     </div>
+                    <button className="ValidButt">Vaider Votre Commande</button>
                     </form>
                 </div>
                 <div className="Item Actions">
@@ -128,6 +129,7 @@ export default function Page() {
             <div>
               <hr />
             </div>
+            
         </div>
     );
 }
