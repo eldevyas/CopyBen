@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import HeroSlider from "./Base/1. Hero Slider";
 
 export default function HomePage() {
     return (
@@ -8,7 +9,9 @@ export default function HomePage() {
                 <title>CopyBen - Accueil</title>
             </Head>
 
-            <div className="PageContent"></div>
+            <div className="PageContent">
+                <HeroSlider />
+            </div>
         </div>
     );
 }
