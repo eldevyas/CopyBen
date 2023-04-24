@@ -1,3 +1,25 @@
-@mixin Button($Color) {
+@mixin random-bgr() {
+    background: rgb(random(255), random(255), random(255));
+}
+
+@mixin Section() {
     position: relative;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+@mixin Section__Title() {
+    text-align: center;
+    padding: 0 1rem;
+    font-size: 1.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: $C1;
 }

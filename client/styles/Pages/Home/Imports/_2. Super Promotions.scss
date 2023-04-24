@@ -1,0 +1,94 @@
+.SuperPromotions {
+    @include Section__Title();
+
+    &__Title {
+        @include Section__Title();
+    }
+
+    &__Slider {
+        width: 100%;
+        height: auto;
+
+        .Slide {
+            position: relative;
+            padding: 1rem;
+
+            .Card {
+                position: relative;
+                min-width: 200px;
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: $C2;
+                border: 0.5rem solid #eee;
+                overflow: hidden;
+
+                &__Image {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 1/1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #ccc;
+                    overflow: hidden;
+
+                    img,
+                    .ImagePlaceHolder {
+                        transition: all .3s ease;
+                    }
+
+                    &:hover {
+
+                        img,
+                        .ImagePlaceHolder {
+                            transform: scale(110%);
+                            background-color: $C3;
+
+                            svg {
+                                color: #fff;
+                            }
+                        }
+                    }
+
+                }
+
+                &__Content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+
+                    &__Title {
+                        position: relative;
+                        font-size: 0.75rem;
+                        font-weight: bold;
+                        color: $C1;
+                    }
+
+                    &__Button {
+                        position: relative;
+                        color: $C1;
+                        background-color: $C5;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        white-space: wrap;
+                        gap: 0.5rem;
+                        font-family: inherit;
+                        font-weight: 900;
+                        padding: 1rem;
+                        // text-transform: none;
+                        font-size: 0.85rem;
+                    }
+                }
+            }
+        }
+    }
+}
