@@ -31,12 +31,13 @@
         margin-bottom:15px;
     }
     .p{
-        background-color: rgb(223, 218, 71);
+        background-color: rgb(225, 225, 28);
         color: rgb(187, 67, 23);
         width: fit-content;
         padding: .5rem;
         border-radius: .5rem;
         margin-bottom: 25px;
+        font-weight: 600;
     }
        
     .lab{
@@ -125,63 +126,40 @@
         color: grey;
         margin-bottom: 5%;
     }
-    .BlackButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: white;
-        background-color: black;
-        font-size: large;
-        margin-bottom: 1rem;
-    }
-    .PinkButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: white;
-        background-color: rgb(255, 0, 140);
-        font-size: large;
-       
-        margin-bottom: 1rem;
-    }
-    .GreyButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: rgb(0, 0, 0);
-        background-color: rgb(197, 196, 196);
-        font-size: large;
-      
-        margin-bottom: 1rem;
-    }
-    .YellowButton{
+    .OrangeButton{
         width: 90%;
         height: 200px;
         font-weight: bold;
-        color: rgb(0, 0, 0);
-        background-color: rgb(245, 253, 15);
+        color: white;
+        background-color: $C3;
         font-size: large;
-      
         margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 3rem;
+        border-radius: .3rem;
+        cursor: pointer;
+        border: none;
+        
     }
-    .BlueButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: rgb(255, 255, 255);
-        background-color: rgb(71, 111, 255);
-        font-size: large;
-      
-        margin-bottom: 1rem;
-    }
+    
+   
+    
     .LittleStyleP{
         font-size: medium;
     }
+
     .ValidButt{
-        width: 20%;
-        height: 50px;
-        color: white;
-        background-color: rgb(140, 140, 140);
-        margin-left: 200px;
+        width: 200px;
+        height: 60px;
+        border: none;
+        margin-left: 35%;
+        font-weight: bold;
+        background-color: yellow;
+        margin-top: 10%;
+        cursor: pointer;
+        border-radius: .3rem;
     }
+   
 }

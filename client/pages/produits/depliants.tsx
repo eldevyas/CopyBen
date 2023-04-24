@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import SimpleSlider from '../slider/SimpleSlider';
-
+import SimpleSlider from "../slider/SimpleSlider";
 
 export default function Page() {
 
@@ -42,7 +41,12 @@ export default function Page() {
                         <p className="p">Prix dégressifs selon la quantité et l&apos;impression</p>
                         <div className="FirstDiv">
                             <label className="lab">Taille</label>
-                            <input className="BasicInput" type="text" value={"A4 -29,7 * 21cm"} disabled />
+                            <input
+                                className="BasicInput"
+                                type="text"
+                                value={"A4 -29,7 * 21cm"}
+                                disabled
+                            />
                         </div>
                         <div className="FirstDiv">
                             <label className="lab">Quantité</label>
@@ -57,7 +61,12 @@ export default function Page() {
 
                         <div className="FirstDiv">
                             <label className="lab">Papier</label>
-                            <input className="BasicInput" type="text" value={"135 gr - Couché"} disabled />
+                            <input
+                                className="BasicInput"
+                                type="text"
+                                value={"135 gr - Couché"}
+                                disabled
+                            />
                         </div>
 
                         <div className="FirstDiv">
@@ -69,11 +78,21 @@ export default function Page() {
                         </div>
 
                         <div className="FirstDiv">
-                            <label className="lab" >Délais de livraison prévisionnel -- Super Promo A4</label>
-                            <input className="BasicInput" type="text" value={"Stantard > 5 à 7 jours ouvrés"} disabled />
+                            <label className="lab">
+                                Délais de livraison prévisionnel -- Super Promo
+                                A4
+                            </label>
+                            <input
+                                className="BasicInput"
+                                type="text"
+                                value={"Stantard > 5 à 7 jours ouvrés"}
+                                disabled
+                            />
                         </div>
                         <div className="FirstDiv">
-                            <label className="lab">Vous avez besoin de conception pour ce produit ?</label>
+                            <label className="lab">
+                                Vous avez besoin de conception pour ce produit ?
+                            </label>
                             <select className="BasicInput">
                                 <option className="Option" value="">oui</option>
                                 <option className="Option" value="">non</option>
@@ -96,7 +115,7 @@ export default function Page() {
                         </details>
                     </div>
                     {/* <hr className="HR" /> */}
-                    <div>
+                    <div >
                         <details>
                             <summary className="ButtonHide">Télécharger ou recevoir des messages</summary>
                             <input className="BasicInput" type="email" placeholder="email" />
@@ -110,20 +129,9 @@ export default function Page() {
                     <p className="H3Style">Etape2 : Personnaliser et commander</p> 
                     </div>
                     <div>
-                    <button className="BlackButton">Passer Commande  Envoyer fichier en ligneou plus tard par mail ici</button>
+                    <button className="OrangeButton">Passer Commande  Envoyer fichier en ligne ou plus tard par mail ici</button>
                     </div>
-                    <div>
-                    <button className="PinkButton">Choisir un design modifiable en ligne</button>
-                    </div>
-                    <div>
-                    <button className="GreyButton">Choisir un design modifiable en ligne</button>
-                    </div>
-                    <div>
-                    <button className="YellowButton">Besoin d'aide pour le design ou pour une modification ?</button>
-                    </div>
-                    <div>
-                    <button className="BlueButton">Demander un devis sur mesure ?</button>
-                    </div>
+                   
                 </div>
             </div>
             <div>

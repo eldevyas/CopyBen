@@ -6,7 +6,14 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    @import "./Imports/1.\ First\ Section";
-    @import "./Imports/2.\ Second\ Section";
-    @import "./Imports/3.\ Third\ Section";
+    max-width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
+    .PageContent {
+        position: relative;
+        width: 100%;
+        @import "./Imports/1.\ Hero\ Slider";
+        @import "./Imports/2.\ Second\ Section";
+        @import "./Imports/3.\ Third\ Section";
+    }
 }

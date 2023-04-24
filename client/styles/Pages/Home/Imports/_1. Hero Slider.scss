@@ -1,0 +1,63 @@
+.HeroSlider {
+    position: relative;
+    width: 100%;
+    background-color: gray;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__Slider {
+        position: relative;
+        width: 100%;
+        height: auto;
+        .MainSlider {
+            position: relative;
+            width: 100%;
+            .slick-slide {
+                position: relative;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                min-height: 300px;
+                background-color: $C5;
+            }
+            .slick-dots {
+                position: absolute;
+                bottom: 1rem;
+                li {
+                    position: relative;
+                    border-radius: 0;
+                    width: 2rem;
+                    height: 0.4rem;
+                    background-color: rgba($color: #000000, $alpha: 0.25);
+                    button {
+                        opacity: 0;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    &.slick-active {
+                        background-color: rgba($color: #000000, $alpha: 0.5);
+                    }
+                }
+            }
+            .Slide {
+                position: relative;
+                width: 100vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                h3 {
+                    position: relative;
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}
