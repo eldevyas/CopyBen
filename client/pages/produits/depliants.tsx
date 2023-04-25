@@ -260,7 +260,7 @@ export default function Page() {
 
                         <button
                             onClick={onSubmit}
-                            className="btn"
+                            className="ValidButt"
                             type="submit"
                         >
                             Envoyer la commande
@@ -274,33 +274,14 @@ export default function Page() {
                         </p>
                     </div>
                     <div>
-                        <button className="BlackButton">
-                            Passer Commande Envoyer fichier en ligneou plus tard
+                        <button className="OrangeButton">
+                            Passer Commande Envoyer fichier en ligne ou plus tard
                             par mail ici
                         </button>
                     </div>
-                    <div>
-                        <button className="PinkButton">
-                            Choisir un design modifiable en ligne
-                        </button>
-                    </div>
-                    <div>
-                        <button className="GreyButton">
-                            Choisir un design modifiable en ligne
-                        </button>
-                    </div>
-                    <div>
-                        <button className="YellowButton">
-                            Besoin d&apos;aide pour le design ou pour une
-                            modification ?
-                        </button>
-                    </div>
-                    <div>
-                        <button className="BlueButton">
-                            Demander un devis sur mesure ?
-                        </button>
-                    </div>
                    
+                       
+                       
                 </div>
                 {/* <div className="Item Actions">div3</div> */}
             </div>
