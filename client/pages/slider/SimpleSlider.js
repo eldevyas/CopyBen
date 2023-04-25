@@ -20,7 +20,7 @@ export default class SimpleSlider extends Component {
     };
 
     const myStl = {
-      'text-align': 'center'
+      'textAlign': 'center'
     }
 
     const con = {

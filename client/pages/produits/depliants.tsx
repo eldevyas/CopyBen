@@ -4,11 +4,45 @@ import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import SimpleSlider from "../slider/SimpleSlider";
 
+const initValues = { name: "", email: "", taille: "A4 -29,7 * 21cm", quantite: "2500", papier: "135 gr - Couché", impression: "Recto Verso" };
+const initState = { values: initValues };
+
+// Mailer imports
+import { sendContactForm } from "../../lib/api";
+
 export default function Page() {
 
-    const [quantite, setQuantite] = useState(2500);
-    const price = quantite*0.54;
-    // console.log(quantite)
+    // const [quantite, setQuantite] = useState(2500);
+    // const price = quantite * 0.54;
+    // Mailer Start
+
+    const [state, setState] = useState(initState);
+    const {values} = state;
+    
+    
+    const handleChange = ({ target }: {target: any}) =>
+    setState((prev) => ({
+      ...prev,
+      values: {
+        ...prev.values,
+        [target.name]: target.value,
+      },
+    }));
+    console.log(state)
+    const onSubmit = async () => {
+        setState((prev) => ({
+          ...prev,
+          isLoading: true,
+        }));
+        try {
+          await sendContactForm(values);
+          setState(initState);
+          console.log(state)
+        } catch (error) {
+            console.log(error)
+        }
+      };
+    // Mailer End
     return (
         <div className="ProductPage">
             <div className="TitleBar">
@@ -18,13 +52,13 @@ export default function Page() {
                         aria-label="Breadcrumb"
                         separator={<NavigateNextIcon fontSize="small" />}
                     >
-                        <Link color="inherit" href="#">
+                        <Link color="inherit" href="/">
                             Accueil
                         </Link>
-                        <Link color="inherit" href="#">
+                        <Link color="inherit" href="/">
                             Nos Produits
                         </Link>
-                        <Link color="inherit" href="#">
+                        <Link color="inherit" href="/">
                             Dépliants
                         </Link>
                     </Breadcrumbs>
@@ -36,108 +70,153 @@ export default function Page() {
                 </div>
                 <div className="Item App">
                     <form>
-                    <div className="Left">
-                        <h1 className="h1">Etape 1 : Calculateur de prix </h1>
-                        <p className="p">Prix dégressifs selon la quantité et l&apos;impression</p>
-                        <div className="FirstDiv">
-                            <label className="lab">Taille</label>
-                            <input
-                                className="BasicInput"
-                                type="text"
-                                value={"A4 -29,7 * 21cm"}
-                                disabled
-                            />
-                        </div>
-                        <div className="FirstDiv">
-                            <label className="lab">Quantité</label>
-                            <select onChange={(e)=>setQuantite(parseInt(e.target.value))} className="BasicInput">
-                                <option className="Option" value="2500">2500</option>
-                                <option className="Option" value="5000">5000</option>
-                                <option className="Option" value="10000">10000</option>
-                                <option className="Option" value="15000">15000</option>
-                                <option className="Option" value="20000">20000</option>
-                            </select>
-                        </div>
+                        <div className="Left">
+                            <h1 className="h1">Etape 1 : Calculateur de prix </h1>
 
-                        <div className="FirstDiv">
-                            <label className="lab">Papier</label>
-                            <input
-                                className="BasicInput"
-                                type="text"
-                                value={"135 gr - Couché"}
-                                disabled
-                            />
-                        </div>
+                            <p className="p">Note : le nom complet et l&apos;email sont obligatoires</p>
+                            <div className="FirstDiv">
+                                <label className="lab">Nom & Prénom <sup style={{'color': 'red'}}>*</sup></label>
+                                <input
+                                    className="BasicInput"
+                                    type="text"
+                                    required
+                                    name="name"
+                                    value={values.name}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="FirstDiv">
+                                <label className="lab">Email <sup style={{'color': 'red'}}>*</sup></label>
+                                <input
+                                    className="BasicInput"
+                                    type="email"
+                                    required
+                                    name="email"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div className="FirstDiv">
-                            <label className="lab">Impression</label>
-                            <select className="BasicInput">
-                                <option className="Option" value="">Recto Verso </option>
-                                <option className="Option" value="">Recto</option>
-                            </select>
-                        </div>
+                            <p className="p">Prix dégressifs selon la quantité et l&apos;impression</p>
+                            <div className="FirstDiv">
+                                <label className="lab">Taille</label>
+                                <input
+                                    className="BasicInput"
+                                    type="text"
+                                    value={"A4 -29,7 * 21cm"}
+                                    readOnly
+                                    name="taille"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="FirstDiv">
+                                <label className="lab">Quantité</label>
+                                <select defaultValue="2500" name="quantite" onChange={handleChange} className="BasicInput">
+                                    <option className="Option" value="2500">2500</option>
+                                    <option className="Option" value="5000">5000</option>
+                                    <option className="Option" value="10000">10000</option>
+                                    <option className="Option" value="15000">15000</option>
+                                    <option className="Option" value="20000">20000</option>
+                                </select>
+                            </div>
 
-                        <div className="FirstDiv">
-                            <label className="lab">
-                                Délais de livraison prévisionnel -- Super Promo
-                                A4
-                            </label>
-                            <input
-                                className="BasicInput"
-                                type="text"
-                                value={"Stantard > 5 à 7 jours ouvrés"}
-                                disabled
-                            />
-                        </div>
-                        <div className="FirstDiv">
-                            <label className="lab">
-                                Vous avez besoin de conception pour ce produit ?
-                            </label>
-                            <select className="BasicInput">
-                                <option className="Option" value="">oui</option>
-                                <option className="Option" value="">non</option>
-                            </select>
-                        </div>
+                            <div className="FirstDiv">
+                                <label className="lab">Papier</label>
+                                <input
+                                    className="BasicInput"
+                                    type="text"
+                                    value={"135 gr - Couché"}
+                                    readOnly
+                                    name="papier"
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div className="FirstDiv FixedDiv">
-                            <div className="YellowSection">
-                                <p className="YellowSectionParag">Total HT : {price.toFixed(2)} Dh</p>
-                                <p className="LittlePar">Prix unitaire 0,54</p>
+                            <div className="FirstDiv">
+                                <label className="lab">Impression</label>
+                                <select defaultValue="Recto Verso" name="impression" onChange={handleChange} className="BasicInput">
+                                    <option className="Option" value="Recto Verso">Recto Verso </option>
+                                    <option className="Option" value="Recto">Recto</option>
+                                </select>
+                            </div>
+
+                            <div className="FirstDiv">
+                                <label className="lab">
+                                    Délais de livraison prévisionnel -- Super Promo
+                                    A4
+                                </label>
+                                <input
+                                    className="BasicInput"
+                                    type="text"
+                                    value={"Stantard > 5 à 7 jours ouvrés"}
+                                    disabled
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="FirstDiv">
+                                <label className="lab">
+                                    Vous avez besoin de conception pour ce produit ?
+                                </label>
+                                <select onChange={handleChange} className="BasicInput">
+                                    <option className="Option" value="">oui</option>
+                                    <option className="Option" value="">non</option>
+                                </select>
+                            </div>
+
+                            <div className="FirstDiv FixedDiv">
+                                <div className="YellowSection">
+                                    <p className="YellowSectionParag">Total HT : 1800 Dh</p>
+                                    <p className="LittlePar">Prix unitaire 0,54</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <details>
-                            <summary className="ButtonHide">more informations</summary>
-                            <select className="BasicInput">
-                                <option className="OptinLiver">Livraison gratuite</option>
-                            </select>
-                        </details>
-                    </div>
-                    {/* <hr className="HR" /> */}
-                    <div >
-                        <details>
-                            <summary className="ButtonHide">Télécharger ou recevoir des messages</summary>
-                            <input className="BasicInput" type="email" placeholder="email" />
-                        </details>
-                    </div>
-                    <button className="ValidButt">Vaider Votre Commande</button>
+                        <div>
+                            <details>
+                                <summary className="ButtonHide">more informations</summary>
+                                <select onChange={handleChange} className="BasicInput">
+                                    <option className="OptinLiver">Livraison gratuite</option>
+                                </select>
+                            </details>
+                        </div>
+                        {/* <hr className="HR" /> */}
+                        <div>
+                            <details>
+                                <summary className="ButtonHide">Télécharger ou recevoir des messages</summary>
+                                <input onChange={handleChange} className="BasicInput" type="email" placeholder="email" />
+                            </details>
+                        </div>
+
+                        <button  onClick={onSubmit} className="btn" type="submit">Envoyer la commande</button>
                     </form>
                 </div>
                 <div className="Item Actions">
                     <div>
-                    <p className="H3Style">Etape2 : Personnaliser et commander</p> 
+                        <p className="H3Style">Etape2 : Personnaliser et commander</p>
                     </div>
                     <div>
-                    <button className="OrangeButton">Passer Commande  Envoyer fichier en ligne ou plus tard par mail ici</button>
+                        <button className="BlackButton">Passer Commande  Envoyer fichier en ligneou plus tard par mail ici</button>
+                    </div>
+                    <div>
+                        <button className="PinkButton">Choisir un design modifiable en ligne</button>
+                    </div>
+                    <div>
+                        <button className="GreyButton">Choisir un design modifiable en ligne</button>
+                    </div>
+                    <div>
+                        <button className="YellowButton">Besoin d'aide pour le design ou pour une modification ?</button>
+                    </div>
+                    <div>
+                        <button className="BlueButton">Demander un devis sur mesure ?</button>
                     </div>
                    
                 </div>
+                {/* <div className="Item Actions">div3</div> */}
             </div>
             <div>
-              <hr />
+                <hr />
             </div>
             
         </div>
     );
 }
+
