@@ -126,72 +126,40 @@
         color: grey;
         margin-bottom: 5%;
     }
-    .BlackButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: white;
-        background-color: black;
-        font-size: large;
-        margin-bottom: 1rem;
-    }
-    .PinkButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: white;
-        background-color: rgb(255, 0, 140);
-        font-size: large;
-       
-        margin-bottom: 1rem;
-    }
-    .GreyButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: rgb(0, 0, 0);
-        background-color: rgb(197, 196, 196);
-        font-size: large;
-      
-        margin-bottom: 1rem;
-    }
-    .YellowButton{
+    .OrangeButton{
         width: 90%;
         height: 200px;
         font-weight: bold;
-        color: rgb(0, 0, 0);
-        background-color: rgb(245, 253, 15);
+        color: white;
+        background-color: $C3;
         font-size: large;
-      
         margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 3rem;
+        border-radius: .3rem;
+        cursor: pointer;
+        border: none;
+        
     }
-    .BlueButton{
-        width: 90%;
-        height: 90px;
-        font-weight: bold;
-        color: rgb(255, 255, 255);
-        background-color: rgb(71, 111, 255);
-        font-size: large;
-      
-        margin-bottom: 1rem;
-    }
+    
+   
+    
     .LittleStyleP{
         font-size: medium;
     }
-    .btn{
-        display: block;
-        margin: 1rem auto;
-        padding: .6rem 1rem;
-        cursor: pointer;
-        font-size: 1.2rem;
-        background-color: rgb(225, 225, 28);
-        outline: none;
+
+    .ValidButt{
+        width: 200px;
+        height: 60px;
         border: none;
-        font-weight: 700;
-        border-radius: .4rem;
-        transition: .2s linear;
-        &:hover{
-        background-color: rgb(179, 179, 20);
-        }
+        margin-left: 35%;
+        font-weight: bold;
+        background-color: yellow;
+        margin-top: 10%;
+        cursor: pointer;
+        border-radius: .3rem;
     }
+   
 }
