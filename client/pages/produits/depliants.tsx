@@ -309,7 +309,7 @@ export default function Page() {
                                     <p className="p1">mecri de telecharge uniquement des fichiers ( .jgp  .jpeg )</p>
                                     <div className="box">
                                         <label>Nom du fichier : </label>
-                                        <input placeholder="Le Nom de fichier" className="input_text" type="text" />
+                                        <input placeholder="Le Nom du fichier" className="input_text" type="text" />
                                     </div>
                                     <p className="p2">Telecharger votre Recto ici :</p>
                                     <input accept="image/jpg, image/jpeg" className="input_file" type="file" />
