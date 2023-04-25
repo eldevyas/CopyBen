@@ -46,7 +46,7 @@ export default function Page() {
             },
         }));
 
-const price = state.values.quantite*0.54;
+const price: number = parseInt(state.values.quantite)*0.54;
 
     const onSubmit = async () => {
         setState((prev) => ({
