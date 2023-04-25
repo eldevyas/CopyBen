@@ -290,7 +290,7 @@ export default function Page() {
 
                             <div className="lol">
                                 <h1>Passer Commande</h1>
-                                <p className="para1">ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - FLYER A4)</p>
+                                <p className="para1">ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - DEPLIANTS)</p>
                             </div>
                             <form>
                                 <div className="taille_info">
