@@ -5,8 +5,8 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 export default function PasserComm() {
   return (
     
-        <div className="PassCommande">
-            <div className="lol">
+        <div >
+            <div >
             <h1>Passer Commande</h1>
             <p>ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - FLYER A4)</p>
             </div>
@@ -18,7 +18,7 @@ export default function PasserComm() {
                 <option >2</option>
                 <option >3</option>
              </select>
-             <button>Transférer un fichier superieur à 150</button>
+             <button className="lol">Transférer un fichier superieur à 150</button>
              </div>
              <br /><br />
              <div>
