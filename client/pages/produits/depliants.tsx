@@ -46,7 +46,8 @@ export default function Page() {
             },
         }));
 
-    console.log(state);
+const price = state.values.quantite*0.54;
+
     const onSubmit = async () => {
         setState((prev) => ({
             ...prev,
@@ -233,7 +234,7 @@ export default function Page() {
                             <div className="FirstDiv FixedDiv">
                                 <div className="YellowSection">
                                     <p className="YellowSectionParag">
-                                        Total HT : 1800 Dh
+                                        Total HT : {price.toFixed(2)} Dh
                                     </p>
                                     <p className="LittlePar">
                                         Prix unitaire 0,54
