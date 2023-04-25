@@ -8,29 +8,35 @@
     align-items: flex-start;
     flex-wrap: wrap;
     overflow-x: hidden;
+
     .Item {
         min-height: 400px;
         min-width: 300px;
         max-width: 100%;
         flex: 1;
         padding: .3rem;
+
         &:nth-child(1) {
-            background-color:white;
+            background-color: white;
         }
+
         &:nth-child(2) {
             background-color: white;
             flex: 2;
         }
+
         &:nth-child(3) {
-            background-color:white;
+            background-color: white;
         }
 
     }
-    .h1{
+
+    .h1 {
         color: grey;
-        margin-bottom:15px;
+        margin-bottom: 15px;
     }
-    .p{
+
+    .p {
         background-color: rgb(225, 225, 28);
         color: rgb(187, 67, 23);
         width: fit-content;
@@ -39,12 +45,13 @@
         margin-bottom: 25px;
         font-weight: 600;
     }
-       
-    .lab{
+
+    .lab {
         font-weight: bold;
         margin-bottom: 1rem;
     }
-    .BasicInput{
+
+    .BasicInput {
         width: 95%;
         border-radius: 1rem;
         height: 2.7rem;
@@ -54,7 +61,8 @@
         font-weight: 700;
         background-color: rgba(236, 236, 236, 0.735);
         outline: none;
-        .Option{
+
+        .Option {
             color: gray;
             cursor: pointer;
             font-size: .9rem;
@@ -62,19 +70,20 @@
             padding: 10rem 0;
         }
     }
-    select{
+
+    select {
         background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
         background-position: calc(100% - 0.75rem) center !important;
-        -moz-appearance:none !important;
-        -webkit-appearance: none !important; 
+        -moz-appearance: none !important;
+        -webkit-appearance: none !important;
         appearance: none !important;
         padding-right: 2rem !important;
         cursor: pointer;
     }
-    
-    .YellowSection{
+
+    .YellowSection {
         background-color: rgb(225, 225, 28);
-        width:95%;
+        width: 95%;
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -82,30 +91,35 @@
         margin-bottom: 3rem;
         border-radius: .3rem;
     }
-    .YellowSectionParag{
+
+    .YellowSectionParag {
         font-weight: bold;
-        font-size:x-large;
-        text-align: end;  
+        font-size: x-large;
+        text-align: end;
     }
-    .LittlePar{
+
+    .LittlePar {
         font-size: small;
         color: grey;
-        text-align: center; 
+        text-align: center;
     }
-    .FirstDiv{
+
+    .FirstDiv {
         display: flex;
         flex-direction: column;
     }
 
-    .StyleP{
+    .StyleP {
         margin-left: 25rem;
         font-weight: bold;
         font-size: x-large;
     }
-    .Left{
+
+    .Left {
         margin-left: 15px;
     }
-    .ButtonHide{
+
+    .ButtonHide {
         background-color: rgb(230, 229, 229);
         padding: .8rem;
         margin: 1rem 0;
@@ -113,20 +127,24 @@
         cursor: pointer;
         box-shadow: 1px 1px 3px gray;
         transition: .2s linear;
-        &:hover{
+
+        &:hover {
             background-color: rgb(162, 168, 170);
         }
     }
-    .OptinLiver{
+
+    .OptinLiver {
         font-weight: bold;
     }
-    .H3Style{
+
+    .H3Style {
         // font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: x-large;
         color: grey;
         margin-bottom: 5%;
     }
-    .OrangeButton{
+
+    .OrangeButton {
         width: 90%;
         height: 200px;
         font-weight: bold;
@@ -141,16 +159,16 @@
         border-radius: .3rem;
         cursor: pointer;
         border: none;
-        
+
     }
-    
-   
-    
-    .LittleStyleP{
+
+
+
+    .LittleStyleP {
         font-size: medium;
     }
 
-    .ValidButt{
+    .ValidButt {
         width: 200px;
         height: 60px;
         border: none;
@@ -161,5 +179,170 @@
         cursor: pointer;
         border-radius: .3rem;
     }
-   
+
+}
+
+.PasserComm__main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 1.5rem;
+
+    .back {
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        background-color: black;
+        color: white;
+        width: fit-content;
+        padding: .4rem;
+        border-radius: .3rem;
+        transition: .2s linear;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: orange;
+            transition: .2s linear;
+        }
+
+        &:hover::before {
+            width: 100%
+        }
+
+        &:hover {
+            color: orange;
+        }
+    }
+
+    h1 {
+        margin: 1rem 0;
+    }
+
+    .para1 {
+        background-color: rgb(225, 225, 28);
+        color: rgb(187, 67, 23);
+        width: fit-content;
+        padding: .5rem;
+        border-radius: .5rem;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    .taille_info {
+        padding: 1rem .8rem;
+
+        .subBlock {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            label {
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin: .5rem;
+            }
+
+            select {
+                width: 30%;
+                border-radius: 1rem;
+                padding: .7rem .5rem;
+                margin-bottom: 1rem;
+                font-size: .9rem;
+                font-weight: 700;
+                background-color: rgba(236, 236, 236, 0.735);
+                outline: none;
+            }
+        }
+        .btn_superieur {
+            padding: .5rem;
+            background-color: orange;
+            color: rgb(149, 9, 9);
+            font-size: 80%;
+            font-weight: 700;
+            margin: 0 .5rem;
+            border-radius: 1rem;
+        }
+
+    }
+
+    .uploar_file{
+        padding: 1rem .8rem;
+
+        .p1{
+            padding: .5rem;
+            width: fit-content;
+            background-color: rgb(225, 225, 28);
+            color: black;
+            font-size: 80%;
+            font-weight: 700;
+            margin: 1rem .5rem;
+            border-radius: 1rem;
+        }
+
+        .box{
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+            label{
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin: .5rem;
+            }
+
+            .input_text{
+                width: 80%;
+                border-radius: 1rem;
+                padding: .5rem .3rem;
+                margin-bottom: 1rem;
+                font-size: .9rem;
+                font-weight: 700;
+                background-color: rgba(236, 236, 236, 0.735);
+                outline: none;
+                border: .5px solid gray;
+            }
+        }
+        .p2{
+            font-size: 1rem;
+            font-weight: 600;
+            margin: .5rem;
+        }
+        .input_file{
+            width: 80%;
+        }
+    }
+    .send_order{
+        width: 40%;
+        border: none;
+        font-weight: bold;
+        background-color: yellow;
+        padding: 1rem .2rem;
+        cursor: pointer;
+        border-radius: .3rem;
+        &:hover{
+        background-color: rgb(218, 218, 8);
+
+        }
+    }
+}
+::-webkit-file-upload-button{
+    background-color: rgba(236, 236, 236, 0.735);
+    color: black;
+    padding: .5rem .8rem;
+    border: .5px solid gray;
+    outline: none;
+    cursor: pointer;
+    border-radius: .3rem;
+    font-weight: 700;
+    transition: .2s linear;
+    &:hover{
+    border: .5px solid rgb(175, 173, 173);
+    color: green;
+    }
 }

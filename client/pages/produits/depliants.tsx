@@ -21,9 +21,21 @@ export default function Page() {
     // const [quantite, setQuantite] = useState(2500);
     // const price = quantite * 0.54;
     // Mailer Start
+    const [fillForm, setFillForm] = useState(true);
+    const [passerComm, setPasserComm] = useState(false);
 
     const [state, setState] = useState(initState);
     const { values } = state;
+
+    const handlePasserComm = () => {
+        setPasserComm(true);
+        setFillForm(false)
+    }
+
+    const backToForm = () => {
+        setPasserComm(false);
+        setFillForm(true)
+    }
 
     const handleChange = ({ target }: { target: any }) =>
         setState((prev) => ({
@@ -75,7 +87,8 @@ export default function Page() {
                     <SimpleSlider />
                 </div>
                 <div className="Item App">
-                    <form>
+                    {/* Fill In Form */}
+                    {fillForm && <form>
                         <div className="Left">
                             <h1 className="h1">
                                 Etape 1 : Calculateur de prix{" "}
@@ -265,7 +278,47 @@ export default function Page() {
                         >
                             Envoyer la commande
                         </button>
-                    </form>
+                    </form>}
+                    {/* Passer Commande */}
+                    {passerComm && <>
+                        <div className="PasserComm__main">
+                            <div>
+                                <Link className="back" href={""} onClick={backToForm}>
+                                    Bach to form
+                                </Link>
+                            </div>
+
+                            <div className="lol">
+                                <h1>Passer Commande</h1>
+                                <p className="para1">ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - FLYER A4)</p>
+                            </div>
+                            <form>
+                                <div className="taille_info">
+                                    <div className="subBlock">
+                                        <label>Taille : </label>
+                                        <select>
+                                            <option value="">1</option>
+                                            <option value="">2</option>
+                                            <option value="">3</option>
+                                        </select>
+                                    </div>
+                                    <Link href={""} className="btn_superieur">Transférer un fichier superieur à 150 MB</Link>
+                                </div>
+
+                                <div className="uploar_file">
+                                    <p className="p1">mecri de telecharge uniquement des fichiers ( .jgp  .jpeg )</p>
+                                    <div className="box">
+                                        <label>Nom du fichier : </label>
+                                        <input placeholder="Fichier.jpeg ou Fichier.jpg" className="input_text" type="text" />
+                                    </div>
+                                    <p className="p2">Telecharger votre Recto ici :</p>
+                                    <input accept="image/jpg, image/jpeg" className="input_file" type="file" />
+                                </div>
+                                <button className="send_order" type="submit">Envoyer la commande</button>
+                            </form>
+
+                        </div>
+                    </>}
                 </div>
                 <div className="Item Actions">
                     <div>
@@ -274,21 +327,18 @@ export default function Page() {
                         </p>
                     </div>
                     <div>
-                        <button className="OrangeButton">
+                        <Link className="OrangeButton" href={""} onClick={handlePasserComm}>
                             Passer Commande Envoyer fichier en ligne ou plus tard
                             par mail ici
-                        </button>
+                        </Link>
                     </div>
-                   
-                       
-                       
                 </div>
                 {/* <div className="Item Actions">div3</div> */}
             </div>
             <div>
                 <hr />
             </div>
-            
+
         </div>
     );
 }
