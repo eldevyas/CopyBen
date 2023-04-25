@@ -284,7 +284,7 @@ export default function Page() {
                         <div className="PasserComm__main">
                             <div>
                                 <Link className="back" href={""} onClick={backToForm}>
-                                    Bach to form
+                                Retour à l&apos;étape 1
                                 </Link>
                             </div>
 
