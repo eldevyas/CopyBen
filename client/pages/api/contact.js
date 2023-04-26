@@ -13,13 +13,13 @@ export default async function handler (req, res){
     from: FROM_EMAIL,
     subject: `Commander par ${name}`,
     html: `
-      <h1> <b>Un Nouveau Commande</b> </h1>
-      <p>Nom et Prénom : ${name}</p>
-      <p>Email : ${email}</p>
-      <p>Taille : ${taille}</p>
-      <p>Taille : ${quantite}</p>
-      <p>Taille : ${papier}</p>
-      <p>Taille : ${impression}</p>
+      <h1> <b>Une Nouvelle Commande</b> </h1>
+      <p><b>Nom et Prénom</b> : ${name}</p>
+      <p><b>Email</b> : ${email}</p>
+      <p><b>Taille</b> : ${taille}</p>
+      <p><b>Quantité</b> : ${quantite}</p>
+      <p><b>Papier</b> : ${papier}</p>
+      <p><b>Impression</b> : ${impression}</p>
     `
   }
   await sgMail.send(msg);
