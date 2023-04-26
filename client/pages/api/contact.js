@@ -1,50 +1,33 @@
-import { mailOptions, transporter } from "../../config/nodemailer";
+require('dotenv').config();
 
-const CONTACT_MESSAGE_FIELDS = {
-  name: "Nom",
-  email: "Email",
-  taille: "Taille",
-  quantite: "Quantité",
-  papier: "Papier",
-  impression: "Impression",
-};
-
-const generateEmailContent = (data) => {
-  const stringData = Object.entries(data).reduce(
-    (str, [key, val]) =>
-      (str += `${CONTACT_MESSAGE_FIELDS[key]}: ${val} \n \n`),
-    ""
-  );
-  const htmlData = Object.entries(data).reduce((str, [key, val]) => {
-    return (str += `<h3 class="form-heading" align="left">${CONTACT_MESSAGE_FIELDS[key]} : ${val}</h3>`);
-  }, "");
-
-  return {
-    text: stringData,
-    html: `<!DOCTYPE html><html> <head> <title></title> <meta charset="utf-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <style type="text/css"> body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}table{border-collapse: collapse !important;}body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}@media screen and (max-width: 525px){.wrapper{width: 100% !important; max-width: 100% !important;}.responsive-table{width: 100% !important;}.padding{padding: 10px 5% 15px 5% !important;}.section-padding{padding: 0 15px 50px 15px !important;}}.form-container{margin-bottom: 24px; padding: 20px; border: 1px dashed #ccc;}.form-heading{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 400; text-align: left; line-height: 20px; font-size: 18px; margin: 0 0 8px; padding: 0;}.form-answer{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 300; text-align: left; line-height: 20px; font-size: 16px; margin: 0 0 24px; padding: 0;}div[style*="margin: 16px 0;"]{margin: 0 !important;}</style> </head> <body style="margin: 0 !important; padding: 0 !important; background: #fff"> <div style=" display: none; font-size: 1px; color: #fefefe; line-height: 1px;  max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; " ></div><table border="0" cellpadding="0" cellspacing="0" width="100%"> <tr> <td bgcolor="#ffffff" align="center" style="padding: 10px 15px 30px 15px" class="section-padding" > <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px" class="responsive-table" > <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0" > <tr> <td style=" padding: 0 0 0 0; font-size: 16px; line-height: 25px; color: #232323; " class="padding message-content" > <h2>New Order</h2> <div class="form-container">${htmlData}</div></td></tr></table> </td></tr></table> </td></tr></table> </td></tr></table> </body></html>`,
-  };
-};
-
-const handler = async (req, res) => {
-  if (req.method === "POST") {
-    const data = req.body;
-    if (!data || !data.name || !data.email || !data.taille || !data.quantite || !data.papier || !data.impression) {
-      return res.status(400).send({ message: "Bad request" });
-    }
-
-    try {
-      await transporter.sendMail({
-        ...mailOptions,
-        ...generateEmailContent(data),
-        subject: data.subject,
-      });
-
-      return res.status(200).json({ success: true });
-    } catch (err) {
-      console.log(err);
-      return res.status(400).json({ message: err.message });
-    }
+const sgMail = require('@sendgrid/mail');
+const {SG_API_KEY, FROM_EMAIL, TO_EMAIL} =process.env;
+sgMail.setApiKey(SG_API_KEY);
+console.log("in contact")
+export default async function handler (req, res){
+  console.log("in handler")
+  console.log(req.body)
+  const {name, email, taille, quantite, papier, impression} = req.body;
+  const msg = {
+    to: TO_EMAIL,
+    from: FROM_EMAIL,
+    subject: `Commander par ${name}`,
+    html: `
+      <h1> <b>Un Nouveau Commande</b> </h1>
+      <p>Nom et Prénom : ${name}</p>
+      <p>Email : ${email}</p>
+      <p>Taille : ${taille}</p>
+      <p>Taille : ${quantite}</p>
+      <p>Taille : ${papier}</p>
+      <p>Taille : ${impression}</p>
+    `
   }
-  return res.status(400).json({ message: "Bad request" });
-};
-export default handler;
+  await sgMail.send(msg);
+  res.json({success: true});
+}
+
+
+
+
+
+

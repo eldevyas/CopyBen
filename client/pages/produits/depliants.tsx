@@ -4,28 +4,25 @@ import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import SimpleSlider from "../slider/SimpleSlider";
 
-const initValues = {
+
+const iniValues = {
     name: "",
     email: "",
     taille: "A4 -29,7 * 21cm",
     quantite: "2500",
     papier: "135 gr - Couché",
     impression: "Recto Verso",
-};
-const initState = { values: initValues };
-
-// Mailer imports
-import { sendContactForm } from "../../lib/api";
-
+}
 export default function Page() {
     // const [quantite, setQuantite] = useState(2500);
     // const price = quantite * 0.54;
     // Mailer Start
+    const [values, setValues] = useState(iniValues);
+
     const [fillForm, setFillForm] = useState(true);
     const [passerComm, setPasserComm] = useState(false);
 
-    const [state, setState] = useState(initState);
-    const { values } = state;
+    const { name, email, taille, quantite, papier, impression } = values;
 
     const handlePasserComm = () => {
         setPasserComm(true);
@@ -37,30 +34,32 @@ export default function Page() {
         setFillForm(true)
     }
 
-    const handleChange = ({ target }: { target: any }) =>
-        setState((prev) => ({
-            ...prev,
-            values: {
-                ...prev.values,
-                [target.name]: target.value,
-            },
-        }));
+    const handleChange = (e: any)=>{
+        setValues({...values, [e.target.name]: e.target.value});
+        console.log(values);
+    }
 
-const price: number = parseInt(state.values.quantite)*0.54;
-
-    const onSubmit = async () => {
-        setState((prev) => ({
-            ...prev,
-            isLoading: true,
-        }));
+    const onSubmit = async (e: any)=>{
+        e.preventDefault();
         try {
-            await sendContactForm(values);
-            setState(initState);
-            console.log(state);
+          console.log("try");
+          await fetch('http://127.0.0.1:3000/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify(values)
+          })
+          console.log("end try");
         } catch (error) {
-            console.log(error);
+          console.log("in catch");
+          console.log(error)
         }
-    };
+      }
+
+const price: number = parseInt(quantite)*0.54;
+
     // Mailer End
     return (
         <div className="ProductPage">
@@ -89,7 +88,7 @@ const price: number = parseInt(state.values.quantite)*0.54;
                 </div>
                 <div className="Item App">
                     {/* Fill In Form */}
-                    {fillForm && <form>
+                    {fillForm && <form method="POST">
                         <div className="Left">
                             <h1 className="h1">
                                 Etape 1 : Calculateur de prix{" "}
@@ -109,7 +108,7 @@ const price: number = parseInt(state.values.quantite)*0.54;
                                     type="text"
                                     required
                                     name="name"
-                                    value={values.name}
+                                    value={name}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -122,7 +121,7 @@ const price: number = parseInt(state.values.quantite)*0.54;
                                     type="email"
                                     required
                                     name="email"
-                                    value={values.email}
+                                    value={email}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -145,11 +144,10 @@ const price: number = parseInt(state.values.quantite)*0.54;
                             <div className="FirstDiv">
                                 <label className="lab">Quantité</label>
                                 <select
-                                    defaultValue="2500"
                                     name="quantite"
                                     onChange={handleChange}
                                     className="BasicInput"
-                                >
+                                    >
                                     <option className="Option" value="2500">
                                         2500
                                     </option>
