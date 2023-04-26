@@ -307,12 +307,12 @@ const price: number = parseInt(state.values.quantite)*0.54;
                                 </div>
 
                                 <div className="uploar_file">
-                                    <p className="p1">mecri de telecharge uniquement des fichiers ( .jgp  .jpeg )</p>
+                                    <p className="p1">Mecri de telecharge uniquement des fichiers ( .jgp  .jpeg )</p>
                                     <div className="box">
                                         <label>Nom du fichier : </label>
                                         <input placeholder="Le Nom du fichier" className="input_text" type="text" />
                                     </div>
-                                    <p className="p2">Telecharger votre Recto ici :</p>
+                                    <p className="p2">Telecharger votre Fichier ici :</p>
                                     <input accept="image/jpg, image/jpeg" className="input_file" type="file" />
                                 </div>
                                 <button className="send_order" type="submit">Envoyer la commande</button>

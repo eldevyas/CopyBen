@@ -16,7 +16,7 @@ export default class SimpleSlider extends Component {
       autoplay: true,
       speed: 3000,
       autoplaySpeed: 2000,
-      cssEase: "linear"
+      cssEase: "ease"
     };
 
     const myStl = {
@@ -29,7 +29,8 @@ export default class SimpleSlider extends Component {
     }
     return (
       <div style={myStl}>
-        <h2>Tferj hna</h2>
+        <h2>Catalogue</h2>
+        <br/> 
         <Slider {...settings}>
           <div>
             <Image style={con} src={myImg} alt="pro" width={300} height={300} />
