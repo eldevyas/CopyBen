@@ -18,11 +18,10 @@ export default function Page() {
     // const price = quantite * 0.54;
     // Mailer Start
     const [values, setValues] = useState(iniValues);
+    const { name, email, taille, quantite, papier, impression } = values;
 
     const [fillForm, setFillForm] = useState(true);
     const [passerComm, setPasserComm] = useState(false);
-
-    const { name, email, taille, quantite, papier, impression } = values;
 
     const handlePasserComm = () => {
         setPasserComm(true);
@@ -34,29 +33,29 @@ export default function Page() {
         setFillForm(true)
     }
 
-    const handleChange = (e: any)=>{
+    const handleChange = (e: { target: { name: any; value: any; }; })=>{
         setValues({...values, [e.target.name]: e.target.value});
-        console.log(values);
     }
+    console.log(values);
 
-    const onSubmit = async (e: any)=>{
+    async function onSubmit(e: any): Promise<void> {
         e.preventDefault();
         try {
-          console.log("try");
-          await fetch('http://127.0.0.1:3000/api/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json'
-            },
-            body: JSON.stringify(values)
-          })
-          console.log("end try");
+            console.log("try");
+            await fetch('http://127.0.0.1:3000/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(values)
+            });
+            console.log("end try");
         } catch (error) {
-          console.log("in catch");
-          console.log(error)
+            console.log("in catch");
+            console.log(error);
         }
-      }
+    }
 
 const price: number = parseInt(quantite)*0.54;
 
@@ -291,7 +290,8 @@ const price: number = parseInt(quantite)*0.54;
                                 <h1>Passer Commande</h1>
                                 <p className="para1">ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - DEPLIANTS)</p>
                             </div>
-                            <form>
+                            <form action="email_sender/app/Http/Controllers/UploadController.php" method="POST" encType="multipart/form-data">
+                                @csrf
                                 <div className="taille_info">
                                     <div className="subBlock">
                                         <label>Taille : </label>
@@ -311,7 +311,7 @@ const price: number = parseInt(quantite)*0.54;
                                         <input placeholder="Le Nom du fichier" className="input_text" type="text" />
                                     </div>
                                     <p className="p2">Telecharger votre Fichier ici :</p>
-                                    <input accept="image/jpg, image/jpeg" className="input_file" type="file" />
+                                    <input accept="image/jpg, image/jpeg" className="input_file" type="file" name="file"/>
                                 </div>
                                 <button className="send_order" type="submit">Envoyer la commande</button>
                             </form>
