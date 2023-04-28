@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
-    public function index (){
-        return "hello yaw";
-    }
+    public function store(Request $request)
+  {
+    $file = $request->file('file');
+    $file->store('uploads');
+    return response()->json(['message' => 'File uploaded successfully']);
+  }
 }

@@ -3,6 +3,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import SimpleSlider from "../slider/SimpleSlider";
+import axios from 'axios';
 
 
 const iniValues = {
@@ -60,6 +61,26 @@ export default function Page() {
 const price: number = parseInt(quantite)*0.54;
 
     // Mailer End
+
+    // Upload
+    const [file, setFile] = useState('')
+
+    const handleFile = (e: any)=>{
+        setFile(e.target.files[0])
+    }
+    console.log(file)
+
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+        // const formData = new FormData();
+        // formData.append('file', file);
+
+        await fetch('/upload', {
+          method: 'POST',
+          body: file
+        });
+      };
+
     return (
         <div className="ProductPage">
             <div className="TitleBar">
@@ -290,8 +311,7 @@ const price: number = parseInt(quantite)*0.54;
                                 <h1>Passer Commande</h1>
                                 <p className="para1">ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - DEPLIANTS)</p>
                             </div>
-                            <form action="email_sender/app/Http/Controllers/UploadController.php" method="POST" encType="multipart/form-data">
-                                @csrf
+                            <form action="/upload" onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
                                 <div className="taille_info">
                                     <div className="subBlock">
                                         <label>Taille : </label>
@@ -311,7 +331,7 @@ const price: number = parseInt(quantite)*0.54;
                                         <input placeholder="Le Nom du fichier" className="input_text" type="text" />
                                     </div>
                                     <p className="p2">Telecharger votre Fichier ici :</p>
-                                    <input accept="image/jpg, image/jpeg" className="input_file" type="file" name="file"/>
+                                    <input onChange={handleFile} accept="image/jpg, image/jpeg" className="input_file" type="file" name="file"/>
                                 </div>
                                 <button className="send_order" type="submit">Envoyer la commande</button>
                             </form>

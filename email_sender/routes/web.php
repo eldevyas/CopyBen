@@ -14,4 +14,4 @@ use App\Http\Controllers\UploadController;
 |
 */
 
-Route::post('produits/depliants',[UploadController::class, 'index']);
+Route::post('/upload', [UploadController::class, 'store']);
