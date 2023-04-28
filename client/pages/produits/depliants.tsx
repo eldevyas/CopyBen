@@ -20,6 +20,11 @@ export default function Page() {
     // Mailer Start
     const [values, setValues] = useState(iniValues);
     const { name, email, taille, quantite, papier, impression } = values;
+    // Upload
+    const [file, setFile] = useState('');
+    const [fileName, setFileName] = useState('');
+    const [uploaded, setUploaded] = useState(false);
+    const [hasUploaded, setHasUploaded] = useState(false);
 
     const [fillForm, setFillForm] = useState(true);
     const [passerComm, setPasserComm] = useState(false);
@@ -63,22 +68,30 @@ const price: number = parseInt(quantite)*0.54;
     // Mailer End
 
     // Upload
-    const [file, setFile] = useState('')
 
     const handleFile = (e: any)=>{
-        setFile(e.target.files[0])
+        setFile(e.target.files[0]);
+        setUploaded(true)
     }
     console.log(file)
 
-    const handleSubmit = async (event: any) => {
+    const handleSubmit = (event: any) => {
+        setUploaded(false)
         event.preventDefault();
-        // const formData = new FormData();
-        // formData.append('file', file);
+        const url = "http://127.0.0.1:8000/api/upload";
+        const formData = new FormData();
+        formData.append('fileAtt', file);
 
-        await fetch('/upload', {
-          method: 'POST',
-          body: file
-        });
+        axios.post(url, formData).then( res => {
+            console.log(res.status)
+            if (res.status == 200){
+                setUploaded(true);
+                setHasUploaded(true);
+                setTimeout(() => {
+                    setHasUploaded(false)
+                }, 3000);
+            }
+        })
       };
 
     return (
@@ -311,7 +324,7 @@ const price: number = parseInt(quantite)*0.54;
                                 <h1>Passer Commande</h1>
                                 <p className="para1">ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - DEPLIANTS)</p>
                             </div>
-                            <form action="/upload" onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
+                            <form onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
                                 <div className="taille_info">
                                     <div className="subBlock">
                                         <label>Taille : </label>
@@ -328,12 +341,13 @@ const price: number = parseInt(quantite)*0.54;
                                     <p className="p1">Mecri de telecharge uniquement des fichiers ( .jgp  .jpeg )</p>
                                     <div className="box">
                                         <label>Nom du fichier : </label>
-                                        <input placeholder="Le Nom du fichier" className="input_text" type="text" />
+                                        <input onChange={e => setFileName(e.target.value)} placeholder="Le Nom du fichier" className="input_text" type="text" />
                                     </div>
                                     <p className="p2">Telecharger votre Fichier ici :</p>
                                     <input onChange={handleFile} accept="image/jpg, image/jpeg" className="input_file" type="file" name="file"/>
                                 </div>
-                                <button className="send_order" type="submit">Envoyer la commande</button>
+                                {hasUploaded && <p className="success">File Uploaded Successfully</p>}
+                                <button disabled={uploaded ? false : true} className="send_order" type="submit">Envoyer la commande</button>
                             </form>
 
                         </div>

@@ -8,8 +8,12 @@ class UploadController extends Controller
 {
     public function store(Request $request)
   {
-    $file = $request->file('file');
-    $file->store('uploads');
-    return response()->json(['message' => 'File uploaded successfully']);
+    if ($request->has('fileAtt')){
+      $file = $request->file('fileAtt');
+      $name = Time().".".$file->getClientOriginalExtension();
+      $file->move('uploads', $name);
+      return response()->json(['success' => 'File uploaded successfully']);
+    }
+    return response()->json("Please try again...!");
   }
 }

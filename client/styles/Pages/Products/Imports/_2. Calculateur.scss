@@ -333,6 +333,15 @@
         background-color: rgb(218, 218, 8);
         }
     }
+    .success{
+    background-color: rgb(179, 231, 179);
+    color: rgb(4, 82, 4);
+    font-weight: 700;
+    border-radius: .5rem;
+    padding: .6rem;
+    margin: .5rem 0;
+    width: fit-content;
+    }
 }
 ::-webkit-file-upload-button{
     background-color: rgba(236, 236, 236, 0.735);
