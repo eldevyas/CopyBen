@@ -25,6 +25,7 @@
     "framer-motion": "^10.12.4",
     "mdb-react-ui-kit": "^6.0.0",
     "next": "13.3.0",
+    "nextjs-progressbar": "^0.0.16",
     "nodemailer": "^6.9.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

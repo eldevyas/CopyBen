@@ -1,8 +1,9 @@
 import React from "react";
-import MenuItems from "./Data/NavigationLinks";
+import Products from "@/data/Products";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { styled } from "@mui/material/styles";
+import { NextRouter, useRouter } from "next/router";
 
 const StyledTabs = styled((props: any) => (
     <Tabs
@@ -39,15 +40,22 @@ const StyledTab = styled((props: any) => <Tab {...props} />)(({ theme }) => ({
 }));
 
 export default function Navigation() {
-    const [value, setValue] = React.useState(0);
+    const Router: NextRouter = useRouter();
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
+    // Get the Product parameter value from the URL
+    const { Product } = Router.query;
+
+    // Find the index of the product that matches the Product parameter value in the URL
+    const activeIndex = Products.findIndex((product) => {
+        return product.name.toLowerCase().replace(/ /g, "-") === Product;
+    });
+
+    const handleChange = () => {};
+
     return (
         <div className="WebHeader__Navigation">
             <StyledTabs
-                value={value}
+                value={activeIndex < 0 ? 0 : activeIndex + 1}
                 onChange={handleChange}
                 variant="scrollable"
                 scrollButtons
@@ -60,12 +68,22 @@ export default function Navigation() {
                     },
                 }}
             >
-                {MenuItems.map((Item, Index) => {
+                <StyledTab
+                    label={"Accueil"}
+                    className={"WebHeader__Navigation__Links__Link"}
+                    onClick={() => {
+                        Router.push("/");
+                    }}
+                />
+                {Products.map((Item, Index) => {
                     return (
                         <StyledTab
-                            label={Item.Name}
+                            label={Item.name}
                             key={Index}
                             className={"WebHeader__Navigation__Links__Link"}
+                            onClick={() => {
+                                Router.push(Item.url);
+                            }}
                         />
                     );
                 })}

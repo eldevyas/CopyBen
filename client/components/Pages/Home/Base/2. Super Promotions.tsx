@@ -4,8 +4,10 @@ import React from "react";
 import Slider from "react-slick";
 import DoubleArrowOutlinedIcon from "@mui/icons-material/DoubleArrowOutlined";
 import ImageWithFallback from "@/components/Global/ImageWithFallbackProps";
+import Products from "@/data/Products";
 
 const Slide = (props: any) => {
+    console.log(props.Title, " ", props.Image);
     return (
         <div className="Slide">
             <div className="Card">
@@ -47,63 +49,18 @@ export default function SuperPromotions() {
         className: "SuperPromotions__Slider",
     };
 
-    let Products = [
-        {
-            Image: "/img/Cartes De Visite.png",
-            Title: "Cartes De Visite",
-        },
-        {
-            Image: "/img/Flyers.png",
-            Title: "Flyers",
-        },
-        {
-            Image: "/img/Dépliants.png",
-            Title: "Dépliants",
-        },
-        {
-            Image: "/img/Brochures.png",
-            Title: "Brochures",
-        },
-        {
-            Image: "/img/Affiches.png",
-            Title: "Affiches",
-        },
-        {
-            Image: "/img/Chemises.png",
-            Title: "Chemises",
-        },
-        {
-            Image: "/img/Chemise à Rabat.png",
-            Title: "Chemise à Rabat",
-        },
-        {
-            Image: "/img/Bloc Note.png",
-            Title: "Bloc Note",
-        },
-        {
-            Image: "/img/Calendrier.png",
-            Title: "Calendrier",
-        },
-        {
-            Image: "/img/Lettres à en tete.png",
-            Title: "Lettres à en tete",
-        },
-        {
-            Image: "/img/Enveloppe.png",
-            Title: "Enveloppe",
-        },
-        {
-            Image: "/img/Carnet de tickets.png",
-            Title: "Carnet de tickets",
-        },
-    ];
-
     return (
         <div className="SuperPromotions">
             <div className="SuperPromotions__Title">Nos Supers Promotions</div>
             <Slider {...settings}>
                 {Products.map((Product, Index) => {
-                    return <Slide key={Index} {...Product} />;
+                    return (
+                        <Slide
+                            key={Index}
+                            Title={Product.name}
+                            Image={Product.images[0]}
+                        />
+                    );
                 })}
             </Slider>
         </div>

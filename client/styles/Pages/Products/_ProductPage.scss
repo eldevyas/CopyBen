@@ -1,0 +1,14 @@
+.ProductPage {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    @import "./Product Imports/1. Title Bar";
+    @import "./Product Imports/2. Calculateur";
+    @import "./Product Imports/3. Autres Produits";
+    @import "./Product Imports/4. Passer Commande";
+}

@@ -1,0 +1,96 @@
+.ProductsList {
+    @include Section();
+    align-items: flex-start;
+
+    &__Title {
+        @include Section__Title();
+    }
+
+    &__Cards {
+        padding: 0 1rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        // place-content: center;
+        // place-items: center;
+        gap: 1rem;
+
+        &__Card {
+            position: relative;
+            min-width: 250px;
+            min-height: 250px;
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background: $C2;
+            transition: transform .3s ease;
+            border: 2px solid rgba($C1, 0.25);
+
+            &:hover {
+                transform: scale(105%);
+            }
+
+            &__Content {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1rem;
+                text-align: start;
+
+                &__Title {
+                    position: relative;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: $C1;
+                }
+
+                &__Description {
+                    position: relative;
+                    font-size: 0.75rem;
+                    font-weight: normal;
+                    color: $C1;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                }
+            }
+
+            &__Image {
+                position: relative;
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+
+                img,
+                .ImagePlaceHolder {
+                    transition: all .3s ease;
+                }
+
+                &:hover {
+
+                    img,
+                    .ImagePlaceHolder {
+                        transform: scale(110%);
+                        background-color: $C3;
+
+                        svg {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

@@ -17,8 +17,8 @@ const ImageWithFallback = (props: ImageWithFallbackProps) => {
             {isValid ? (
                 // eslint-disable-next-line jsx-a11y/alt-text
                 <Image
-                    {...rest}
                     src={src}
+                    {...rest}
                     onError={() => {
                         setValidity(false);
                     }}

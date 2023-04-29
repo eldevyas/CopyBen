@@ -1,31 +1,38 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-// import { Product } from "../../types";
-// import ProductPage from "../../components/ProductPage";
+import { Product } from "@/types/Product";
+import ProductPage from "@/components/Pages/Products/ProductPage";
+import { getProductByName } from "@/data/Products";
 
-// interface ProductPageProps {
-//     product: Product;
-// }
+interface ProductPageProps {
+    product: Product;
+}
 
-// const ProductPageRoute = ({ product }: ProductPageProps) => {
-//     return <ProductPage product={product} />;
-// };
+const ProductPageRoute = ({ product }: ProductPageProps) => {
+    return <ProductPage product={product} />;
+};
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//     // Fetch the list of products and create a list of paths
-//     const products = await fetch("/api/products").then((res) => res.json());
-//     const paths = products.map((product: Product) => ({
-//         params: { product: product.name },
-//     }));
-//     return { paths, fallback: false };
-// };
+export const getStaticPaths: GetStaticPaths = async () => {
+    const products = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/products`
+    ).then((res) => res.json());
+    const paths = products.map((product: Product) => ({
+        params: { Product: product.name.toLowerCase().replace(/ /g, "-") },
+    }));
+    console.clear();
+    console.log("Paths: ", paths);
 
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//     // Fetch the data for the product based on the name in the URL
-//     const productName = params?.product;
-//     const product = await fetch(`/api/products/${productName}`).then((res) =>
-//         res.json()
-//     );
-//     return { props: { product } };
-// };
+    return { paths, fallback: false };
+};
 
-// export default ProductPageRoute;
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+    // Fetch the data for the product based on the name in the URL
+    console.log("Parameters: ", params);
+    const productName: any = params.Product;
+    const product = getProductByName(productName);
+    // return { props: { product } };
+    return {
+        props: { product },
+    };
+};
+
+export default ProductPageRoute;

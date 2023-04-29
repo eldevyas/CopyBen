@@ -1,4 +1,4 @@
-.ProductPage {
+.ProductsPage {
     position: relative;
     width: 100%;
     display: flex;
@@ -7,8 +7,32 @@
     justify-content: flex-start;
     align-items: center;
     gap: 2rem;
-    @import "./Imports/1. Title Bar";
-    @import "./Imports/2. Calculateur";
-    @import "./Imports/3. Autres Produits";
-    @import "./Imports/4. Passer Commande";
+
+    .PageContent {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5rem;
+        overflow: hidden;
+        @import "./Products Imports/1. Products List.scss";
+
+        .ImagePlaceHolder {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ccc;
+
+            svg {
+                font-size: 3rem;
+                color: #fff;
+            }
+        }
+    }
 }
