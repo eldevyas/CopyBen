@@ -12,6 +12,7 @@ const initValues = {
     papier: "135 gr - Couché",
     impression: "Recto Verso",
 };
+
 const initState = { values: initValues };
 
 // Mailer imports
