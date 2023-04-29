@@ -4,51 +4,51 @@ let MenuItems: {
 }[] = [
     {
         Name: "CARTES DE VISITE",
-        Link: "/",
+        Link: "/Products/CARTES DE VISITE",
     },
     {
         Name: "FLYERS",
-        Link: "/",
+        Link: "/Products/FLYERS",
     },
     {
         Name: "DÉPLIANTS",
-        Link: "/",
+        Link: "/Products/DÉPLIANTS",
     },
     {
         Name: "BROCHURES",
-        Link: "/",
+        Link: "/Products/BROCHURES",
     },
     {
         Name: "AFFICHES",
-        Link: "/",
+        Link: "/Products/AFFICHES",
     },
     {
         Name: "CHEMISES",
-        Link: "/",
+        Link: "/Products/CHEMISES",
     },
     {
         Name: "CHEMISE A RABAT",
-        Link: "/",
+        Link: "/Products/CHEMISE A RABAT",
     },
     {
         Name: "BLOC NOTE",
-        Link: "/",
+        Link: "/Products/BLOC NOTE",
     },
     {
         Name: "CALENDRIER",
-        Link: "/",
+        Link: "/Products/CALENDRIER",
     },
     {
         Name: "LETTRES À EN TÊTE",
-        Link: "/",
+        Link: "/Products/LETTRES À EN TÊTE",
     },
     {
         Name: "ENVELOPPE",
-        Link: "/",
+        Link: "/Products/ENVELOPPE",
     },
     {
         Name: "CARNET DE TICKETS",
-        Link: "/",
+        Link: "/Products/CARNET DE TICKETS",
     },
 ];
 

@@ -23,7 +23,6 @@
                 align-items: center;
                 background-color: $C2;
                 border: 0.5rem solid #eee;
-                overflow: hidden;
 
                 &__Image {
                     position: relative;
@@ -35,25 +34,6 @@
                     align-items: center;
                     background-color: #ccc;
                     overflow: hidden;
-
-                    img,
-                    .ImagePlaceHolder {
-                        transition: all .3s ease;
-                    }
-
-                    &:hover {
-
-                        img,
-                        .ImagePlaceHolder {
-                            transform: scale(110%);
-                            background-color: $C3;
-
-                            svg {
-                                color: #fff;
-                            }
-                        }
-                    }
-
                 }
 
                 &__Content {

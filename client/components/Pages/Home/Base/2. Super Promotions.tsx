@@ -40,11 +40,11 @@ export default function SuperPromotions() {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        className: "SuperPromotions__Slider",
         autoPlay: true,
         autoPlaySpeed: 300,
         variableWidth: true,
         centerMode: true,
+        className: "SuperPromotions__Slider",
     };
 
     let Products = [

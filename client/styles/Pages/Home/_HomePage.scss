@@ -9,6 +9,7 @@
     width: 100%;
     overflow-x: hidden;
     min-height: 100vh;
+
     .PageContent {
         position: relative;
         width: 100%;
@@ -17,6 +18,7 @@
         align-items: center;
         justify-content: flex-start;
         gap: 5rem;
+        overflow: hidden;
         @import "./Imports/1.\ Hero\ Slider";
         @import "./Imports/2.\ Super\ Promotions";
         @import "./Imports/3.\ Categories";
@@ -24,6 +26,7 @@
         @import "./Imports/5.\ Service";
         @import "./Imports/6.\ Avis";
         @import "./Imports/7.\ Statistiques";
+
         .ImagePlaceHolder {
             position: absolute;
             height: 100%;
@@ -33,6 +36,7 @@
             justify-content: center;
             align-items: center;
             background-color: #ccc;
+
             svg {
                 font-size: 3rem;
                 color: #fff;

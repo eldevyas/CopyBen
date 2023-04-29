@@ -1,0 +1,104 @@
+.Service {
+    @include Section();
+
+    &__Title {
+        @include Section__Title();
+    }
+
+    &__Services {
+        $SingleWidth: 250px;
+        padding: 0 1rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax($SingleWidth * 2, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax($SingleWidth, 1fr));
+
+        &__Card {
+            position: relative;
+            width: auto;
+            height: auto;
+            padding: 0 0rem;
+            gap: 0rem;
+            background: $C2;
+            transition: transform .3s ease;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax($SingleWidth, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax($SingleWidth, 1fr));
+            /* responsive 2 column grid */
+            grid-gap: 0px;
+            max-width: calc(100vw - 2rem);
+
+            @media screen and (min-width: 768px) {
+
+                &:nth-child(3),
+                &:nth-child(4) {
+                    direction: rtl;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+
+                &:nth-child(1),
+                &:nth-child(3) {
+                    grid-auto-flow: row;
+                    direction: rtl;
+                }
+            }
+
+
+            &__Content {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1rem;
+                text-align: start;
+                min-height: $SingleWidth;
+
+                &__Title {
+                    position: relative;
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                    color: $C1;
+                }
+
+                &__Description {
+                    position: relative;
+                    font-size: 0.9rem;
+                    font-weight: normal;
+                    color: $C1;
+                }
+            }
+
+            &__Image {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                min-height: $SingleWidth;
+
+                img,
+                .ImagePlaceHolder {
+                    transition: all .3s ease;
+                }
+
+                &:hover {
+
+                    img,
+                    .ImagePlaceHolder {
+                        transform: scale(110%);
+                        background-color: $C5;
+
+                        svg {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

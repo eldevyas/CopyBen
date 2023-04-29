@@ -21,10 +21,10 @@ export default function Page() {
     // const [quantite, setQuantite] = useState(2500);
     // const price = quantite * 0.54;
     // Mailer Start
-
+    //
     const [state, setState] = useState(initState);
     const { values } = state;
-
+    //
     const handleChange = ({ target }: { target: any }) =>
         setState((prev) => ({
             ...prev,
@@ -33,7 +33,7 @@ export default function Page() {
                 [target.name]: target.value,
             },
         }));
-
+    //
     console.log(state);
     const onSubmit = async () => {
         setState((prev) => ({
@@ -49,6 +49,7 @@ export default function Page() {
         }
     };
     // Mailer End
+    //
     return (
         <div className="ProductPage">
             <div className="TitleBar">
@@ -300,14 +301,12 @@ export default function Page() {
                             Demander un devis sur mesure ?
                         </button>
                     </div>
-                   
                 </div>
                 {/* <div className="Item Actions">div3</div> */}
             </div>
             <div>
                 <hr />
             </div>
-            
         </div>
     );
 }

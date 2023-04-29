@@ -11,7 +11,7 @@ const Header = (props: HeaderProps) => {
     // Add an event listener to update the screen size on window resize
     React.useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
+            setIsMobile(window.innerWidth < 1024);
         };
         window.addEventListener("resize", handleResize);
         handleResize();

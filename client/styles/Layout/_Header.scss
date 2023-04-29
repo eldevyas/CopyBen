@@ -1,16 +1,25 @@
 .Header {
-    position: relative;
+    // position: relative;
     width: 100%;
     min-height: 50px;
 }
 
 .WebHeader {
-    position: inherit;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
     width: 100%;
+    z-index: 100;
+
+    &__Sticky {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+    }
+
     &__TopBar {
         background-color: $C2;
         position: relative;
@@ -21,6 +30,9 @@
         justify-content: flex-start;
         align-items: center;
         padding: 0.5rem;
+        // will-change: height;
+        // transition: all .3s ease;
+
         &__Left {
             width: 100%;
             height: auto;
@@ -30,6 +42,7 @@
             justify-content: flex-start;
             align-items: center;
             gap: 1rem;
+
             &__Item {
                 display: flex;
                 flex-direction: row;
@@ -37,12 +50,15 @@
                 align-items: center;
                 padding: 0.25rem;
                 gap: 0.25rem;
+
                 &__Icon {
                     font-size: 1rem;
                 }
+
                 &__Name {
                     font-size: 0.75rem;
                 }
+
                 &:hover {
                     cursor: pointer;
                     background-color: $C3;
@@ -51,6 +67,7 @@
             }
         }
     }
+
     &__Main {
         position: relative;
         min-height: 50px;
@@ -62,12 +79,14 @@
         align-items: center;
         gap: 2rem;
         padding: 1rem;
+
         &__Logo {
             position: relative;
             min-width: 200px;
             min-height: 50px;
             height: 100%;
             background-color: transparent;
+
             .LogoImage {
                 position: relative;
                 width: 100%;
@@ -75,15 +94,19 @@
                 max-height: 50px;
                 object-fit: contain;
             }
+
             transition: all .3s ease;
             cursor: pointer;
+
             &:hover {
                 transform: scale(105%);
             }
+
             &:active {
                 transform: scale(95%);
             }
         }
+
         &__Search {
             position: relative;
             width: 100%;
@@ -93,10 +116,12 @@
             flex-direction: row;
             align-items: center;
             justify-content: flex-start;
+
             &__Bar {
                 display: flex;
                 align-items: center;
                 width: 100%;
+
                 &__Input {
                     position: relative;
                     flex: 1;
@@ -108,6 +133,7 @@
                     border: none;
                     outline: none;
                 }
+
                 &__Button {
                     position: absolute;
                     left: 0;
@@ -119,6 +145,7 @@
                 }
             }
         }
+
         &__Contact {
             position: relative;
             min-width: 200px;
@@ -127,22 +154,27 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+
             &__Icon {
                 position: relative;
+
                 svg {
                     font-size: 2rem;
                 }
             }
+
             &__Numbers {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-start;
                 gap: 0rem;
+
                 &__Number {
                     font-size: 1rem;
                     font-weight: 900;
                     transition: all .3s ease;
+
                     &:hover {
                         color: $C4;
                         cursor: pointer;
@@ -151,16 +183,19 @@
             }
         }
     }
+
     &__Navigation {
-        position: relative;
+        // position: relative;
         width: 100%;
         // min-height: 50px;
         background-color: $C1;
         display: flex;
         justify-content: center;
         align-items: center;
+
         &__Links {
             position: relative;
+
             &__Link {
                 font-family: inherit;
                 position: relative;

@@ -4,3 +4,37 @@ $C2: #fcfcfc;
 $C3: #ff9515;
 $C4: #008ded;
 $C5: #c3ea24;
+
+$theme-colors: ("primary": $C3,
+    "secondary": $C4,
+    "success": #14A44D,
+    "info": #54B4D3,
+    "warning": #E4A11B,
+    "danger": #DC4C64,
+    "light": $C2,
+    "dark": $C1);
+
+
+// Theme colors
+$primary: #008ded;
+$secondary: #9fa6b2;
+$success: #c3ea24;
+$danger: #dc4c64;
+$warning: #ff9515;
+$info: #008ded;
+$light: #fcfcfc;
+$dark: #000000;
+
+// scss-docs-start theme-colors-map
+$theme-colors: ('primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'danger': $danger,
+    'warning': $warning,
+    'info': $info,
+    'light': $light,
+    'dark': $dark,
+);
+// scss-docs-end theme-colors-map
+
+// Import Bootstrap and its default variables

@@ -1,0 +1,68 @@
+@use "sass:color";
+$VC: $C1;
+
+.Valeurs {
+    @include Section();
+    background: $VC;
+    transition: all .3s ease;
+    overflow: hidden;
+    will-change: background;
+
+    &:has(.Valeurs__Values__Value:hover) {
+        $VC: $C4;
+        background: color.adjust($VC, $lightness: -15%);
+    }
+
+    &__Title {
+        @include Section__Title();
+        color: #fff;
+        z-index: 3;
+    }
+
+    &__Values {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+
+        &__Value {
+            position: relative;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            flex: 1;
+            min-width: 150px;
+            border-radius: 1rem;
+            transition: all .3s ease;
+
+            &__Icon {
+                position: relative;
+                color: inherit;
+                font-size: 5rem;
+            }
+
+            will-change: background,
+            color,
+            box-shadow;
+
+            &:hover {
+                background: $C2;
+                color: $VC;
+                $Distance: 1.5;
+                box-shadow:
+                    0 0 60px calc(30px * $Distance) color.adjust($VC, $lightness: -0%),
+                    0 0 100px calc(60px * $Distance) color.adjust($VC, $lightness: -5%),
+                    0 0 140px calc(90px * $Distance) color.adjust($VC, $lightness: -10%);
+            }
+        }
+    }
+}
