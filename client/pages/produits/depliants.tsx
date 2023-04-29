@@ -240,7 +240,7 @@ const price: number = parseInt(quantite)*0.54;
                                     className="BasicInput"
                                     type="text"
                                     value={"Stantard > 5 à 7 jours ouvrés"}
-                                    disabled
+                                    readOnly
                                     onChange={handleChange}
                                 />
                             </div>
@@ -334,7 +334,7 @@ const price: number = parseInt(quantite)*0.54;
                                             <option value="">3</option>
                                         </select>
                                     </div>
-                                    <Link href={""} className="btn_superieur">Transférer un fichier superieur à 150 MB</Link>
+                                    {/* <Link href={""} className="btn_superieur">Transférer un fichier superieur à 150 MB</Link> */}
                                 </div>
 
                                 <div className="uploar_file">
