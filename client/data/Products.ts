@@ -2,7 +2,9 @@ import { Product } from "@/types/Product";
 import { randomInt } from "crypto";
 
 // will be used in this file that is accessible for the netire website data
-let ImagesDirectory = '/img/products'
+let ImagesDirectory = '/img/products';
+let StartCount = 0;
+let EndCount = 4;
 const products = [
     // Cartes De Visite
     {
@@ -10,8 +12,8 @@ const products = [
         description: "Des cartes de visite pour votre entreprise ou utilisation personnelle.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -29,8 +31,8 @@ const products = [
         description: "Des flyers personnalisés pour votre entreprise ou événement.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -48,8 +50,8 @@ const products = [
         description: "Des brochures personnalisées pour votre entreprise ou événement.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -67,8 +69,8 @@ const products = [
         description: "Des brochures personnalisées pour votre entreprise ou événement.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -86,8 +88,8 @@ const products = [
         description: "Des affiches personnalisées pour votre entreprise ou événement.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -105,8 +107,8 @@ const products = [
         description: "Custom folders for your business or event.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -124,8 +126,8 @@ const products = [
         description: "Custom folders with flaps for your business or event.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -143,8 +145,8 @@ const products = [
         description: "Custom notepads for your business or personal use.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -162,8 +164,8 @@ const products = [
         description: "Custom calendars for your business or personal use.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i <= Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i <= Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -181,8 +183,8 @@ const products = [
         description: "Custom letterheads for your business or personal use.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -200,8 +202,8 @@ const products = [
         description: "Custom envelopes for your business or personal use.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
@@ -219,8 +221,8 @@ const products = [
         description: "Custom tickets books for your events or raffles.",
         get images() {
             let ImagesList: string[] = [];
-            let Count = 4;
-            for (let i = 0; i < Count; i++) {
+            let Count = EndCount;
+            for (let i = StartCount; i < Count; i++) {
                 ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
             }
             return ImagesList;
