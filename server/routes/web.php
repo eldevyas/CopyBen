@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +13,3 @@ use App\Http\Controllers\UploadController;
 |
 */
 
-Route::get('/sendEmail', [UploadController::class, 'send_attach_email']);
