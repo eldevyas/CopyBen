@@ -23,8 +23,9 @@ export default function Page() {
     // Upload
     const [file, setFile] = useState('');
     const [fileName, setFileName] = useState('');
-    const [uploaded, setUploaded] = useState(false);
-    const [hasUploaded, setHasUploaded] = useState(false);
+    const [uploaded, setUploaded] = useState(true);
+    const [hasUploaded, setHasUploaded] = useState(true);
+    const [sending, setSending] = useState(false);
 
     const [fillForm, setFillForm] = useState(true);
     const [passerComm, setPasserComm] = useState(false);
@@ -67,7 +68,7 @@ const price: number = parseInt(quantite)*0.54;
 
     // Mailer End
 
-    // Upload
+    // Upload Starts
 
     const handleFile = (e: any)=>{
         setFile(e.target.files[0]);
@@ -76,7 +77,7 @@ const price: number = parseInt(quantite)*0.54;
     console.log(file)
 
     const handleSubmit = (event: any) => {
-        setUploaded(false)
+        setSending(true);
         event.preventDefault();
         const url = "http://127.0.0.1:8000/api/upload";
         const formData = new FormData();
@@ -85,7 +86,7 @@ const price: number = parseInt(quantite)*0.54;
         axios.post(url, formData).then( res => {
             console.log(res.status)
             if (res.status == 200){
-                setUploaded(true);
+                setSending(false);
                 setHasUploaded(true);
                 setTimeout(() => {
                     setHasUploaded(false)
@@ -93,7 +94,7 @@ const price: number = parseInt(quantite)*0.54;
             }
         })
       };
-
+      // Upload Ends
     return (
         <div className="ProductPage">
             <div className="TitleBar">
@@ -240,7 +241,7 @@ const price: number = parseInt(quantite)*0.54;
                                     className="BasicInput"
                                     type="text"
                                     value={"Stantard > 5 à 7 jours ouvrés"}
-                                    disabled
+                                    readOnly
                                     onChange={handleChange}
                                 />
                             </div>
@@ -265,7 +266,7 @@ const price: number = parseInt(quantite)*0.54;
                             <div className="FirstDiv FixedDiv">
                                 <div className="YellowSection">
                                     <p className="YellowSectionParag">
-                                        Total HT : {price.toFixed(2)} Dh
+                                        Total HT : {price.toFixed(2)} Dhs
                                     </p>
                                     <p className="LittlePar">
                                         Prix unitaire 0,54
@@ -334,20 +335,19 @@ const price: number = parseInt(quantite)*0.54;
                                             <option value="">3</option>
                                         </select>
                                     </div>
-                                    <Link href={""} className="btn_superieur">Transférer un fichier superieur à 150 MB</Link>
                                 </div>
 
                                 <div className="uploar_file">
                                     <p className="p1">Mecri de telecharge uniquement des fichiers ( .jgp  .jpeg )</p>
                                     <div className="box">
-                                        <label>Nom du fichier : </label>
+                                        <label>Nom du fichier : ( optional )</label>
                                         <input onChange={e => setFileName(e.target.value)} placeholder="Le Nom du fichier" className="input_text" type="text" />
                                     </div>
                                     <p className="p2">Telecharger votre Fichier ici :</p>
-                                    <input onChange={handleFile} accept="image/jpg, image/jpeg" className="input_file" type="file" name="file"/>
+                                    <input onChange={handleFile} accept="image/jpg, image/jpeg" className="input_file" type="file" name="file" required/>
                                 </div>
                                 {hasUploaded && <p className="success">File Uploaded Successfully</p>}
-                                <button disabled={uploaded ? false : true} className="send_order" type="submit">Envoyer la commande</button>
+                                {uploaded && <button className="send_order" type="submit">{sending ? "Wait..." : "Envoyer la commande"}</button>}
                             </form>
 
                         </div>
