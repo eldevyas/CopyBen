@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-
 
 class UploadController extends Controller
 {
@@ -29,14 +27,6 @@ class UploadController extends Controller
 
     echo "email sent";
   }
-
-
-
-
-
-
-
-
 
   public function send_form (Request $request)
   {

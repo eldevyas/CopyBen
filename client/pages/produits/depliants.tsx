@@ -3,54 +3,97 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "next/link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import SimpleSlider from "../slider/SimpleSlider";
+import axios from 'axios';
 
-const initValues = {
+
+const iniValues = {
     name: "",
     email: "",
     taille: "A4 -29,7 * 21cm",
     quantite: "2500",
     papier: "135 gr - Couché",
     impression: "Recto Verso",
-};
-
-const initState = { values: initValues };
-
-// Mailer imports
-import { sendContactForm } from "../../lib/api";
-
+}
 export default function Page() {
     // const [quantite, setQuantite] = useState(2500);
     // const price = quantite * 0.54;
     // Mailer Start
-    //
-    const [state, setState] = useState(initState);
-    const { values } = state;
-    //
-    const handleChange = ({ target }: { target: any }) =>
-        setState((prev) => ({
-            ...prev,
-            values: {
-                ...prev.values,
-                [target.name]: target.value,
-            },
-        }));
-    //
-    console.log(state);
-    const onSubmit = async () => {
-        setState((prev) => ({
-            ...prev,
-            isLoading: true,
-        }));
+    const [values, setValues] = useState(iniValues);
+    const { name, email, taille, quantite, papier, impression } = values;
+    // Upload
+    const [file, setFile] = useState('');
+    const [fileName, setFileName] = useState('');
+    const [uploaded, setUploaded] = useState(false);
+    const [hasUploaded, setHasUploaded] = useState(false);
+
+    const [fillForm, setFillForm] = useState(true);
+    const [passerComm, setPasserComm] = useState(false);
+
+    const handlePasserComm = () => {
+        setPasserComm(true);
+        setFillForm(false)
+    }
+
+    const backToForm = () => {
+        setPasserComm(false);
+        setFillForm(true)
+    }
+
+    const handleChange = (e: { target: { name: any; value: any; }; })=>{
+        setValues({...values, [e.target.name]: e.target.value});
+    }
+    console.log(values);
+
+    async function onSubmit(e: any): Promise<void> {
+        e.preventDefault();
         try {
-            await sendContactForm(values);
-            setState(initState);
-            console.log(state);
+            console.log("try");
+            await fetch('http://127.0.0.1:3000/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify(values)
+            });
+            console.log("end try");
         } catch (error) {
+            console.log("in catch");
             console.log(error);
         }
-    };
+    }
+
+const price: number = parseInt(quantite)*0.54;
+
     // Mailer End
-    //
+
+    // Upload
+
+    const handleFile = (e: any)=>{
+        setFile(e.target.files[0]);
+        setUploaded(true)
+    }
+    console.log(file)
+
+    const handleSubmit = (event: any) => {
+        setUploaded(false)
+        event.preventDefault();
+        const url = "http://127.0.0.1:8000/api/upload";
+        const formData = new FormData();
+        formData.append('fileAtt', file);
+
+        axios.post(url, formData).then( res => {
+            console.log(res.status)
+            if (res.status == 200){
+                setUploaded(true);
+                setHasUploaded(true);
+                setTimeout(() => {
+                    setHasUploaded(false)
+                }, 3000);
+            }
+        })
+      };
+
     return (
         <div className="ProductPage">
             <div className="TitleBar">
@@ -77,7 +120,8 @@ export default function Page() {
                     <SimpleSlider />
                 </div>
                 <div className="Item App">
-                    <form>
+                    {/* Fill In Form */}
+                    {fillForm && <form method="POST">
                         <div className="Left">
                             <h1 className="h1">
                                 Etape 1 : Calculateur de prix{" "}
@@ -97,7 +141,7 @@ export default function Page() {
                                     type="text"
                                     required
                                     name="name"
-                                    value={values.name}
+                                    value={name}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -110,7 +154,7 @@ export default function Page() {
                                     type="email"
                                     required
                                     name="email"
-                                    value={values.email}
+                                    value={email}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -133,11 +177,10 @@ export default function Page() {
                             <div className="FirstDiv">
                                 <label className="lab">Quantité</label>
                                 <select
-                                    defaultValue="2500"
                                     name="quantite"
                                     onChange={handleChange}
                                     className="BasicInput"
-                                >
+                                    >
                                     <option className="Option" value="2500">
                                         2500
                                     </option>
@@ -222,7 +265,7 @@ export default function Page() {
                             <div className="FirstDiv FixedDiv">
                                 <div className="YellowSection">
                                     <p className="YellowSectionParag">
-                                        Total HT : 1800 Dh
+                                        Total HT : {price.toFixed(2)} Dh
                                     </p>
                                     <p className="LittlePar">
                                         Prix unitaire 0,54
@@ -262,12 +305,53 @@ export default function Page() {
 
                         <button
                             onClick={onSubmit}
-                            className="btn"
+                            className="ValidButt"
                             type="submit"
                         >
                             Envoyer la commande
                         </button>
-                    </form>
+                    </form>}
+                    {/* Passer Commande */}
+                    {passerComm && <>
+                        <div className="PasserComm__main">
+                            <div>
+                                <Link className="back" href={""} onClick={backToForm}>
+                                Retour à l&apos;étape 1
+                                </Link>
+                            </div>
+
+                            <div className="lol">
+                                <h1>Passer Commande</h1>
+                                <p className="para1">ENVOYER FICHIER EN LIGNE OU PLUS TARD PAR MAIL ICI (SUPER PROMO - DEPLIANTS)</p>
+                            </div>
+                            <form onSubmit={handleSubmit} method="POST" encType="multipart/form-data">
+                                <div className="taille_info">
+                                    <div className="subBlock">
+                                        <label>Taille : </label>
+                                        <select>
+                                            <option value="">1</option>
+                                            <option value="">2</option>
+                                            <option value="">3</option>
+                                        </select>
+                                    </div>
+                                    <Link href={""} className="btn_superieur">Transférer un fichier superieur à 150 MB</Link>
+                                </div>
+
+                                <div className="uploar_file">
+                                    <p className="p1">Mecri de telecharge uniquement des fichiers ( .jgp  .jpeg )</p>
+                                    <div className="box">
+                                        <label>Nom du fichier : </label>
+                                        <input onChange={e => setFileName(e.target.value)} placeholder="Le Nom du fichier" className="input_text" type="text" />
+                                    </div>
+                                    <p className="p2">Telecharger votre Fichier ici :</p>
+                                    <input onChange={handleFile} accept="image/jpg, image/jpeg" className="input_file" type="file" name="file"/>
+                                </div>
+                                {hasUploaded && <p className="success">File Uploaded Successfully</p>}
+                                <button disabled={uploaded ? false : true} className="send_order" type="submit">Envoyer la commande</button>
+                            </form>
+
+                        </div>
+                    </>}
                 </div>
                 <div className="Item Actions">
                     <div>
@@ -276,31 +360,10 @@ export default function Page() {
                         </p>
                     </div>
                     <div>
-                        <button className="BlackButton">
-                            Passer Commande Envoyer fichier en ligneou plus tard
+                        <Link className="OrangeButton" href={""} onClick={handlePasserComm}>
+                            Passer Commande Envoyer fichier en ligne ou plus tard
                             par mail ici
-                        </button>
-                    </div>
-                    <div>
-                        <button className="PinkButton">
-                            Choisir un design modifiable en ligne
-                        </button>
-                    </div>
-                    <div>
-                        <button className="GreyButton">
-                            Choisir un design modifiable en ligne
-                        </button>
-                    </div>
-                    <div>
-                        <button className="YellowButton">
-                            Besoin d&apos;aide pour le design ou pour une
-                            modification ?
-                        </button>
-                    </div>
-                    <div>
-                        <button className="BlueButton">
-                            Demander un devis sur mesure ?
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 {/* <div className="Item Actions">div3</div> */}
@@ -308,6 +371,7 @@ export default function Page() {
             <div>
                 <hr />
             </div>
+
         </div>
     );
 }
