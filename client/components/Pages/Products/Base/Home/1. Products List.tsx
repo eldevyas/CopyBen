@@ -10,11 +10,7 @@ const Card = (props: any) => {
                     {props.Title}
                 </div>
                 <div className="ProductsList__Cards__Card__Content__Description">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Illo, aliquam earum dignissimos quisquam voluptate possimus
-                    commodi recusandae doloremque placeat, numquam quia est
-                    reprehenderit inventore adipisci deserunt in quasi deleniti
-                    nisi?
+                    {props.Description}
                 </div>
             </div>
             <div className="ProductsList__Cards__Card__Image">
@@ -40,9 +36,20 @@ export default function ProductsList({ Query }: { Query: string }) {
         <div className="ProductsList">
             <div className="ProductsList__Title">Produits</div>
             <div className="ProductsList__Cards">
-                {filteredProducts.map((Product, Index) => {
-                    return <Card key={Index} Title={Product.name} />;
-                })}
+                {filteredProducts.length > 0 ? (
+                    filteredProducts.map((Product, Index) => {
+                        return (
+                            <Card
+                                key={Index}
+                                Title={Product.name}
+                                Description={Product.description}
+                                Image={Product.images[0]}
+                            />
+                        );
+                    })
+                ) : (
+                    <div className="ProductsList__EmptyState"></div>
+                )}
             </div>
         </div>
     );

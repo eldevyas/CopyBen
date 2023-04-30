@@ -93,4 +93,22 @@
 
         }
     }
+
+    &__EmptyState {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        // padding: 1rem;
+        font-size: 1.25rem;
+
+        &:after {
+            position: relative;
+            content: "Aucun produits trouvés.";
+            color: rgba($C1, 0.5);
+        }
+    }
 }

@@ -30,23 +30,23 @@ export default function HeroSlider() {
 
     let Slides = [
         {
-            Image: "/img/Hero Slides/1.png",
+            Image: "/img/Hero Slides/1.jpg",
             Link: "/",
         },
         {
-            Image: "/img/Hero Slides/2.png",
+            Image: "/img/Hero Slides/2.jpg",
             Link: "/",
         },
         {
-            Image: "/img/Hero Slides/3.png",
+            Image: "/img/Hero Slides/3.jpg",
             Link: "/",
         },
         {
-            Image: "/img/Hero Slides/4.png",
+            Image: "/img/Hero Slides/4.jpg",
             Link: "/",
         },
         {
-            Image: "/img/Hero Slides/5.png",
+            Image: "/img/Hero Slides/5.jpg",
             Link: "/",
         },
     ];
