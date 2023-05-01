@@ -1,10 +1,6 @@
-
-.Footer{
-    text-align: center;
-    padding: 1rem;
-    height: 250px;
-    width: 100%;
-    background-color: black;
-    color: wheat;
-    margin-top: 3rem;
+.Footer {
+    position: relative;
+    z-index: 90;
+    background-color: $C1;
+    color: $C2 !important;
 }

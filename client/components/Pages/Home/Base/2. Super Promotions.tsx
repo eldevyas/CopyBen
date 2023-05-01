@@ -41,7 +41,7 @@ export default function SuperPromotions() {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1,
+        swipeToSlide: true,
         autoPlay: true,
         autoPlaySpeed: 300,
         variableWidth: true,

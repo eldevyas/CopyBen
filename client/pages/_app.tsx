@@ -7,6 +7,58 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import NextNProgress from "nextjs-progressbar";
+import {
+    createTheme,
+    responsiveFontSizes,
+    ThemeProvider,
+} from "@mui/material/styles";
+
+let theme = createTheme({
+    palette: {
+        primary: {
+            main: "#ff9515",
+        },
+        secondary: {
+            main: "#008ded",
+        },
+    },
+    typography: {
+        // fontFamily: ['"Montserrat"', "sans-serif"].join(","),
+        fontFamily: "inherit",
+    },
+    components: {
+        MuiFormControlLabel: {
+            styleOverrides: {
+                // Name of the slot
+                root: {
+                    // Some CSS
+                    fontSize: "1rem",
+                },
+            },
+        },
+        MuiButton: {
+            styleOverrides: {
+                // Name of the slot
+                root: {
+                    // Some CSS
+                    fontSize: "1rem",
+                    fontWeight: 800,
+                    padding: "0.75rem 1rem",
+                    backgroundColor: "primary.main",
+                    color: "white",
+                },
+            },
+        },
+        MuiButtonBase: {
+            defaultProps: {
+                disableRipple: false,
+                // disableElevation: false,
+            },
+        },
+    },
+});
+
+theme = responsiveFontSizes(theme);
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
@@ -18,7 +70,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 height={5}
                 showOnShallow={true}
             />
-            <Component {...pageProps} />
+            <ThemeProvider theme={theme}>
+                <Component {...pageProps} />
+            </ThemeProvider>
         </Layout>
     );
 }

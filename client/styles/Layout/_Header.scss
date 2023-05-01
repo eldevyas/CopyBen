@@ -99,6 +99,13 @@
                     background-color: $C3;
                     color: #fff;
                 }
+
+                &__Active {
+                    background-color: $C3;
+                    color: $C2;
+                    font-weight: bold;
+                    pointer-events: none;
+                }
             }
         }
     }
