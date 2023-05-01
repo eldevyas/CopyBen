@@ -21,8 +21,8 @@ function Copyright(props: any) {
             {...props}
         >
             {"Copyright © "}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
+            <Link color="inherit" href="https://copyben.ma/">
+                CopyBen
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
@@ -62,7 +62,7 @@ export default function Register() {
                         color: "primary.main",
                     }}
                 >
-                    Sign up
+                    S&apos;inscrire
                 </Typography>
                 <Box
                     component="form"
@@ -78,7 +78,7 @@ export default function Register() {
                                 required
                                 fullWidth
                                 id="firstName"
-                                label="First Name"
+                                label="Prénom"
                                 autoFocus
                             />
                         </Grid>
@@ -87,7 +87,7 @@ export default function Register() {
                                 required
                                 fullWidth
                                 id="lastName"
-                                label="Last Name"
+                                label="Nom de famille"
                                 name="lastName"
                                 autoComplete="family-name"
                             />
@@ -97,7 +97,7 @@ export default function Register() {
                                 required
                                 fullWidth
                                 id="email"
-                                label="Email Address"
+                                label="Adresse e-mail"
                                 name="email"
                                 autoComplete="email"
                             />
@@ -107,21 +107,10 @@ export default function Register() {
                                 required
                                 fullWidth
                                 name="password"
-                                label="Password"
+                                label="Mot de passe"
                                 type="password"
                                 id="password"
                                 autoComplete="new-password"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        value="allowExtraEmails"
-                                        color="primary"
-                                    />
-                                }
-                                label="I want to receive inspiration, marketing promotions and updates via email."
                             />
                         </Grid>
                     </Grid>
@@ -130,19 +119,21 @@ export default function Register() {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        disableElevation
                     >
-                        Sign Up
+                        {/* eslint-disable-next-line react/no-unescaped-entities */}
+                        S'inscrire
                     </Button>
-                    <Grid container justifyContent="flex-end">
+                    <Grid container justifyContent="center">
                         <Grid item>
                             <Link href="#" variant="body2">
-                                Already have an account? Sign in
+                                Vous avez déjà un compte? Connectez-vous
                             </Link>
                         </Grid>
                     </Grid>
                 </Box>
             </Box>
-            <Copyright sx={{ mt: 5 }} />
+            <Copyright sx={{ mt: 5, mb: 5 }} />
         </Container>
     );
 }

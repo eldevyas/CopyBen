@@ -52,7 +52,7 @@ export default function Login() {
                     alignItems: "center",
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: "primary.main" }} className="">
+                <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography
@@ -74,7 +74,7 @@ export default function Login() {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="Adresse e-mail"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -84,7 +84,7 @@ export default function Login() {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="Mot de passe"
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -105,13 +105,15 @@ export default function Login() {
                             color: "white",
                         }}
                     >
-                        Sign In
+                        S&apos;identifier
                     </Button>
                     <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
                             <NextLink href="/auth/register">
                                 <Link variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                    {
+                                        "Vous n'avez pas de compte ? Inscrivez-vous"
+                                    }
                                 </Link>
                             </NextLink>
                         </Grid>
