@@ -4,13 +4,16 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 function Copyright(props: any) {
     return (
@@ -31,14 +34,21 @@ function Copyright(props: any) {
 }
 
 export default function Register() {
+    const [PhoneNumber, setPhoneNumber] = React.useState<string>("");
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        console.table({
+            firstName: data.get("firstName"),
+            lastName: data.get("lastName"),
             email: data.get("email"),
             password: data.get("password"),
-            fname: data.get("firstName"),
-            lname: data.get("lastName"),
+            tel: data.get("phone-number"),
+            city: data.get("city"),
+            zipCode: data.get("zipCode"),
+            AddressLineOne: data.get("AddressLineOne"),
+            AddressLineTwo: data.get("AddressLineTwo"),
         });
     };
 
@@ -82,6 +92,9 @@ export default function Register() {
                                 id="firstName"
                                 label="Prénom"
                                 autoFocus
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -92,6 +105,9 @@ export default function Register() {
                                 label="Nom de famille"
                                 name="lastName"
                                 autoComplete="family-name"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -102,6 +118,9 @@ export default function Register() {
                                 label="Adresse e-mail"
                                 name="email"
                                 autoComplete="email"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -113,6 +132,75 @@ export default function Register() {
                                 type="password"
                                 id="password"
                                 autoComplete="new-password"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                name="phone-number"
+                                label="Numéro de téléphone"
+                                id="phone-number"
+                                autoComplete="tel"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                autoComplete="address-level2"
+                                name="city"
+                                required
+                                fullWidth
+                                id="city"
+                                label="Ville"
+                                autoFocus
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="zipCode"
+                                label="Code Postal"
+                                name="zipCode"
+                                autoComplete="postal-code"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="AddressLineOne"
+                                label="Adresse 1"
+                                name="AddressLineOne"
+                                autoComplete="address-line1"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id="AddressLineTwo"
+                                label="Adresse 2"
+                                name="AddressLineTwo"
+                                autoComplete="address-line2"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                             />
                         </Grid>
                     </Grid>
