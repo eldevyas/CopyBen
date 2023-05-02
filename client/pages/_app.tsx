@@ -65,7 +65,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <AuthProvider>
             <Layout>
-                <NextNProgresss
+                <NextNProgress
                     color="#ff9515"
                     startPosition={0.3}
                     stopDelayMs={200}
