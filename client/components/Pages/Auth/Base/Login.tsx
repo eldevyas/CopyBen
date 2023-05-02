@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,7 +12,9 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import axios from 'axios';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import axios from "axios";
 
 function Copyright(props: any) {
     return (
@@ -32,25 +34,56 @@ function Copyright(props: any) {
     );
 }
 
-export default function Login() {
-    const [sending, setSending] = React.useState<boolean>(false);
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
+export default function Login() {
+    // Process States
+    const [isSending, setSending] = React.useState<boolean>(false);
+
+    // MUI states
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState<
+        "success" | "error" | "warning" | "info" | undefined
+    >(undefined);
+
+    // Methods
+    const handleSnackbarOpen = () => {
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        setSending(true)
-
+        setSending(true);
         const data = new FormData(event.currentTarget);
         const url = "http://127.0.0.1:8000/api/login";
 
-        axios.post(url, data).then( res => {
-            const loggedUser = res.data.loggedIn[0];
-            console.log(loggedUser)
-            setSending(false)
-        })
-        // console.log({
-        //     email: data.get("email"),
-        //     password: data.get("password"),
-        // });
+        axios
+            .post(url, data)
+            .then((res) => {
+                console.log(res.status);
+                setSending(false);
+                setSnackbarMessage("Connexion réussie !");
+                setSnackbarSeverity("success");
+                setSnackbarOpen(true);
+            })
+            .catch((error) => {
+                setSending(false);
+                setSnackbarMessage(
+                    "Échec de la connexion! Veuillez réessayer."
+                );
+                setSnackbarSeverity("error");
+                setSnackbarOpen(true);
+                console.log(error);
+            });
     };
 
     return (
@@ -90,6 +123,9 @@ export default function Login() {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
                         margin="normal"
@@ -100,6 +136,9 @@ export default function Login() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
@@ -117,7 +156,7 @@ export default function Login() {
                             color: "white",
                         }}
                     >
-                        {sending ? "Envoi en cours..." : "S'identifier"}
+                        {isSending ? "Chargement..." : "S'identifier"}
                     </Button>
                     <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
@@ -132,6 +171,19 @@ export default function Login() {
                     </Grid>
                 </Box>
             </Box>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={snackbarSeverity}
+                    sx={{ width: "100%" }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
             <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
     );

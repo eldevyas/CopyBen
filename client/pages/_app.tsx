@@ -12,6 +12,7 @@ import {
     responsiveFontSizes,
     ThemeProvider,
 } from "@mui/material/styles";
+import { AuthProvider } from "@/context/Authcontext";
 
 let theme = createTheme({
     palette: {
@@ -62,17 +63,19 @@ theme = responsiveFontSizes(theme);
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
-        <Layout>
-            <NextNProgress
-                color="#ff9515"
-                startPosition={0.3}
-                stopDelayMs={200}
-                height={5}
-                showOnShallow={true}
-            />
-            <ThemeProvider theme={theme}>
-                <Component {...pageProps} />
-            </ThemeProvider>
-        </Layout>
+        <AuthProvider>
+            <Layout>
+                <NextNProgresss
+                    color="#ff9515"
+                    startPosition={0.3}
+                    stopDelayMs={200}
+                    height={5}
+                    showOnShallow={true}
+                />
+                <ThemeProvider theme={theme}>
+                    <Component {...pageProps} />
+                </ThemeProvider>
+            </Layout>
+        </AuthProvider>
     );
 }

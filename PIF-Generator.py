@@ -56,7 +56,7 @@ product_names = [
 for product_name in product_names:
     # Create a folder for the product
     folder_name = product_name.lower().replace(" ", "-")
-    folder_path = f"./client/public/img/products/{folder_name}"
+    folder_path = f"./client/public/img/products2/{folder_name}"
     os.makedirs(folder_path, exist_ok=True)
 
     # Generate 1 to 4 random images for the product

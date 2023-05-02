@@ -1,21 +1,18 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import axios from 'axios';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
+import axios from "axios";
 
 function Copyright(props: any) {
     return (
@@ -35,31 +32,57 @@ function Copyright(props: any) {
     );
 }
 
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function Register() {
-    const [PhoneNumber, setPhoneNumber] = React.useState<string>("");
-    const [sending, setSending] = React.useState<boolean>(false);
+    // Process States
+    const [isSending, setSending] = useState<boolean>(false);
+
+    // MUI states
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState<
+        "success" | "error" | "warning" | "info" | undefined
+    >(undefined);
+
+    // Methods
+    const handleSnackbarOpen = () => {
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        setSending(true)
+        setSending(true);
         const data = new FormData(event.currentTarget);
         const url = "http://127.0.0.1:8000/api/register";
 
-        axios.post(url, data).then( res => {
-            console.log(res.status)
-            setSending(false)
-        })
-        // console.table({
-        //     firstName: data.get("firstName"),
-        //     lastName: data.get("lastName"),
-        //     email: data.get("email"),
-        //     password: data.get("password"),
-        //     tel: data.get("phone-number"),
-        //     city: data.get("city"),
-        //     zipCode: data.get("zipCode"),
-        //     AddressLineOne: data.get("AddressLineOne"),
-        //     AddressLineTwo: data.get("AddressLineTwo"),
-        // });
+        axios
+            .post(url, data)
+            .then((res) => {
+                console.log(res.status);
+                setSending(false);
+                setSnackbarMessage("Inscrit avec succès!");
+                setSnackbarSeverity("success");
+                setSnackbarOpen(true);
+            })
+            .catch((error) => {
+                setSending(false);
+                setSnackbarMessage(
+                    "Échec de l'inscription ! Veuillez réessayer."
+                );
+                setSnackbarSeverity("error");
+                setSnackbarOpen(true);
+                console.log(error);
+            });
     };
 
     return (
@@ -88,7 +111,7 @@ export default function Register() {
                 </Typography>
                 <Box
                     component="form"
-                    noValidate
+                    // noValidate
                     onSubmit={handleSubmit}
                     sx={{ mt: 3 }}
                 >
@@ -222,7 +245,7 @@ export default function Register() {
                         disableElevation
                     >
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        {sending ? "Envoi en cours..." : "S'inscrire"}
+                        {isSending ? "Chargement..." : "S'inscrire"}
                     </Button>
                     <Grid container justifyContent="center">
                         <Grid item>
@@ -233,6 +256,19 @@ export default function Register() {
                     </Grid>
                 </Box>
             </Box>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={snackbarSeverity}
+                    sx={{ width: "100%" }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
             <Copyright sx={{ mt: 5, mb: 5 }} />
         </Container>
     );
