@@ -14,6 +14,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import axios from 'axios';
+
 
 function Copyright(props: any) {
     return (
@@ -35,21 +37,29 @@ function Copyright(props: any) {
 
 export default function Register() {
     const [PhoneNumber, setPhoneNumber] = React.useState<string>("");
+    const [sending, setSending] = React.useState<boolean>(false);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
+        setSending(true)
         const data = new FormData(event.currentTarget);
-        console.table({
-            firstName: data.get("firstName"),
-            lastName: data.get("lastName"),
-            email: data.get("email"),
-            password: data.get("password"),
-            tel: data.get("phone-number"),
-            city: data.get("city"),
-            zipCode: data.get("zipCode"),
-            AddressLineOne: data.get("AddressLineOne"),
-            AddressLineTwo: data.get("AddressLineTwo"),
-        });
+        const url = "http://127.0.0.1:8000/api/register";
+
+        axios.post(url, data).then( res => {
+            console.log(res.status)
+            setSending(false)
+        })
+        // console.table({
+        //     firstName: data.get("firstName"),
+        //     lastName: data.get("lastName"),
+        //     email: data.get("email"),
+        //     password: data.get("password"),
+        //     tel: data.get("phone-number"),
+        //     city: data.get("city"),
+        //     zipCode: data.get("zipCode"),
+        //     AddressLineOne: data.get("AddressLineOne"),
+        //     AddressLineTwo: data.get("AddressLineTwo"),
+        // });
     };
 
     return (
@@ -141,7 +151,7 @@ export default function Register() {
                             <TextField
                                 required
                                 fullWidth
-                                name="phone-number"
+                                name="phone_number"
                                 label="Numéro de téléphone"
                                 id="phone-number"
                                 autoComplete="tel"
@@ -212,7 +222,7 @@ export default function Register() {
                         disableElevation
                     >
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        S'inscrire
+                        {sending ? "Envoi en cours..." : "S'inscrire"}
                     </Button>
                     <Grid container justifyContent="center">
                         <Grid item>

@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import axios from 'axios';
 
 function Copyright(props: any) {
     return (
@@ -32,13 +33,24 @@ function Copyright(props: any) {
 }
 
 export default function Login() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const [sending, setSending] = React.useState<boolean>(false);
+
+    const handleSubmit = (event: any) => {
         event.preventDefault();
+        setSending(true)
+
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
+        const url = "http://127.0.0.1:8000/api/login";
+
+        axios.post(url, data).then( res => {
+            const loggedUser = res.data.loggedIn[0];
+            console.log(loggedUser)
+            setSending(false)
+        })
+        // console.log({
+        //     email: data.get("email"),
+        //     password: data.get("password"),
+        // });
     };
 
     return (
@@ -105,7 +117,7 @@ export default function Login() {
                             color: "white",
                         }}
                     >
-                        S&apos;identifier
+                        {sending ? "Envoi en cours..." : "S'identifier"}
                     </Button>
                     <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
