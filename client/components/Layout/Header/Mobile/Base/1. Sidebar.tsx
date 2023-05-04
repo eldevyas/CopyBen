@@ -6,15 +6,28 @@ import {
     MDBNavbarItem,
     MDBNavbarLink,
 } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Products from "@/data/Products";
 
 const Sidebar = (props: any) => {
     const [showNav, setShowNav] = useState(false);
 
+    const toggleShowHide = ()=>{
+        if (!showNav){
+            setShowNav(true)
+            console.log(showNav)
+        }else{
+            setShowNav(false)
+            console.log(showNav)
+
+        }
+    }
+
+    // useEffect( ()=>{console.log('useEffect')}, [showNav] )
+
     return (
         <MDBCollapse show={props.showNav} navbar>
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0 p-3">
+            <ul style={{}} className="navbar-nav me-auto mb-2 mb-lg-0 p-3">
                 <li className="nav-item">
                     <MDBNavbarLink>Accueil</MDBNavbarLink>
                 </li>
@@ -24,19 +37,21 @@ const Sidebar = (props: any) => {
                         role="button"
                         data-mdb-toggle="dropdown"
                         aria-expanded="false"
+                        onClick={toggleShowHide}
                     >
                         Produits
                     </MDBNavbarLink>
-                    <ul className="dropdown-menu">
-                        {Products.map((product: any) => (
-                            <li key={product.name}>
-                                <MDBNavbarLink>{product.name}</MDBNavbarLink>
-                            </li>
-                        ))}
-                    </ul>
+                    {showNav && <ul>
+                                    {Products.map((product: any) => (
+                                    <li className="nav-item" key={product.name}>
+                                        <MDBNavbarLink>{product.name}</MDBNavbarLink>
+                                    </li>
+                                        ))}
+                                </ul>}
                 </li>
             </ul>
-            <ul className="navbar-nav d-flex flex-row">
+
+            <ul className="navbar-nav d-flex flex-row mx-3">
                 <li className="nav-item me-3 me-lg-0">
                     <MDBNavbarLink>Se connecter</MDBNavbarLink>
                 </li>
