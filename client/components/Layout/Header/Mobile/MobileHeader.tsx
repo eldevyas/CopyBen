@@ -15,7 +15,7 @@ const MobileHeader = () => {
     const [showNav, setShowNav] = useState(false);
 
     return (
-        <MDBNavbar color="light" light expand="md">
+        <MDBNavbar color="light" light expand="md" style={{ zIndex: '2000', 'background': 'white' }}>
             <MDBNavbarToggler
                 aria-controls="navbarExample01"
                 aria-expanded="false"
@@ -51,7 +51,7 @@ const MobileHeader = () => {
                     />
                 </form>
             </MDBCollapse>
-            <Sidebar showNav={showNav} />
+            <Sidebar showNav={showNav} style={{ zIndex: '2000', 'background': 'white' }}/>
         </MDBNavbar>
     );
 };

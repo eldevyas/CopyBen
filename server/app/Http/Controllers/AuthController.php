@@ -21,7 +21,7 @@ class AuthController extends Controller
             'AddressLineOne' => 'required',
             'AddressLineTwo' => 'nullable',
         ]);
-
+        
         User::create([
             'fname' => $validatedData['firstName'],
             'lname' => $validatedData['lastName'],
