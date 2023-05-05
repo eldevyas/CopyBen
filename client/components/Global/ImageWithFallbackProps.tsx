@@ -4,11 +4,11 @@ import BrokenImageOutlinedIcon from "@mui/icons-material/BrokenImageOutlined";
 import LandscapeOutlinedIcon from "@mui/icons-material/LandscapeOutlined";
 
 interface ImageWithFallbackProps extends ImageProps {
-    fallbackSrc: string;
+    fallbackSrc?: string;
 }
 
 const ImageWithFallback = (props: ImageWithFallbackProps) => {
-    const { src, fallbackSrc, ...rest } = props;
+    const { src, ...rest } = props;
     const [isValid, setValidity] = useState(true);
     //
     //

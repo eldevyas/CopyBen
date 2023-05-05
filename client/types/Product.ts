@@ -7,4 +7,5 @@ type Product = {
 };
 
 
-export type { Product }; 
+export type { Product };
+export default Product;

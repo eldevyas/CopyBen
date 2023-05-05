@@ -21,9 +21,7 @@ const products = [
         get url() {
             return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
-        get unitPrice() {
-            return randomInt(100);
-        }
+        unitPrice: 1.56
     },
     // Flyers
     {
@@ -40,14 +38,12 @@ const products = [
         get url() {
             return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
-        get unitPrice() {
-            return randomInt(100);
-        }
+        unitPrice: 0.54
     },
     // Dépliants
     {
-        name: "Dépliants",
-        description: "Des brochures personnalisées pour votre entreprise ou événement.",
+        name: "Bloc Note",
+        description: "Des Bloc Notes personnalisées pour votre entreprise ou événement.",
         get images() {
             let ImagesList: string[] = [];
             let Count = EndCount;
@@ -59,9 +55,7 @@ const products = [
         get url() {
             return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
-        get unitPrice() {
-            return randomInt(100);
-        }
+        unitPrice: 1.6
     },
     // Brochures
     {
@@ -78,162 +72,8 @@ const products = [
         get url() {
             return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
-        get unitPrice() {
-            return randomInt(100);
-        }
+        unitPrice: 2.8
     },
-    // Affiches
-    {
-        name: "Affiches",
-        description: "Des affiches personnalisées pour votre entreprise ou événement.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i < Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(100);
-        }
-    },
-    // Chemises
-    {
-        name: "Chemises",
-        description: "Custom folders for your business or event.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i < Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(150);
-        }
-    },
-    // Chemise à Rabat
-    {
-        name: "Chemise à Rabat",
-        description: "Custom folders with flaps for your business or event.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i < Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(200);
-        }
-    },
-    // Bloc Note
-    {
-        name: "Bloc Note",
-        description: "Custom notepads for your business or personal use.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i < Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(50);
-        }
-    },
-    // Calendrier
-    {
-        name: "Calendrier",
-        description: "Custom calendars for your business or personal use.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i <= Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(80);
-        }
-    },
-    // Lettres à en tete
-    {
-        name: "Lettres à en tete",
-        description: "Custom letterheads for your business or personal use.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i < Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(70);
-        }
-    },
-    // Enveloppe
-    {
-        name: "Enveloppe",
-        description: "Custom envelopes for your business or personal use.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i < Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(30);
-        }
-    },
-    // Carnet de tickets
-    {
-        name: "Carnet de tickets",
-        description: "Custom tickets books for your events or raffles.",
-        get images() {
-            let ImagesList: string[] = [];
-            let Count = EndCount;
-            for (let i = StartCount; i < Count; i++) {
-                ImagesList.push(`${ImagesDirectory}/${this.name.toLowerCase().replace(/ /g, "-")}/${i + 1}.jpg`);
-            }
-            return ImagesList;
-        },
-        get url() {
-            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
-        },
-        get unitPrice() {
-            return randomInt(40);
-        }
-    }
 ];
 
 export default products;

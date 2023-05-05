@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { useAuth } from "@/context/AuthContext";
 import axios from "axios";
 
 function Copyright(props: any) {
@@ -42,6 +43,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Login() {
+    // Auth Context
+    const { isLoggedIn, login, logout, userInfo }: any = useAuth();
+
     // Process States
     const [isSending, setSending] = React.useState<boolean>(false);
 
@@ -70,6 +74,7 @@ export default function Login() {
             .post(url, data)
             .then((res) => {
                 console.log(res.status);
+                login(res.data["loggedIn"]);
                 setSending(false);
                 setSnackbarMessage("Connexion réussie !");
                 setSnackbarSeverity("success");

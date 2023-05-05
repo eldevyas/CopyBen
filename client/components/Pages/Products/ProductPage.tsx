@@ -1,5 +1,6 @@
 import { Product } from "@/types/Product";
 import Head from "next/head";
+import ProductContainer from "./Base/App/Product Container";
 
 interface ProductPageProps {
     product: Product;
@@ -9,11 +10,13 @@ const ProductPage = ({ product }: ProductPageProps) => {
     return (
         <div className="Page ProductPage">
             <Head>
-                <title>CopyBen - {product.name}</title>
+                <title>CopyBen | {product.name}</title>
             </Head>
-            <div className="PageContent">
-                <h1>{product.name}</h1>
-                <p>{product.description}</p>
+            <div className="ProductPage__PageContent">
+                <ProductContainer
+                    className={"ProductPage__PageContent__"}
+                    product={product}
+                />
             </div>
         </div>
     );

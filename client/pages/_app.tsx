@@ -12,7 +12,7 @@ import {
     responsiveFontSizes,
     ThemeProvider,
 } from "@mui/material/styles";
-import { AuthProvider } from "@/context/Authcontext";
+import { AuthProvider } from "@/context/AuthContext";
 
 let theme = createTheme({
     palette: {
@@ -22,10 +22,12 @@ let theme = createTheme({
         secondary: {
             main: "#008ded",
         },
+        // mode: "dark",
     },
     typography: {
         // fontFamily: ['"Montserrat"', "sans-serif"].join(","),
         fontFamily: "inherit",
+        fontSize: 12,
     },
     components: {
         MuiFormControlLabel: {
@@ -53,7 +55,6 @@ let theme = createTheme({
         MuiButtonBase: {
             defaultProps: {
                 disableRipple: false,
-                // disableElevation: false,
             },
         },
     },
@@ -64,18 +65,18 @@ theme = responsiveFontSizes(theme);
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <AuthProvider>
-            <Layout>
-                <NextNProgress
-                    color="#ff9515"
-                    startPosition={0.3}
-                    stopDelayMs={200}
-                    height={5}
-                    showOnShallow={true}
-                />
-                <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+                <Layout>
+                    <NextNProgress
+                        color="#ff9515"
+                        startPosition={0.3}
+                        stopDelayMs={200}
+                        height={5}
+                        showOnShallow={true}
+                    />
                     <Component {...pageProps} />
-                </ThemeProvider>
-            </Layout>
+                </Layout>
+            </ThemeProvider>
         </AuthProvider>
     );
 }
