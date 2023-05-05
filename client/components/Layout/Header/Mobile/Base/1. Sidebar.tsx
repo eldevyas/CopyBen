@@ -12,11 +12,11 @@ import Products from "@/data/Products";
 const Sidebar = (props: any) => {
     const [showNav, setShowNav] = useState(false);
 
-    const toggleShowHide = ()=>{
-        if (!showNav){
+    const toggleShowHide = () => {
+        if (!showNav) {
             setShowNav(true)
             console.log(showNav)
-        }else{
+        } else {
             setShowNav(false)
             console.log(showNav)
 
@@ -27,7 +27,7 @@ const Sidebar = (props: any) => {
 
     return (
         <MDBCollapse show={props.showNav} navbar>
-            <ul style={{}} className="navbar-nav me-auto mb-2 mb-lg-0 p-3">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 p-3">
                 <li className="nav-item">
                     <MDBNavbarLink>Accueil</MDBNavbarLink>
                 </li>
@@ -41,17 +41,18 @@ const Sidebar = (props: any) => {
                     >
                         Produits
                     </MDBNavbarLink>
-                    {showNav && <ul>
-                                    {Products.map((product: any) => (
-                                    <li className="nav-item" key={product.name}>
-                                        <MDBNavbarLink>{product.name}</MDBNavbarLink>
-                                    </li>
-                                        ))}
-                                </ul>}
                 </li>
             </ul>
 
-            <ul className="navbar-nav d-flex flex-row mx-3">
+            <ul style={{'display': showNav ? 'block' : 'none', 'background': 'white', 'margin': '0'}}>
+                {Products.map((product: any) => (
+                <li className="nav-item" key={product.name}>
+                    <MDBNavbarLink>{product.name}</MDBNavbarLink>
+                </li>
+                ))}
+            </ul>
+
+            <ul className="navbar-nav d-flex flex-row mx-3 bg-white">
                 <li className="nav-item me-3 me-lg-0">
                     <MDBNavbarLink>Se connecter</MDBNavbarLink>
                 </li>
@@ -60,6 +61,7 @@ const Sidebar = (props: any) => {
                     <MDBNavbarLink>S'inscrire</MDBNavbarLink>
                 </li>
             </ul>
+
         </MDBCollapse>
     );
 };
