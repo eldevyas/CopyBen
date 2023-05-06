@@ -13,6 +13,14 @@ import {
     Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import {
+    ProductFields as Fields,
+    ProductFieldType as FieldType,
+    getDefaultValues,
+    ProductFieldType,
+    calculatePrice,
+} from "./Types/ProductFields";
+import ProductField from "./Core/ProductField";
 
 const Div = styled("div")(({ theme }) => ({
     ...theme.typography.button,
@@ -21,61 +29,54 @@ const Div = styled("div")(({ theme }) => ({
     padding: theme.spacing(1),
 }));
 
-let ProductFields = {
-    "Bloc Note": {
-        label: "Bloc Note",
-        unitPrice: 23.06,
-        fields: [
-            {
-                name: "Assemblage",
-                type: "Select",
-                options: [
-                    {
-                        label: "Dos carré collé",
-                        type: "Standard",
-                        value: 0,
-                    },
-                    {
-                        label: "Spiral plastique",
-                        type: "Multiple",
-                        value: {
-                            100: 7,
-                            "+100": 10,
-                        },
-                    },
-                    {
-                        label: "Spiral métallique",
-                        type: "Multiple",
-                        value: {
-                            100: 10,
-                            "+100": 15,
-                        },
-                    },
-                    {
-                        label: "Séré Feuille",
-                        type: "Multiple",
-                        value: {
-                            100: 7,
-                            "+100": 10,
-                        },
-                    },
-                ],
-            },
-        ],
-    },
-};
-
 export default function ProductCustomization(props: {
     Product: Product;
     Customization: any;
     setCustomization: any;
 }) {
+    // Parent Properties
+    const Product = props.Product;
+    const Customization = props.Customization;
+    const setCustomization = props.setCustomization;
+
     // Product Custom Fields
-    const [ProductType, setProductType] = useState<string>("");
-    const [ProductName, setProductName] = useState<string>("");
-    const [ProductFields, setProductFields] = useState<{}[]>([]);
+    const [ProductFields, setProductFields] = useState<FieldType[]>(Fields);
+    const DefaultValues = getDefaultValues();
+    // State for selected values
+    const [selectedValues, setSelectedValues] = useState<{
+        [key: string]: any;
+    }>(DefaultValues);
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        // console.table(selectedValues);
+        console.log(calculatePrice(selectedValues));
+    }, [selectedValues]);
 
-    return <form></form>;
+    return (
+        <Stack
+            direction={"column"}
+            justifyContent={"flex-start"}
+            alignItems={"flex-start"}
+            gap={"0.5rem"}
+            sx={{
+                mb: 2.5,
+                width: "100%",
+            }}
+        >
+            {ProductFields.map((field: any) => {
+                return (
+                    <ProductField
+                        key={field.name}
+                        Field={field}
+                        ParentValue={
+                            selectedValues[field.name]
+                                ? selectedValues[field.name]
+                                : null
+                        }
+                        setCustomization={setSelectedValues}
+                    />
+                );
+            })}
+        </Stack>
+    );
 }
