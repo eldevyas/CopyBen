@@ -1,3 +1,4 @@
+import React from "react";
 import { createContext, useContext, useState, useEffect } from "react";
 import { UserType, Context } from "@/types/Context";
 
@@ -28,10 +29,10 @@ export const AuthProvider: any = ({ children, props }: any) => {
         localStorage.removeItem("userInfo");
     };
 
-    return (
-        <AuthContext.Provider value={{ isLoggedIn, login, logout, userInfo }}>
-            {children}
-        </AuthContext.Provider>
+    return React.createElement(
+        AuthContext.Provider,
+        { value: { isLoggedIn, login, logout, userInfo } },
+        children
     );
 };
 
