@@ -6,8 +6,8 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import UserAvatar from "./Utils/D. User Avatar";
-import { useAuth } from "./../../../../../context/AuthContext";
-import { Context } from "./../../../../../types/Context";
+import { useAuth } from "@/context/AuthContext";
+import { Context } from "@/types/Context";
 
 function ActiveLink({ children, href }: any) {
     const router = useRouter();
