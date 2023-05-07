@@ -15,7 +15,7 @@ const ProductPage = ({ product }: ProductPageProps) => {
             <div className="ProductPage__PageContent">
                 <ProductContainer
                     className={"ProductPage__PageContent__"}
-                    product={product}
+                    Product={product}
                 />
             </div>
         </div>

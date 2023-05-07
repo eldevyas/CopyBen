@@ -1,29 +1,43 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Product } from "@/types/Product";
 import ProductPage from "@/components/Pages/Products/ProductPage";
-import { getProductByName } from "@/data/Products";
+import Prodcuts, { getProductByName } from "@/data/Products";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 interface ProductPageProps {
     product: Product;
 }
 
 const ProductPageRoute = ({ product }: ProductPageProps) => {
+    const Router = useRouter();
+    const { isLoggedIn }: any = useAuth();
+
+    useEffect(() => {
+        const checkAuthentication = () => {
+            if (!isLoggedIn) {
+                // Redirect to the homepage or a fallback URL
+                Router.push("/auth/login");
+            }
+        };
+
+        checkAuthentication();
+    }, [Router, isLoggedIn]);
+
     return <ProductPage product={product} />;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
     let Hostname = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-    const products = await fetch(`${Hostname}/products`).then((res) =>
-        res.json()
-    );
-    const paths = products.map((product: Product) => ({
-        params: { Product: product.name.toLowerCase().replace(/ /g, "-") },
+    const paths = Prodcuts.map((Product: Product) => ({
+        params: { Product: Product.name.toLowerCase().replace(/ /g, "-") },
     }));
     console.clear();
     console.log("Paths: ", paths);
 
-    return { paths, fallback: false };
+    return { paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {

@@ -1,10 +1,18 @@
 import ImageWithFallback from "@/components/Global/ImageWithFallbackProps";
 import Products from "@/data/Products";
 import React from "react";
+import { useRouter } from "next/router";
 
 const Card = (props: any) => {
+    const Router = useRouter();
+
     return (
-        <div className="ProductsList__Cards__Card">
+        <div
+            className="ProductsList__Cards__Card"
+            onClick={() => {
+                Router.push(props.Href);
+            }}
+        >
             <div className="ProductsList__Cards__Card__Content">
                 <div className="ProductsList__Cards__Card__Content__Title">
                     {props.Title}
@@ -44,6 +52,7 @@ export default function ProductsList({ Query }: { Query: string }) {
                                 Title={Product.name}
                                 Description={Product.description}
                                 Image={Product.images[0]}
+                                Href={Product.url}
                             />
                         );
                     })

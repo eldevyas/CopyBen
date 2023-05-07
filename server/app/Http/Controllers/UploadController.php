@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmation;
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -51,24 +52,41 @@ class UploadController extends Controller
         ]);
     }
 
-
-    public function send_attach_email()
+    public function handleOrder(Request $request)
     {
-        $mailData = [
-            'title' => 'confirmation email',
-            'body' => 'Hello Aymane, Thank you for your order.'
-        ];
-        Mail::to('Aymecd123@gmail.com')->send(new SendEmail($mailData));
+        // Get the order information from the request
+        $OrderID = $request->input('orderID');
+        $UserInfo = $request->input('userInfo');
+        $ProductName = $request->input('Product');
+        $Customization = $request->input('Customization');
+        $Files = $request->input('Files');
 
-        echo "email sent";
-    }
-
-    public function send_form(Request $request)
-    {
-        if ($request) {
-
-            return response()->json(['success' => 'File uploaded successfully', 'values' => $request->payload]);
+        // Generate the customization list
+        $CustomizationList = array();
+        foreach ($Customization['Customization'] as $key => $value) {
+            $CustomizationItem = [
+                'Name' => $key,
+                'Value' => $value,
+            ];
+            array_push($CustomizationList, $CustomizationItem);
         }
-        return response()->json("Please try again...!");
+
+        // Create the order details object
+        $OrderDetails = [
+            "Quantity" => $Customization['Quantity'],
+            "Conception" => $Customization["Conception"],
+            "Customization" => $CustomizationList,
+            "Notes" => $Customization["Notes"],
+            "Unit Price" => $Customization["Unit Price"],
+            "Total HT" => $Customization["Total HT"],
+        ];
+
+        $Order = ["Order ID" => $OrderID, "User Information" => $UserInfo, "Product Name" => $ProductName, "Order Details" => $OrderDetails, "Files" => $Files];
+
+        // Send the email to the owner
+        // Mail::to('yassinechettouch@gmail.com')->send(new OrderConfirmation($Order));
+
+        // Return a response indicating success
+        return response()->json(['success' => true, "OrderConfirmation" => ["Order ID" => $OrderID, "User Information" => $UserInfo, "Product Name" => $ProductName, "Order Details" => $OrderDetails, "Files" => $Files]]);
     }
 }

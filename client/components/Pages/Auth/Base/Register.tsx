@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import NextLink from "next/link";
 
 import axios from "axios";
 
@@ -63,12 +64,12 @@ export default function Register() {
         event.preventDefault();
         setSending(true);
         const data = new FormData(event.currentTarget);
-        const url = "http://127.0.0.1:8000/api/register";
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+        const URL = `${API_URL}/login`;
         axios
-            .post(url, data)
+            .post(URL, data)
             .then((res) => {
-                console.log(res.status);
                 setSending(false);
                 setSnackbarMessage("Inscrit avec succès!");
                 setSnackbarSeverity("success");
@@ -249,9 +250,11 @@ export default function Register() {
                     </Button>
                     <Grid container justifyContent="center">
                         <Grid item>
-                            <Link href="#" variant="body2">
-                                Vous avez déjà un compte? Connectez-vous
-                            </Link>
+                            <NextLink href="/auth/login">
+                                <Link href="#" variant="body2">
+                                    Vous avez déjà un compte? Connectez-vous
+                                </Link>
+                            </NextLink>
                         </Grid>
                     </Grid>
                 </Box>

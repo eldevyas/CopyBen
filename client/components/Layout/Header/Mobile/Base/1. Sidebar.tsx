@@ -14,16 +14,11 @@ const Sidebar = (props: any) => {
 
     const toggleShowHide = () => {
         if (!showNav) {
-            setShowNav(true)
-            console.log(showNav)
+            setShowNav(true);
         } else {
-            setShowNav(false)
-            console.log(showNav)
-
+            setShowNav(false);
         }
-    }
-
-    // useEffect( ()=>{console.log('useEffect')}, [showNav] )
+    };
 
     return (
         <MDBCollapse show={props.showNav} navbar>
@@ -44,11 +39,17 @@ const Sidebar = (props: any) => {
                 </li>
             </ul>
 
-            <ul style={{'display': showNav ? 'block' : 'none', 'background': 'white', 'margin': '0'}}>
+            <ul
+                style={{
+                    display: showNav ? "block" : "none",
+                    background: "white",
+                    margin: "0",
+                }}
+            >
                 {Products.map((product: any) => (
-                <li className="nav-item" key={product.name}>
-                    <MDBNavbarLink>{product.name}</MDBNavbarLink>
-                </li>
+                    <li className="nav-item" key={product.name}>
+                        <MDBNavbarLink>{product.name}</MDBNavbarLink>
+                    </li>
                 ))}
             </ul>
 
@@ -61,7 +62,6 @@ const Sidebar = (props: any) => {
                     <MDBNavbarLink>S'inscrire</MDBNavbarLink>
                 </li>
             </ul>
-
         </MDBCollapse>
     );
 };

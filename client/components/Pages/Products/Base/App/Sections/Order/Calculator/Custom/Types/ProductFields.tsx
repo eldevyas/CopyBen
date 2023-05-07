@@ -193,7 +193,7 @@ export type ProductFieldType = {
     }[];
 };
 
-export function getDefaultValues() {
+export function getDefaultValues(): { [key: string]: any } {
     const getDefaultValue = (field: ProductFieldType): any => {
         switch (field.type) {
             case "Select":
@@ -398,6 +398,5 @@ export function calculatePrice(SelectedOptions: { [key: string]: any }): {
         TotalSelectedOptionsDetails.push(OptionPriceDetails);
         TotalSelectedOptionsPrice += OptionPrice;
     });
-    console.table(TotalSelectedOptionsDetails);
     return { TotalSelectedOptionsDetails, TotalSelectedOptionsPrice };
 }

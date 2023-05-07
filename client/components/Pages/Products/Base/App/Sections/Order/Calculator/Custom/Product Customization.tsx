@@ -31,8 +31,10 @@ const Div = styled("div")(({ theme }) => ({
 
 export default function ProductCustomization(props: {
     Product: Product;
-    Customization: any;
-    setCustomization: any;
+    Customization: { [key: string]: any };
+    setCustomization: React.Dispatch<
+        React.SetStateAction<{ [key: string]: any }>
+    >;
 }) {
     // Parent Properties
     const Product = props.Product;
@@ -41,16 +43,14 @@ export default function ProductCustomization(props: {
 
     // Product Custom Fields
     const [ProductFields, setProductFields] = useState<FieldType[]>(Fields);
-    const DefaultValues = getDefaultValues();
     // State for selected values
     const [selectedValues, setSelectedValues] = useState<{
         [key: string]: any;
-    }>(DefaultValues);
+    }>(Customization);
 
     useEffect(() => {
-        // console.table(selectedValues);
-        console.log(calculatePrice(selectedValues));
-    }, [selectedValues]);
+        setCustomization(selectedValues);
+    }, [selectedValues, setCustomization]);
 
     return (
         <Stack

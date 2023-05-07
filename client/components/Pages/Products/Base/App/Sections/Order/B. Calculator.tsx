@@ -10,6 +10,8 @@ import SecondStep from "./Calculator/2. Second Step";
 import { Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ThankYouScreen from "./Calculator/3. Thank You";
+import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -49,10 +51,14 @@ const Div = styled("div")(({ theme }) => ({
 
 type FormValues = {
     Quantity: number;
+    Customization: any;
     Delivery: string;
     Conception: string;
     Notes: string;
+    "Unit Price": number;
+    "Total HT": number;
 };
+
 function generateOrderId(prefix: string, postfix: string): string {
     const timestamp = Date.now().toString().substr(-4); // Get last 6 digits of current timestamp
     const randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; // Characters to use for random string
@@ -62,12 +68,23 @@ function generateOrderId(prefix: string, postfix: string): string {
     return `${prefix}-${timestamp}-${randomString}-${postfix}`;
 }
 
-export default function Calculator(props: { product: Product } | any) {
+type OrderInfo = {
+    orderID: string;
+    Product: any;
+    Customization: FormValues | null;
+    Files: string[];
+};
+
+export default function Calculator(props: { Product: Product } | any) {
+    // Get Order Info from LoggenIn user
+    const { userInfo }: any = useAuth();
+
     const [value, setValue] = React.useState(0);
     let GeneratedID: string = generateOrderId("CB", "OD");
     const [orderID, setOrderID] = useState<string>(GeneratedID);
     const [FirstValues, setFirstValues] = useState<FormValues | null>(null);
     const [SecondValues, setSecondValues] = useState<FormValues | null>(null);
+    const [OrderInfo, setOrderInfo] = useState<OrderInfo | null>(null);
 
     useEffect(() => {
         // alert("Generated ID: " + orderID);
@@ -79,16 +96,33 @@ export default function Calculator(props: { product: Product } | any) {
     };
 
     // Final Uplaod of Values
+
     const callFinalUpload = (FinalLinks: string[]) => {
-        const orderInfo = {
+        const Info = {
             orderID: orderID,
-            Product: props.product.name,
+            userInfo: userInfo,
+            Product: props.Product.name,
             Customization: FirstValues,
             Files: FinalLinks,
         };
 
-        console.table(orderInfo);
-        setValue(2);
+        setOrderInfo(Info);
+
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+        axios
+            .post(`${API_URL}/order`, Info)
+            .then((response) => {
+                // handle success response here
+                console.log(response.data);
+                setValue(2);
+            })
+            .catch((error) => {
+                // handle error response here
+                console.error(error);
+                alert(error.message);
+            });
+        console.table(Info);
     };
 
     return (
@@ -96,7 +130,7 @@ export default function Calculator(props: { product: Product } | any) {
             <TabPanel value={value} index={0}>
                 <FirstStep
                     orderID={orderID}
-                    product={props.product}
+                    product={props.Product}
                     className={props.className + "__FirstStep"}
                     Values={FirstValues}
                     validateStep={setFirstValues}
@@ -111,7 +145,7 @@ export default function Calculator(props: { product: Product } | any) {
             <TabPanel value={value} index={1}>
                 <SecondStep
                     orderID={orderID}
-                    product={props.product}
+                    product={props.Product}
                     className={props.className + "__SecondStep"}
                     Files={SecondValues}
                     setFiles={setSecondValues}
@@ -124,7 +158,7 @@ export default function Calculator(props: { product: Product } | any) {
                 />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <ThankYouScreen />
+                <ThankYouScreen Product={props.Product} OrderInfo={OrderInfo} />
             </TabPanel>
         </div>
     );

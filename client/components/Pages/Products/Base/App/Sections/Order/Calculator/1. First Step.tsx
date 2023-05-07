@@ -14,6 +14,11 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ProductCustomization from "./Custom/Product Customization";
+import {
+    getDefaultValues,
+    ProductFieldType as FieldType,
+    calculatePrice,
+} from "./Custom/Types/ProductFields";
 
 const Div = styled("div")(({ theme }) => ({
     ...theme.typography.button,
@@ -28,6 +33,8 @@ type FormValues = {
     Delivery: string;
     Conception: string;
     Notes: string;
+    "Unit Price": number;
+    "Total HT": number;
 };
 
 export default function FirstStep(props: { product: Product } | any) {
@@ -41,8 +48,8 @@ export default function FirstStep(props: { product: Product } | any) {
     const [Quantity, setQuantity] = useState<number>(
         ParentValues?.Quantity ? ParentValues.Quantity : 1
     );
-    const [Customization, setCustomization] = useState<any>(
-        ParentValues?.Customization ? ParentValues.Customization : 1
+    const [Customization, setCustomization] = useState<{ [key: string]: any }>(
+        getDefaultValues()
     );
     const [Delivery, setDelivery] = useState<string>(
         ParentValues?.Delivery
@@ -56,22 +63,31 @@ export default function FirstStep(props: { product: Product } | any) {
         ParentValues?.Notes ? ParentValues.Notes : ""
     );
 
+    const [OptionsPrice, setOptionsPrice] = useState<{
+        TotalSelectedOptionsDetails: any;
+        TotalSelectedOptionsPrice: number;
+    }>(calculatePrice(Customization));
+
+    // Track Total Value
+    const [Total, setTotal] = useState<number>(
+        (UnitPrice + OptionsPrice.TotalSelectedOptionsPrice) * Quantity
+    );
+    //
+    // Calculated Values
     const [Values, setValues] = useState<FormValues>({
         Quantity: Quantity,
         Customization: Customization,
         Delivery: Delivery,
         Conception: Conception,
         Notes: Notes,
+        "Unit Price": UnitPrice + OptionsPrice.TotalSelectedOptionsPrice,
+        "Total HT": Total,
     });
-
-    // Calculated Values
-    const [Total, setTotal] = useState<number>(UnitPrice * Quantity);
-    //
-    // Track Total Value
     useEffect(() => {
-        let Total = UnitPrice * Quantity;
+        let Total =
+            (UnitPrice + OptionsPrice.TotalSelectedOptionsPrice) * Quantity;
         setTotal(Total);
-    }, [Quantity, UnitPrice]);
+    }, [OptionsPrice.TotalSelectedOptionsPrice, Quantity, UnitPrice]);
 
     useEffect(() => {
         setValues({
@@ -80,8 +96,20 @@ export default function FirstStep(props: { product: Product } | any) {
             Delivery: Delivery,
             Conception: Conception,
             Notes: Notes,
+            "Unit Price": UnitPrice + OptionsPrice.TotalSelectedOptionsPrice,
+            "Total HT": Total,
         });
-    }, [Conception, Customization, Delivery, Notes, Quantity]);
+        setOptionsPrice(calculatePrice(Customization));
+    }, [
+        Conception,
+        Customization,
+        Delivery,
+        Notes,
+        OptionsPrice.TotalSelectedOptionsPrice,
+        Quantity,
+        Total,
+        UnitPrice,
+    ]);
 
     // Const Handle Submission
     const handleSubmit = () => {
@@ -93,7 +121,6 @@ export default function FirstStep(props: { product: Product } | any) {
     return (
         <div className={props.className}>
             <Stack
-                className={`${props.className}__Stack`}
                 direction={"column"}
                 justifyContent={"flex-start"}
                 alignItems={"flex-start"}
@@ -102,22 +129,16 @@ export default function FirstStep(props: { product: Product } | any) {
                     mb: 2.5,
                 }}
             >
-                <Typography
-                    variant="h4"
-                    component="h2"
-                    fontWeight={"bold"}
-                    className={`${props.className}__Stack__Title`}
-                >
+                <Typography variant="h4" component="h2" fontWeight={"bold"}>
                     Etape 1 : Calculateur du Prix{" "}
                 </Typography>
 
-                <Div className={`${props.className}__Stack__Description`}>
+                <Div>
                     Prix dégressifs selon la quantité et l&apos;impression
                 </Div>
             </Stack>
 
             <Stack
-                className={`${props.className}__Form`}
                 direction={"column"}
                 justifyContent={"flex-start"}
                 alignItems={"flex-start"}
@@ -137,7 +158,6 @@ export default function FirstStep(props: { product: Product } | any) {
                 >
                     <FormLabel>Quantité</FormLabel>
                     <Input
-                        className="BasicInput"
                         type="number"
                         inputProps={{
                             min: 1,
@@ -162,7 +182,6 @@ export default function FirstStep(props: { product: Product } | any) {
 
                 {/* Delivery */}
                 <FormControl
-                    className={`${props.className}__Form__Field`}
                     sx={{
                         mb: 2.5,
                         width: "100%",
@@ -170,7 +189,6 @@ export default function FirstStep(props: { product: Product } | any) {
                 >
                     <FormLabel>Délais de livraison prévisionnel</FormLabel>
                     <Input
-                        className="BasicInput"
                         type="text"
                         value={Delivery}
                         onChange={(
@@ -185,7 +203,6 @@ export default function FirstStep(props: { product: Product } | any) {
 
                 {/* Conception */}
                 <FormControl
-                    className={`${props.className}__Form__Field`}
                     sx={{
                         mb: 2.5,
                         width: "100%",
@@ -211,7 +228,6 @@ export default function FirstStep(props: { product: Product } | any) {
 
                 {/* Notes */}
                 <FormControl
-                    className={`${props.className}__Form__Field`}
                     variant="standard"
                     sx={{
                         mb: 2.5,
@@ -220,7 +236,6 @@ export default function FirstStep(props: { product: Product } | any) {
                 >
                     <FormLabel>Notes</FormLabel>
                     <Input
-                        className="BasicInput"
                         type="text"
                         fullWidth
                         multiline={true}
@@ -232,7 +247,6 @@ export default function FirstStep(props: { product: Product } | any) {
                 </FormControl>
 
                 <Stack
-                    className={`${props.className}__Form__Field`}
                     direction={"column"}
                     justifyContent={"flex-start"}
                     alignItems={"flex-start"}
@@ -243,7 +257,6 @@ export default function FirstStep(props: { product: Product } | any) {
                     }}
                 >
                     <Div
-                        className={`${props.className}__Form__Field__Total`}
                         sx={{
                             fontSize: 20,
                             width: "100%",
@@ -261,7 +274,6 @@ export default function FirstStep(props: { product: Product } | any) {
                     </Div>
 
                     <Div
-                        className={`${props.className}__Form__Field__Total`}
                         sx={{
                             fontSize: 15,
                             width: "100%",
@@ -273,7 +285,9 @@ export default function FirstStep(props: { product: Product } | any) {
                         <Typography paragraph component={"div"}>
                             Prix Unitaire:
                         </Typography>{" "}
-                        {Product.unitPrice.toLocaleString("fr-MA", {
+                        {(
+                            UnitPrice + OptionsPrice.TotalSelectedOptionsPrice
+                        ).toLocaleString("fr-MA", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                         })}
@@ -282,7 +296,6 @@ export default function FirstStep(props: { product: Product } | any) {
                 </Stack>
 
                 <Stack
-                    className={`${props.className}__Form__Field`}
                     direction={"row"}
                     justifyContent={"flex-start"}
                     alignItems={"flex-start"}

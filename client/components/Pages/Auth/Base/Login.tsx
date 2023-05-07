@@ -68,10 +68,13 @@ export default function Login() {
         event.preventDefault();
         setSending(true);
         const data = new FormData(event.currentTarget);
-        const url = "http://127.0.0.1:8000/api/login";
+
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+        const URL = `${API_URL}/login`;
 
         axios
-            .post(url, data)
+            .post(URL, data)
             .then((res) => {
                 console.log(res.status);
                 login(res.data["loggedIn"]);

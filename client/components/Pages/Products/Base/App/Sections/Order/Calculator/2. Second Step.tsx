@@ -36,6 +36,7 @@ import {
 import FolderIcon from "@mui/icons-material/Folder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UploadIcon from "@mui/icons-material/Upload";
+import CheckIcon from "@mui/icons-material/Check";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import EditableTextField from "./Core/EditableTextField";
@@ -104,8 +105,10 @@ export default function SecondStep(props: { Product: Product } | any) {
     const [Progress, setProgress] = useState<any>({});
     const [Completed, setCompleted] = useState<any>({});
 
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
     // Upload Endpoint
-    let uploadUrl = "http://localhost:8000/api/upload";
+    let uploadUrl = API_URL + "/upload";
 
     const handleUpload = () => {
         const totalFiles = Files.length;
@@ -261,20 +264,25 @@ export default function SecondStep(props: { Product: Product } | any) {
                                     width: "100%",
                                 }}
                             >
-                                <ListItemIcon>
-                                    {!Completed[file.name] && (
+                                {!Completed[file.name] && (
+                                    <ListItemIcon>
                                         <CircularProgressWithLabel
-                                            value={Progress[file.name]}
+                                            value={
+                                                Progress[file.name]
+                                                    ? Progress[file.name]
+                                                    : 0
+                                            }
                                             color={"secondary"}
                                         />
-                                    )}
-                                    {Completed[file.name] && (
-                                        <CircularProgressWithLabel
-                                            value={100}
-                                            color={"success"}
-                                        />
-                                    )}
-                                </ListItemIcon>
+                                    </ListItemIcon>
+                                )}
+                                {Completed[file.name] && (
+                                    <ListItemIcon>
+                                        <Avatar>
+                                            <CheckIcon />
+                                        </Avatar>
+                                    </ListItemIcon>
+                                )}
                                 <ListItemText
                                     sx={{
                                         display: "flex",

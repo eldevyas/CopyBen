@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { UserType, Context } from "@/types/Context";
 
 export const AuthContext = createContext<Context | null>(null);
@@ -6,6 +6,15 @@ export const AuthContext = createContext<Context | null>(null);
 export const AuthProvider: any = ({ children, props }: any) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userInfo, setUserInfo] = useState<UserType | null>(null);
+
+    useEffect(() => {
+        const userInfoFromLocalStorage = localStorage.getItem("userInfo");
+        if (userInfoFromLocalStorage) {
+            const parsedUserInfo = JSON.parse(userInfoFromLocalStorage);
+            setUserInfo(parsedUserInfo);
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     const login = (userData: UserType) => {
         setIsLoggedIn(true);

@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
+import Product from "@/types/Product";
 import { Button, Container, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 
-const ThankYouScreen = () => {
+const ThankYouScreen = (props: { Product: Product; OrderInfo: any }) => {
     const Router = useRouter();
     //
     //

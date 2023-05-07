@@ -5,9 +5,10 @@ import Slider from "react-slick";
 import DoubleArrowOutlinedIcon from "@mui/icons-material/DoubleArrowOutlined";
 import ImageWithFallback from "@/components/Global/ImageWithFallbackProps";
 import Products from "@/data/Products";
+import { useRouter } from "next/router";
 
 const Slide = (props: any) => {
-    console.log(props.Title, " ", props.Image);
+    const Router = useRouter();
     return (
         <div className="Slide">
             <div className="Card">
@@ -26,6 +27,9 @@ const Slide = (props: any) => {
                         variant="text"
                         className="Card__Content__Button"
                         endIcon={<DoubleArrowOutlinedIcon />}
+                        onClick={() => {
+                            Router.push(props.Href);
+                        }}
                     >
                         Commander en ligne
                     </Button>
@@ -59,6 +63,7 @@ export default function SuperPromotions() {
                             key={Index}
                             Title={Product.name}
                             Image={Product.images[0]}
+                            Href={Product.url}
                         />
                     );
                 })}

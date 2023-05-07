@@ -22,6 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/upload', [UploadController::class, 'store']);
-Route::post('/form', [UploadController::class, 'send_form']);
+Route::post('/order', [UploadController::class, 'handleOrder']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
