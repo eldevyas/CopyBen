@@ -7,10 +7,10 @@ import { useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 
 interface ProductPageProps {
-    product: Product;
+    Product: Product;
 }
 
-const ProductPageRoute = ({ product }: ProductPageProps) => {
+const ProductPageRoute = ({ Product }: ProductPageProps) => {
     const Router = useRouter();
     const { isLoggedIn }: any = useAuth();
 
@@ -25,7 +25,7 @@ const ProductPageRoute = ({ product }: ProductPageProps) => {
         checkAuthentication();
     }, [Router, isLoggedIn]);
 
-    return <ProductPage product={product} />;
+    return <ProductPage Product={Product} />;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -43,11 +43,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
     // Fetch the data for the product based on the name in the URL
     console.log("Parameters: ", params);
-    const productName: any = params.Product;
-    const product = getProductByName(productName);
-    // return { props: { product } };
+    const ProductName: any = params.Product;
+    const Product = getProductByName(ProductName);
     return {
-        props: { product },
+        props: { Product },
     };
 };
 

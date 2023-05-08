@@ -3,19 +3,20 @@ import Head from "next/head";
 import ProductContainer from "./Base/App/Product Container";
 
 interface ProductPageProps {
-    product: Product;
+    Product: Product;
 }
 
-const ProductPage = ({ product }: ProductPageProps) => {
+const ProductPage = ({ Product }: ProductPageProps) => {
+    const DocumentTitle = `CopyBen | ${Product.name}`;
     return (
         <div className="Page ProductPage">
             <Head>
-                <title>CopyBen | {product.name}</title>
+                <title>{DocumentTitle}</title>
             </Head>
             <div className="ProductPage__PageContent">
                 <ProductContainer
                     className={"ProductPage__PageContent__"}
-                    Product={product}
+                    Product={Product}
                 />
             </div>
         </div>
