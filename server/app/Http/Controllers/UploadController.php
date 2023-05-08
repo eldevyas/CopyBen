@@ -84,7 +84,7 @@ class UploadController extends Controller
         $Order = ["Order ID" => $OrderID, "User Information" => $UserInfo, "Product Name" => $ProductName, "Order Details" => $OrderDetails, "Files" => $Files];
 
         // Send the email to the owner
-        // Mail::to('yassinechettouch@gmail.com')->send(new OrderConfirmation($Order));
+        Mail::to('yassinechettouch@gmail.com')->send(new OrderConfirmation($Order));
 
         // Return a response indicating success
         return response()->json(['success' => true, "OrderConfirmation" => ["Order ID" => $OrderID, "User Information" => $UserInfo, "Product Name" => $ProductName, "Order Details" => $OrderDetails, "Files" => $Files]]);

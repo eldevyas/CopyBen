@@ -9,7 +9,11 @@ export default function Page() {
 
     // If no products were filtered, display all products
     const Query = q ? q : q;
-    console.log(Query)
+    console.log(Query);
 
-    return <ProductsPage Query={Query} />;
+    return (
+        <>
+            <ProductsPage Query={Query} />{" "}
+        </>
+    );
 }
