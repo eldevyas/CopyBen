@@ -10,7 +10,7 @@ interface ProductPageProps {
     Product: Product;
 }
 
-const ProductPageRoute = () => {
+const ProductPageRoute = ({ Product }: ProductPageProps) => {
     const Router = useRouter();
     const { isLoggedIn }: any = useAuth();
 
@@ -25,7 +25,29 @@ const ProductPageRoute = () => {
         checkAuthentication();
     }, [Router, isLoggedIn]);
 
-    return <ProductPage Product={Products[0]} />;
+    return <ProductPage Product={Product} />;
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    let Hostname = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+    const paths = Products.map((Product: Product) => ({
+        params: { Product: Product.name.toLowerCase().replace(/ /g, "-") },
+    }));
+    console.clear();
+    console.log("Paths: ", paths);
+
+    return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+    // Fetch the data for the product based on the name in the URL
+    console.log("Parameters: ", params);
+    const ProductName: any = params.Product;
+    const Product = getProductByName(ProductName);
+    return {
+        props: { Product },
+    };
 };
 
 export default ProductPageRoute;
