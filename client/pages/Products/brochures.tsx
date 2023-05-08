@@ -25,7 +25,7 @@ const ProductPageRoute = () => {
         checkAuthentication();
     }, [Router, isLoggedIn]);
 
-    return <ProductPage Product={Products[4]} />;
+    return <ProductPage Product={Products[3]} />;
 };
 
 export default ProductPageRoute;
