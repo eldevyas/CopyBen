@@ -77,8 +77,15 @@ export default function Login() {
             .post(URL, data)
             .then((res) => {
                 console.log(res);
-                login(res.data["loggedIn"]);
+                if (res.data == "Email ou Mot de passe incorrect.") {
+                    setSending(false);
+                    setSnackbarMessage("Email ou Mot de passe incorrect.");
+                    setSnackbarSeverity("error");
+                    setSnackbarOpen(true);
+                    return;
+                }
                 setSending(false);
+                login(res.data["loggedIn"]);
                 setSnackbarMessage("Connexion réussie !");
                 setSnackbarSeverity("success");
                 setSnackbarOpen(true);
