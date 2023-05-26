@@ -251,9 +251,10 @@ export default function Register() {
                     <Grid container justifyContent="center">
                         <Grid item>
                             <NextLink href="/auth/login">
-                                <Link href="#" variant="body2">
-                                    Vous avez déjà un compte? Connectez-vous
-                                </Link>
+                                <Link href="#" variant="body2"></Link>
+                                <Typography variant="body1" color={"GrayText"}>
+                                    {"Vous avez déjà un compte? Connectez-vous"}
+                                </Typography>
                             </NextLink>
                         </Grid>
                     </Grid>

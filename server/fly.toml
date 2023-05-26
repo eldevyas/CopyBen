@@ -1,0 +1,35 @@
+# fly.toml app configuration file generated for copyben-test on 2023-05-08T20:52:52+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "copyben-test"
+primary_region = "mad"
+
+[build]
+  [build.args]
+    NODE_VERSION = "18"
+    PHP_VERSION = "8.1"
+
+
+[mounts]
+  source="mysqldata"
+  destination="/data"
+
+[env]
+  APP_ENV = "production"
+  APP_URL = "https://hidden-snow-3544.fly.dev"
+  LOG_CHANNEL = "stderr"
+  LOG_LEVEL = "info"
+  LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
+  DB_CONNECTION = "mysql"
+  DB_DATABASE= "mysqldata"
+
+[deploy]
+  release_command = "php /var/www/html/artisan migrate --force"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true

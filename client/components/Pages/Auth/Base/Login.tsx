@@ -73,6 +73,8 @@ export default function Login() {
 
         const URL = `${API_URL}/login`;
 
+        alert(URL);
+
         axios
             .post(URL, data)
             .then((res) => {
@@ -169,11 +171,11 @@ export default function Login() {
                     <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
                             <NextLink href="/auth/register">
-                                <Link variant="body2">
+                                <Typography variant="body1" color={"GrayText"}>
                                     {
                                         "Vous n'avez pas de compte ? Inscrivez-vous"
                                     }
-                                </Link>
+                                </Typography>
                             </NextLink>
                         </Grid>
                     </Grid>
