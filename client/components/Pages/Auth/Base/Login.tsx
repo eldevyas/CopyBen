@@ -76,7 +76,7 @@ export default function Login() {
         axios
             .post(URL, data)
             .then((res) => {
-                console.log(res.status);
+                console.log(res);
                 login(res.data["loggedIn"]);
                 setSending(false);
                 setSnackbarMessage("Connexion réussie !");
