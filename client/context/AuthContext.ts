@@ -20,7 +20,9 @@ export const AuthProvider: any = ({ children, props }: any) => {
     const login = (userData: UserType) => {
         setIsLoggedIn(true);
         setUserInfo(userData);
+        console.log(userData);
         localStorage.setItem("userInfo", JSON.stringify(userData));
+        console.log("Local Storage: ", localStorage.getItem("userInfo"));
     };
 
     const logout = () => {
