@@ -73,8 +73,6 @@ export default function Login() {
 
         const URL = `${API_URL}/login`;
 
-        alert(URL);
-
         axios
             .post(URL, data)
             .then((res) => {
