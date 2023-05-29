@@ -2,7 +2,7 @@ import { Product } from "@/types/Product";
 import { randomInt } from "crypto";
 
 // will be used in this file that is accessible for the netire website data
-let ImagesDirectory = '/img/Products';
+let ImagesDirectory = '/img/products';
 let StartCount = 0;
 let EndCount = 4;
 export const products = [
