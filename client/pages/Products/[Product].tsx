@@ -30,7 +30,7 @@ const ProductPageRoute = ({ Product }: ProductPageProps) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const paths = Products.map((Product: Product) => ({
-        params: { Product: Product.url },
+        params: { Product: Product.name.toLowerCase().replace(/ /g, "-") },
     }));
     console.clear();
     console.log("Paths: ", paths);
