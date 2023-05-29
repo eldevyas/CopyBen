@@ -5,7 +5,7 @@ import { randomInt } from "crypto";
 let ImagesDirectory = '/img/products';
 let StartCount = 0;
 let EndCount = 4;
-const products = [
+export const products = [
     // Cartes De Visite
     {
         name: "Cartes De Visite",
@@ -76,9 +76,9 @@ const products = [
     },
 ];
 
-export default products;
-
 
 export const getProductByName = (name: string): Product | undefined => {
     return products.find((product) => product.name.toLowerCase().replace(/ /g, "-") === name);
 };
+
+export default products;

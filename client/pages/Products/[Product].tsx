@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     let Hostname = process.env.NEXT_PUBLIC_API_BASE_URL;
 
     const paths = Products.map((Product: Product) => ({
-        params: { Product: Product.name.toLowerCase().replace(/ /g, "-") },
+        params: { product: Product.url },
     }));
     console.clear();
     console.log("Paths: ", paths);
@@ -43,7 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
     // Fetch the data for the product based on the name in the URL
     console.log("Parameters: ", params);
-    const ProductName: any = params.Product;
+    const ProductName: any = params.product;
     const Product = getProductByName(ProductName);
     return {
         props: { Product },
