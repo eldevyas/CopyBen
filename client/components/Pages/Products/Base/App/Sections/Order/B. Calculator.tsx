@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import FirstStep from "./Calculator/1. First Step";
 import SecondStep from "./Calculator/2. Second Step";
-import { Stack } from "@mui/material";
+import { Alert, Snackbar, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ThankYouScreen from "./Calculator/3. Thank You";
 import axios from "axios";
@@ -76,6 +76,21 @@ type OrderInfo = {
 };
 
 export default function Calculator(props: { Product: Product } | any) {
+    // MUI states
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState<
+        "success" | "error" | "warning" | "info" | undefined
+    >(undefined);
+
+    // Methods
+    const handleSnackbarOpen = () => {
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
     // Get Order Info from LoggenIn user
     const { userInfo }: any = useAuth();
 
@@ -116,11 +131,17 @@ export default function Calculator(props: { Product: Product } | any) {
                 // handle success response here
                 console.log(response.data);
                 setValue(2);
+                setSnackbarMessage("Commande envoyée !");
+                setSnackbarSeverity("success");
+                setSnackbarOpen(true);
             })
             .catch((error) => {
                 // handle error response here
                 console.error(error);
-                alert(error.message);
+                setSnackbarMessage(error.message);
+                setSnackbarSeverity("error");
+                setSnackbarOpen(true);
+                setValue(0);
             });
         console.table(Info);
     };
@@ -160,6 +181,19 @@ export default function Calculator(props: { Product: Product } | any) {
             <TabPanel value={value} index={2}>
                 <ThankYouScreen Product={props.Product} OrderInfo={OrderInfo} />
             </TabPanel>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert
+                    onClose={handleSnackbarClose}
+                    severity={snackbarSeverity}
+                    sx={{ width: "100%" }}
+                >
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

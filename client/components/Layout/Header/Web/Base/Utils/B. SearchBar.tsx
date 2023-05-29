@@ -4,11 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Product } from "@/types/Product";
 import { useRouter } from "next/router";
 
-type SearchBarProps = {
-    Products: Product[];
-};
-
-export default function Search({ Products }: SearchBarProps) {
+export default function Search() {
     const [query, setQuery] = React.useState("");
 
     const Router = useRouter();
@@ -20,7 +16,7 @@ export default function Search({ Products }: SearchBarProps) {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         Router.push({
-            pathname: "/Products",
+            pathname: "/products",
             query: { q: query },
         });
     };
@@ -49,7 +45,6 @@ export default function Search({ Products }: SearchBarProps) {
                         <SearchIcon />
                     </IconButton>
                 </form>
-                <div className="WebHeader__Main__Search__List"></div>
             </div>
         </>
     );

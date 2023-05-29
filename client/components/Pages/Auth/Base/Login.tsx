@@ -75,9 +75,9 @@ export default function Login() {
 
         axios
             .post(URL, data)
-            .then((res) => {
-                console.log(res);
-                if (res.data == "Email ou Mot de passe incorrect.") {
+            .then((response) => {
+                console.log(response);
+                if (response.data.error) {
                     setSending(false);
                     setSnackbarMessage("Email ou Mot de passe incorrect.");
                     setSnackbarSeverity("error");
@@ -85,19 +85,19 @@ export default function Login() {
                     return;
                 }
                 setSending(false);
-                login(res.data["loggedIn"]);
-                setSnackbarMessage("Connexion réussie !");
+                login(response.data.user);
+                setSnackbarMessage("Connexion réussie !");
                 setSnackbarSeverity("success");
                 setSnackbarOpen(true);
             })
             .catch((error) => {
+                console.log(error);
                 setSending(false);
                 setSnackbarMessage(
                     "Échec de la connexion! Veuillez réessayer."
                 );
                 setSnackbarSeverity("error");
                 setSnackbarOpen(true);
-                console.log(error);
             });
     };
 
@@ -159,20 +159,27 @@ export default function Login() {
                         control={<Checkbox value="remember" color="primary" />}
                         label="Se souvenir de moi"
                     />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        disableElevation
-                        sx={{
-                            mt: 3,
-                            mb: 2,
-                            backgroundColor: "primary.main",
-                            color: "white",
-                        }}
-                    >
-                        {isSending ? "Chargement..." : "S'identifier"}
-                    </Button>
+                    {isSending ? (
+                        <Button
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2, cursor: "wait" }}
+                            disableElevation
+                        >
+                            Chargement...
+                        </Button>
+                    ) : (
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            disableElevation
+                        >
+                            S&apos;inscrire
+                        </Button>
+                    )}
                     <Grid container justifyContent="center" alignItems="center">
                         <Grid item>
                             <NextLink href="/auth/register">

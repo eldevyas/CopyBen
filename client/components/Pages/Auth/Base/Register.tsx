@@ -14,6 +14,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import NextLink from "next/link";
 
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
 
 function Copyright(props: any) {
     return (
@@ -41,6 +42,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Register() {
+    // Auth Context
+    const { isLoggedIn, login, logout, userInfo }: any = useAuth();
+
     // Process States
     const [isSending, setSending] = useState<boolean>(false);
 
@@ -65,24 +69,40 @@ export default function Register() {
         setSending(true);
         const data = new FormData(event.currentTarget);
         const API_URL = process.env.NEXT_PUBLIC_API_URL;
+        const URL = `${API_URL}/register`;
 
-        const URL = `${API_URL}/login`;
+        console.log("Data sent: ", event.currentTarget);
+
         axios
             .post(URL, data)
-            .then((res) => {
+            .then((response) => {
+                console.log(response);
                 setSending(false);
                 setSnackbarMessage("Inscrit avec succès!");
+                login(response.data.user);
                 setSnackbarSeverity("success");
                 setSnackbarOpen(true);
             })
             .catch((error) => {
                 setSending(false);
-                setSnackbarMessage(
-                    "Échec de l'inscription ! Veuillez réessayer."
-                );
+                console.log(error);
+                alert(error.message);
+                if (
+                    error.response &&
+                    error.response.data &&
+                    error.response.data.errors
+                ) {
+                    const validationErrors = error.response.data.errors;
+                    const errorMessage =
+                        Object.values(validationErrors).join(" ");
+                    setSnackbarMessage(errorMessage);
+                } else {
+                    setSnackbarMessage(
+                        "Échec de l'inscription! Veuillez réessayer."
+                    );
+                }
                 setSnackbarSeverity("error");
                 setSnackbarOpen(true);
-                console.log(error);
             });
     };
 
@@ -238,20 +258,30 @@ export default function Register() {
                             />
                         </Grid>
                     </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        disableElevation
-                    >
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        {isSending ? "Chargement..." : "S'inscrire"}
-                    </Button>
+                    {isSending ? (
+                        <Button
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2, cursor: "wait" }}
+                            disableElevation
+                        >
+                            Chargement...
+                        </Button>
+                    ) : (
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            disableElevation
+                        >
+                            S&apos;inscrire
+                        </Button>
+                    )}
                     <Grid container justifyContent="center">
                         <Grid item>
                             <NextLink href="/auth/login">
-                                <Link href="#" variant="body2"></Link>
                                 <Typography variant="body1" color={"GrayText"}>
                                     {"Vous avez déjà un compte? Connectez-vous"}
                                 </Typography>

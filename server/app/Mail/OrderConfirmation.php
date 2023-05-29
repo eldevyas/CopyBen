@@ -34,13 +34,20 @@ class OrderConfirmation extends Mailable
 
         $mail = $this->view('emails.orderConfirmation')
             ->with(['Order' => $Order])
-            ->subject('Order Confirmation - ' . $this->Order['Order ID']);
+            ->subject('CopyBen - Nouvelle commande en ligne - ' . $this->Order['Order ID']);
 
         // Attach files
-        foreach ($Order['Files'][0] as $file) {
-            $mail->attach(storage_path('app/' . $file), [
-                'as' => $file,
-            ]);
+        // 
+        // 
+        if (isset($Order['Files']) && is_array($Order['Files']) && count($Order['Files']) > 0) {
+            $files = $Order['Files'][0];
+            if (is_array($files)) {
+                foreach ($files as $file) {
+                    $mail->attach(storage_path('app/' . $file), [
+                        'as' => $file,
+                    ]);
+                }
+            }
         }
 
         return $mail;

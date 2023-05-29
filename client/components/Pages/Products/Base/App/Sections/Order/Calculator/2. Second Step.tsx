@@ -156,6 +156,7 @@ export default function SecondStep(props: { Product: Product } | any) {
                 })
                 .catch((error) => {
                     console.error(error);
+                    setUploading(false);
                     // handle errors here
                 });
         });

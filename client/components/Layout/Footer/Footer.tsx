@@ -6,6 +6,8 @@ import {
     MDBCol,
     MDBIcon,
 } from "mdb-react-ui-kit";
+import Link from "next/link";
+import products from "@/data/Products";
 
 export default function Footer() {
     return (
@@ -50,8 +52,14 @@ export default function Footer() {
                                 CopyBen
                             </h6>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit.
+                                Découvrez un univers de connaissances avec
+                                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                                CopyBen, votre source d'inspiration et de
+                                savoir. Explorez notre vaste collection de
+                                livres, profitez de nos services de lecture en
+                                ligne et plongez dans un monde de découvertes
+                                littéraires. CopyBen, votre compagnon de
+                                lecture.
                             </p>
                         </MDBCol>
 
@@ -59,26 +67,16 @@ export default function Footer() {
                             <h6 className="text-uppercase fw-bold mb-4">
                                 Produits
                             </h6>
-                            <p>
-                                <a href="#!" className="text-reset">
-                                    Cartes de visite
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#!" className="text-reset">
-                                    Flyers
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#!" className="text-reset">
-                                    Brochures
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#!" className="text-reset">
-                                    Affiches
-                                </a>
-                            </p>
+                            {products.map((Product) => (
+                                <p key={Product.name}>
+                                    <Link
+                                        href={Product.url}
+                                        className="text-reset"
+                                    >
+                                        {Product.name}
+                                    </Link>
+                                </p>
+                            ))}
                         </MDBCol>
 
                         <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
@@ -86,14 +84,14 @@ export default function Footer() {
                                 Liens Rapides
                             </h6>
                             <p>
-                                <a href="#!" className="text-reset">
+                                <Link href="/" className="text-reset">
                                     Accueil
-                                </a>
+                                </Link>
                             </p>
                             <p>
-                                <a href="#!" className="text-reset">
+                                <Link href="/products" className="text-reset">
                                     Produits
-                                </a>
+                                </Link>
                             </p>
                         </MDBCol>
 

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <title>Order Confirmation</title>
+    <title>Nouvelle commande</title>
     <style>
         /* General styles */
         body {
@@ -15,13 +15,13 @@
             background-color: #f2f2f2;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
         }
 
         h1 {
@@ -34,100 +34,89 @@
             margin: 0 0 10px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
         table td {
-            padding: 10px;
             border: 1px solid #ccc;
         }
 
-        table tr:first-child {
-            background-color: #f7f7f7;
-        }
-
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        ul li {
-            margin-bottom: 10px;
-        }
-
-        /* Media query for mobile devices */
-        @media only screen and (max-width: 600px) {
-            .container {
-                max-width: 100%;
-                padding: 10px;
-            }
-        }
+        /* Rest of your styles */
+        /* ... */
     </style>
 </head>
 
-<body>
-    <h1>Order Confirmation</h1>
+<body style="font-family: Arial, sans-serif; font-size: 16px; margin: 0; padding: 0;">
 
-    <p>Thank you for your order! Here is your confirmation:</p>
+    <h1>Nouvelle commande</h1>
 
-    <table>
+    <p>Bonjour, vous avez reçu une nouvelle commande sur le site CopyBen, veuillez vérifier les informations ci-dessous.
+    </p>
+
+
+    <table style="border-collapse: collapse;">
         <tr>
-            <td>Order ID:</td>
-            <td>{{ $Order['Order ID'] }}</td>
+            <td style="background-color: #ff9515; color: #fff; font-weight: bold; padding: 10px;">Identifiant de
+                commande:</td>
+            <td style="padding: 10px;">{{ $Order['Order ID'] }}</td>
         </tr>
         <tr>
-            <td>User Information:</td>
-            <td>Nom: {{ $Order['User Information']['fname'] }} {{ $Order['User Information']['lname']
-                }}
-                <br />
-                Ville: {{ $Order['User Information']['city'] }}
-                <br />
-                Num: {{ $Order['User Information']['phone'] }}
-                <br />
-                Email: {{ $Order['User Information']['email'] }}
-                <br />
-                ZIP: {{ $Order['User Information']['zip'] }}
-                <br />
+            <td style="background-color: #ff9515; color: #fff; font-weight: bold; padding: 10px;">Informations sur
+                l'utilisateur:</td>
+            <td style="padding: 10px;">
+                Nom complet: {{ $Order['User Information']['fname'] }} {{ $Order['User Information']['lname'] }}<br />
+                Numéro de téléphone: {{ $Order['User Information']['phone'] }}<br />
+                Ville: {{ $Order['User Information']['city'] }}<br />
+                Email: {{ $Order['User Information']['email'] }}<br />
+                ZIP: {{ $Order['User Information']['zip'] }}<br />
                 Adresse: {{ $Order['User Information']['address'] }}
             </td>
         </tr>
         <tr>
-            <td>Product Name:</td>
-            <td>{{ $Order['Product Name'] }}</td>
+            <td style="background-color: #ff9515; color: #fff; font-weight: bold; padding: 10px;">Nom du produit: </td>
+            <td style="padding: 10px;">{{ $Order['Product Name'] }}</td>
         </tr>
         <tr>
-            <td>Order Details:</td>
-            <td>
-                <ul>
-                    <li>Quantité: {{ $Order['Order Details']['Quantity'] }}</li>
-                    <li>Conception: {{ $Order['Order Details']['Conception'] }}</li>
-                    <li>
-                        Personnalisation:
-                        <ul>
-                            @foreach ($Order['Order Details']['Customization'] as $customization)
-                            <li>{{ $customization['Name'] }}: {{ $customization['Value'] }}</li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li>Notes: {{ $Order['Order Details']['Notes'] }}</li>
-                    <li>Prix ​​unitaire: {{ $Order['Order Details']['Unit Price'] }}</li>
-                    <li>Total HT: {{ $Order['Order Details']['Total HT'] }}</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>Fichiers:</td>
-            <td>
-                @foreach ($Order['Files'] as $file)
-                <img src="{{ asset($file[0]) }}" alt="{{ $file[0] }}" width="200px">
-                @endforeach
+            <td style="background-color: #ff9515; color: #fff; font-weight: bold; padding: 10px;">Détails de la
+                commande: </td>
+            <td style="padding: 10px;">
+                <strong>Quantité:</strong> {{ $Order['Order Details']['Quantity'] }}<br />
+                <strong>Conception:</strong> {{ $Order['Order Details']['Conception'] }}<br />
+                <table style="border-collapse: collapse; width: 100%; margin: 10px 0;">
+                    <tr>
+                        <th colspan="2" style="text-align: center; border: 1px solid #ccc; padding: 10px;">
+                            <strong>Personnalisation:</strong>
+                        </th>
+                    </tr>
+                    @foreach ($Order['Order Details']['Customization'] as $customization)
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ccc;">
+                            <strong>
+                                {{ $customization['Name'] }}:
+                            </strong>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #ccc;">
+                            {{ $customization['Value'] }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+                <br />
+                <strong>Notes:</strong> {{ $Order['Order Details']['Notes'] }}<br />
+                <strong>Prix ​​unitaire:</strong> {{ $Order['Order Details']['Unit Price'] }}<br />
+                <strong>Total HT:</strong> {{ $Order['Order Details']['Total HT'] }}<br />
             </td>
         </tr>
     </table>
+
+
+    <!-- Section as a support contact -->
+    <div style="margin-top: 20px; text-align: left;">
+        <p style="margin-bottom: 10px;">Si vous avez des questions ou besoin d'une assistance supplémentaire, n'hésitez
+            pas à me contacter.</p>
+        <a href="https://www.linkedin.com/in/yassinechettouch/" target="_blank"
+            style="font-weight: bold; background-color: #ff9515; color: #fff; display: inline-block; padding: 10px 20px; text-decoration: none;">Contacter
+            le développeur</a>
+    </div>
+
+
 </body>
 
 </html>

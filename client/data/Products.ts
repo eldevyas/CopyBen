@@ -19,7 +19,7 @@ const products = [
             return ImagesList;
         },
         get url() {
-            return `/Products/${this.name.toLowerCase().replace(/ /g, "-")}`;
+            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
         unitPrice: 1.56
     },
@@ -36,7 +36,7 @@ const products = [
             return ImagesList;
         },
         get url() {
-            return `/Products/${this.name.toLowerCase().replace(/ /g, "-")}`;
+            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
         unitPrice: 0.54
     },
@@ -53,7 +53,7 @@ const products = [
             return ImagesList;
         },
         get url() {
-            return `/Products/${this.name.toLowerCase().replace(/ /g, "-")}`;
+            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
         unitPrice: 1.6
     },
@@ -70,7 +70,7 @@ const products = [
             return ImagesList;
         },
         get url() {
-            return `/Products/${this.name.toLowerCase().replace(/ /g, "-")}`;
+            return `/products/${this.name.toLowerCase().replace(/ /g, "-")}`;
         },
         unitPrice: 2.8
     },

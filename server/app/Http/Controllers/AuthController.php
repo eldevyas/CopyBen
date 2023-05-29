@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
-    public function register(Request $req)
+    public function register(Request $request)
     {
-        $validatedData = $req->validate([
+        $validator = Validator::make($request->all(), [
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'phone_number' => 'required',
             'city' => 'required',
@@ -21,35 +24,57 @@ class AuthController extends Controller
             'AddressLineOne' => 'required',
             'AddressLineTwo' => 'nullable',
         ]);
-        
-        User::create([
-            'fname' => $validatedData['firstName'],
-            'lname' => $validatedData['lastName'],
-            'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
-            'phone' => $validatedData['phone_number'],
-            'city' => $validatedData['city'],
-            'zip' => $validatedData['zipCode'],
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $user = User::create([
+            'fname' => $request->input('firstName'),
+            'lname' => $request->input('lastName'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'phone' => $request->input('phone_number'),
+            'city' => $request->input('city'),
+            'zip' => $request->input('zipCode'),
             'remember_token' => Str::random(20),
-            'address' => $validatedData['AddressLineOne'] . ($validatedData['AddressLineTwo'] ? " , " . $validatedData['AddressLineTwo'] : ""),
+            'address' => $request->input('AddressLineOne') . ($request->input('AddressLineTwo') ? ", " . $request->input('AddressLineTwo') : ""),
         ]);
 
-        return response()->json(['success' => 'New User Created Successfully.']);
+        return response()->json([
+            'success' => 'New User Created Successfully.',
+            'user' => $user,
+        ]);
     }
 
 
-    public function login()
+    public function login(Request $request)
     {
-        $data = request()->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        if (auth()->attempt($data)) {
-            $user = auth()->user();
-            return response()->json(['loggedIn' => $user]);
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 400);
         }
 
-        return response()->json("Email ou Mot de passe incorrect.");
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            return response()->json([
+                'loggedIn' => true,
+                'user' => $user,
+            ]);
+        }
+
+        return response()->json([
+            'error' => 'Invalid email or password.',
+        ], 401);
     }
 }

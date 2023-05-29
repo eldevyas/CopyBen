@@ -9,8 +9,6 @@
     gap: 2rem;
     @import "./Product Imports/1. Title Bar";
     @import "./Product Imports/2. Calculateur";
-    @import "./Product Imports/3. Autres Produits";
-    @import "./Product Imports/4. Passer Commande";
 
     &__PageContent {
         position: relative;
@@ -129,6 +127,7 @@
                     background-color: $C2;
                     border: 0.25rem solid rgba($color: #000000, $alpha: 0.2);
                     padding: 1rem;
+                    margin: 1rem;
                     min-width: 250px;
                 }
 
