@@ -31,7 +31,7 @@ const Sidebar = (props: any) => {
                 <li
                     className="nav-item"
                     onClick={() => {
-                        Router.push("/products");
+                        Router.push("/Products");
                     }}
                 >
                     <MDBNavbarLink>Produits</MDBNavbarLink>

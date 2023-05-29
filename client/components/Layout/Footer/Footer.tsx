@@ -89,7 +89,7 @@ export default function Footer() {
                                 </Link>
                             </p>
                             <p>
-                                <Link href="/products" className="text-reset">
+                                <Link href="/Products" className="text-reset">
                                     Produits
                                 </Link>
                             </p>

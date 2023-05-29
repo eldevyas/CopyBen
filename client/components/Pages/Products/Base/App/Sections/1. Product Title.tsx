@@ -19,7 +19,7 @@ export default function ProductTitle(props: { Name: string } | any) {
                     <Link color="inherit" href="/">
                         Accueil
                     </Link>
-                    <Link color="inherit" href="/products">
+                    <Link color="inherit" href="/Products">
                         Nos Produits
                     </Link>
                     <Link color="inherit" href="#!">

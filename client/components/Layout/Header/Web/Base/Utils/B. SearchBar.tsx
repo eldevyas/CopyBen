@@ -16,7 +16,7 @@ export default function Search() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         Router.push({
-            pathname: "/products",
+            pathname: "/Products",
             query: { q: query },
         });
     };
