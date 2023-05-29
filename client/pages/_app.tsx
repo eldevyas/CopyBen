@@ -7,6 +7,8 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import NextNProgress from "nextjs-progressbar";
+import { Analytics } from "@vercel/analytics/react";
+
 import {
     createTheme,
     responsiveFontSizes,
@@ -77,6 +79,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     <Component {...pageProps} />
                 </Layout>
             </ThemeProvider>
+            <Analytics />
         </AuthProvider>
     );
 }
