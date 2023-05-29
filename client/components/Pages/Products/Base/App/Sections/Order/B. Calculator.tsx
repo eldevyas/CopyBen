@@ -101,11 +101,6 @@ export default function Calculator(props: { Product: Product } | any) {
     const [SecondValues, setSecondValues] = useState<FormValues | null>(null);
     const [OrderInfo, setOrderInfo] = useState<OrderInfo | null>(null);
 
-    useEffect(() => {
-        // alert("Generated ID: " + orderID);
-    }, [orderID]);
-    useEffect(() => {}, [SecondValues]);
-
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };

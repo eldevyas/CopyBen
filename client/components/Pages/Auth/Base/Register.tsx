@@ -86,7 +86,6 @@ export default function Register() {
             .catch((error) => {
                 setSending(false);
                 console.log(error);
-                alert(error.message);
                 if (
                     error.response &&
                     error.response.data &&
