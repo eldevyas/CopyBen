@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: false,
-    // env: {
-    //     "NEXT_PUBLIC_API_URL": "https://api.copyben.online/api"
-    // }
-}
+    async redirects() {
+        return [
+            {
+                source: "/products",
+                destination: "/Products",
+                permanent: true,
+            },
+        ];
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
