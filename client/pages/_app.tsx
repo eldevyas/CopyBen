@@ -13,10 +13,17 @@ import {
     createTheme,
     responsiveFontSizes,
     ThemeProvider,
+    ThemeOptions,
+    Shadows,
 } from "@mui/material/styles";
 import { AuthProvider } from "@/context/AuthContext";
 
+const defaultTheme = createTheme();
+
+const defaultShadows: ThemeOptions["shadows"] = [...defaultTheme.shadows];
+
 let theme = createTheme({
+    shadows: defaultShadows.map(() => "none") as Shadows,
     palette: {
         primary: {
             main: "#ff9515",
