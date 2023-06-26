@@ -98,8 +98,7 @@ class UploadController extends Controller
         // }
 
         $Emails = [
-            "yassinechettouch@gmail.com",
-            // "copy.ben1@gmail.com", 
+            "copy.ben1@gmail.com",
             "yassinechett3@gmail.com"
         ];
         $SentTo = [];
