@@ -11,20 +11,6 @@ interface ProductPageProps {
 }
 
 const ProductPageRoute = ({ Product }: ProductPageProps) => {
-    const Router = useRouter();
-    const { isLoggedIn }: any = useAuth();
-
-    useEffect(() => {
-        const checkAuthentication = () => {
-            if (!isLoggedIn) {
-                // Redirect to the homepage or a fallback URL
-                Router.push("/auth/login");
-            }
-        };
-
-        checkAuthentication();
-    }, [Router, isLoggedIn]);
-
     return <ProductPage Product={Product} />;
 };
 

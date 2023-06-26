@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import myImg from "@/public/img/Placeholder.png";
 import ImageWithFallback from "@/components/Global/ImageWithFallbackProps";
+import { Box, Typography } from "@mui/material";
 
 export default function Catalogue(props: any) {
     const settings = {
@@ -37,6 +38,12 @@ export default function Catalogue(props: any) {
                     </div>
                 ))}
             </Slider>
+
+            <Box>
+                <Typography paragraph variant="body1">
+                    {props.description}
+                </Typography>
+            </Box>
         </div>
     );
 }

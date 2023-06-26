@@ -33,9 +33,21 @@ export default function ProductField(props: {
                 mb: 2.5,
                 width: "100%",
             }}
-            variant="standard"
+            variant="outlined"
         >
-            <FormLabel>{Field.name}</FormLabel>
+            <FormLabel
+                sx={{
+                    mb: 1,
+                    fontWeight: "bold",
+                    paddingInline: "20px",
+                    // focus
+                    "&.Mui-focused": {
+                        color: "#000000",
+                    },
+                }}
+            >
+                {Field.name}
+            </FormLabel>
             {Field.type === "Select" && (
                 <SelectCase Field={Field} Value={Value} setValue={setValue} />
             )}

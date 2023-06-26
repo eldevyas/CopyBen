@@ -12,6 +12,10 @@ import { styled } from "@mui/material/styles";
 import ThankYouScreen from "./Calculator/3. Thank You";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import { useAppDispatch, useAppSelector } from "@/redux/Hooks";
+import { SetOrder } from "@/redux/Actions/OrderActions";
+import { sendOrder } from "@/lib/sendOrder";
+import { useRouter } from "next/router";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -70,12 +74,14 @@ function generateOrderId(prefix: string, postfix: string): string {
 
 type OrderInfo = {
     orderID: string;
+    userInfo: any;
     Product: any;
     Customization: FormValues | null;
     Files: string[];
 };
 
 export default function Calculator(props: { Product: Product } | any) {
+    const Router = useRouter();
     // MUI states
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -99,15 +105,15 @@ export default function Calculator(props: { Product: Product } | any) {
     const [orderID, setOrderID] = useState<string>(GeneratedID);
     const [FirstValues, setFirstValues] = useState<FormValues | null>(null);
     const [SecondValues, setSecondValues] = useState<FormValues | null>(null);
-    const [OrderInfo, setOrderInfo] = useState<OrderInfo | null>(null);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
+    // Redux Things
+    const Dispatch = useAppDispatch();
+    const Order = useAppSelector((state) => state.Order);
+    const User = useAppSelector((state) => state.User);
 
     // Final Uplaod of Values
 
-    const callFinalUpload = (FinalLinks: string[]) => {
+    const callFinalUpload = async (FinalLinks: string[]) => {
         const Info = {
             orderID: orderID,
             userInfo: userInfo,
@@ -116,29 +122,30 @@ export default function Calculator(props: { Product: Product } | any) {
             Files: FinalLinks,
         };
 
-        setOrderInfo(Info);
+        Dispatch(SetOrder(Info));
 
-        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+        console.log("Final Upload: ", Info);
+        console.log("Dispatched: ", Order);
 
-        axios
-            .post(`${API_URL}/order`, Info)
-            .then((response) => {
-                // handle success response here
-                console.log(response.data);
-                setValue(2);
-                setSnackbarMessage("Commande envoyée !");
+        if (User.isLoggedIn === true) {
+            const SendOrder = await sendOrder(Info);
+
+            if (SendOrder) {
+                setSnackbarMessage("Votre commande s'est bien envoyée.");
                 setSnackbarSeverity("success");
-                setSnackbarOpen(true);
-            })
-            .catch((error) => {
-                // handle error response here
-                console.error(error);
-                setSnackbarMessage(error.message);
+                handleSnackbarOpen();
+                setValue(value + 1);
+            } else {
+                setSnackbarMessage("Erreur lors de l'envoi de la commande.");
                 setSnackbarSeverity("error");
-                setSnackbarOpen(true);
-                setValue(0);
-            });
-        console.table(Info);
+                handleSnackbarOpen();
+            }
+        } else {
+            setSnackbarMessage("Vous devez être connecté pour commander.");
+            setSnackbarSeverity("info");
+            handleSnackbarOpen();
+            Router.push("/auth/login");
+        }
     };
 
     return (
@@ -174,7 +181,7 @@ export default function Calculator(props: { Product: Product } | any) {
                 />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <ThankYouScreen Product={props.Product} OrderInfo={OrderInfo} />
+                <ThankYouScreen Product={props.Product} OrderInfo={Order} />
             </TabPanel>
             <Snackbar
                 open={snackbarOpen}

@@ -1,6 +1,6 @@
 import React from "react";
 import { ProductFieldType } from "../../Types/ProductFields";
-import { Input } from "@mui/material";
+import { Input, TextField } from "@mui/material";
 
 export default function NumberCase(props: {
     Field: ProductFieldType;
@@ -10,7 +10,7 @@ export default function NumberCase(props: {
     const { Field, Value, setValue } = props;
 
     return (
-        <Input
+        <TextField
             type="number"
             inputProps={{
                 min: Field.min,
@@ -29,6 +29,21 @@ export default function NumberCase(props: {
                 } else if ((event.target.value as number) > 500) {
                     return setValue(500);
                 }
+            }}
+            sx={{
+                backgroundColor: "#f2f2f2",
+                borderRadius: "200px",
+                border: "1px solid #eeeeee",
+                outline: "none !important",
+                overflow: "hidden",
+                "& .MuiInputBase-input": {
+                    borderRadius: "200px",
+                    padding: "10px 20px",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #eeeeee !important",
+                    borderRadius: "200px",
+                },
             }}
         />
     );

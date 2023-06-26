@@ -413,7 +413,7 @@ export default function SecondStep(props: { Product: Product } | any) {
                             py: "0.75rem",
                         }}
                     >
-                        Submit
+                        {Uploading ? "Téléchargement" : "Commande en cours"}
                     </LoadingButton>
                 )}
             </Stack>

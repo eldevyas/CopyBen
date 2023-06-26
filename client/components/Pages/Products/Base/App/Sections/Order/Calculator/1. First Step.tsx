@@ -11,6 +11,7 @@ import {
     FormLabel,
     FormHelperText,
     Button,
+    TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ProductCustomization from "./Custom/Product Customization";
@@ -19,12 +20,16 @@ import {
     ProductFieldType as FieldType,
     calculatePrice,
 } from "./Custom/Types/ProductFields";
+import { ArrowDown2 } from "iconsax-react";
 
 const Div = styled("div")(({ theme }) => ({
     ...theme.typography.button,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: "#000",
     color: "white",
     padding: theme.spacing(1),
+    spacing: theme.spacing(0),
+    gap: theme.spacing(),
+    borderRadius: "5px",
 }));
 
 type FormValues = {
@@ -35,6 +40,10 @@ type FormValues = {
     Notes: string;
     "Unit Price": number;
     "Total HT": number;
+};
+
+const CustomIcon = (props: any) => {
+    return <ArrowDown2 color="currentColor" variant="Linear" {...props} />;
 };
 
 export default function FirstStep(props: { product: Product } | any) {
@@ -111,7 +120,7 @@ export default function FirstStep(props: { product: Product } | any) {
         UnitPrice,
     ]);
 
-    // Const Handle Submission
+    // Handle Submission
     const handleSubmit = () => {
         validateStep(Values);
         props.callNext();
@@ -156,8 +165,20 @@ export default function FirstStep(props: { product: Product } | any) {
                         width: "100%",
                     }}
                 >
-                    <FormLabel>Quantité</FormLabel>
-                    <Input
+                    <FormLabel
+                        sx={{
+                            mb: 1,
+                            fontWeight: "bold",
+                            paddingInline: "20px",
+                            // focus
+                            "&.Mui-focused": {
+                                color: "#000000",
+                            },
+                        }}
+                    >
+                        Quantité
+                    </FormLabel>
+                    <TextField
                         type="number"
                         inputProps={{
                             min: 1,
@@ -169,6 +190,21 @@ export default function FirstStep(props: { product: Product } | any) {
                         value={Quantity}
                         onChange={(event: React.ChangeEvent<any>) => {
                             return setQuantity(event.target.value as number);
+                        }}
+                        sx={{
+                            backgroundColor: "#f2f2f2",
+                            borderRadius: "200px",
+                            border: "1px solid #eeeeee",
+                            outline: "none !important",
+                            overflow: "hidden",
+                            "& .MuiInputBase-input": {
+                                borderRadius: "200px",
+                                padding: "10px 20px",
+                            },
+                            "& .MuiOutlinedInput-notchedOutline": {
+                                border: "1px solid #eeeeee !important",
+                                borderRadius: "200px",
+                            },
                         }}
                     />
                 </FormControl>
@@ -187,17 +223,45 @@ export default function FirstStep(props: { product: Product } | any) {
                         width: "100%",
                     }}
                 >
-                    <FormLabel>Délais de livraison prévisionnel</FormLabel>
-                    <Input
+                    <FormLabel
+                        sx={{
+                            mb: 1,
+                            fontWeight: "bold",
+                            paddingInline: "20px",
+                            // focus
+                            "&.Mui-focused": {
+                                color: "#000000",
+                            },
+                        }}
+                    >
+                        Délais de livraison prévisionnel
+                    </FormLabel>
+                    <TextField
                         type="text"
                         value={Delivery}
+                        variant="outlined"
                         onChange={(
                             event: React.ChangeEvent<HTMLInputElement>
                         ) => {
                             return setDelivery(event.target.value as string);
                         }}
-                        readOnly={true}
                         fullWidth
+                        disabled
+                        sx={{
+                            backgroundColor: "#f2f2f2",
+                            borderRadius: "200px",
+                            border: "1px solid #eeeeee",
+                            outline: "none !important",
+                            overflow: "hidden",
+                            "& .MuiInputBase-input": {
+                                borderRadius: "200px",
+                                padding: "10px 20px",
+                            },
+                            "& .MuiOutlinedInput-notchedOutline": {
+                                border: "1px solid #eeeeee !important",
+                                borderRadius: "200px",
+                            },
+                        }}
                     />
                 </FormControl>
 
@@ -209,15 +273,93 @@ export default function FirstStep(props: { product: Product } | any) {
                     }}
                     variant="standard"
                 >
-                    <FormLabel>
+                    <FormLabel
+                        sx={{
+                            mb: 1,
+                            fontWeight: "bold",
+                            paddingInline: "20px",
+                            // focus
+                            "&.Mui-focused": {
+                                color: "#000000",
+                            },
+                        }}
+                    >
                         Vous avez besoin de conception pour ce produit ?
                     </FormLabel>
                     <Select
                         name="Conception"
                         fullWidth
+                        variant="outlined"
                         value={Conception}
                         onChange={(event: any) => {
                             return setConception(event.target.value as string);
+                        }}
+                        sx={{
+                            backgroundColor: "#f2f2f2",
+                            borderRadius: "200px",
+                            border: "1px solid #eeeeee",
+                            outline: "none !important",
+                            overflow: "hidden",
+                            "& .MuiSelect-root": { borderRadius: "200px" },
+                            "& .MuiSelect-select": {
+                                borderRadius: "200px",
+                                padding: "10px 20px",
+                            },
+                            "& .MuiInputBase-root": {
+                                borderRadius: "200px",
+                                padding: "10px 20px",
+                            },
+                            "& .MuiSelect-icon": {
+                                color: "black",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                display: "flex",
+                                height: "100%",
+                                position: "absolute",
+                                top: 0,
+                                right: 0,
+                                marginInlineEnd: "10px",
+                            },
+                            "& .MuiSelect-select:focus": {
+                                backgroundColor: "#eeeeee",
+                                borderRadius: "12px",
+                                outline: "none !important",
+                            },
+                            "& .MuiOutlinedInput-notchedOutline": {
+                                border: "1px solid #eeeeee !important",
+                                borderRadius: "200px",
+                            },
+                        }}
+                        IconComponent={CustomIcon}
+                        MenuProps={{
+                            anchorOrigin: {
+                                vertical: "bottom",
+                                horizontal: "left",
+                            },
+                            transformOrigin: {
+                                vertical: "top",
+                                horizontal: "left",
+                            },
+                            // getContentAnchorEl: null,
+                            PaperProps: {
+                                sx: {
+                                    backgroundColor: "white",
+                                    border: "1px solid #eeeeee !important",
+                                    borderRadius: "5px",
+                                    transition: "none !important",
+                                    "& .MuiMenuItem-root": {
+                                        "&.Mui-selected": {
+                                            backgroundColor: "lightgray",
+                                            "&:hover": {
+                                                backgroundColor: "lightgray",
+                                            },
+                                            "& .MuiListItemIcon-root": {
+                                                color: "darkgray",
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                         }}
                     >
                         <MenuItem value={"Oui"}>Oui</MenuItem>
@@ -234,14 +376,42 @@ export default function FirstStep(props: { product: Product } | any) {
                         width: "100%",
                     }}
                 >
-                    <FormLabel>Notes</FormLabel>
-                    <Input
+                    <FormLabel
+                        sx={{
+                            mb: 1,
+                            fontWeight: "bold",
+                            paddingInline: "20px",
+                            // focus
+                            "&.Mui-focused": {
+                                color: "#000000",
+                            },
+                        }}
+                    >
+                        Notes
+                    </FormLabel>
+                    <TextField
                         type="text"
+                        variant="outlined"
                         fullWidth
-                        multiline={true}
+                        // multiline={true}
                         value={Notes}
                         onChange={(event: any) => {
                             return setNotes(event.target.value as string);
+                        }}
+                        sx={{
+                            backgroundColor: "#f2f2f2",
+                            borderRadius: "200px",
+                            border: "1px solid #eeeeee",
+                            outline: "none !important",
+                            overflow: "hidden",
+                            "& .MuiInputBase-input": {
+                                borderRadius: "200px",
+                                padding: "10px 20px",
+                            },
+                            "& .MuiOutlinedInput-notchedOutline": {
+                                border: "1px solid #eeeeee !important",
+                                borderRadius: "200px",
+                            },
                         }}
                     />
                 </FormControl>
@@ -263,35 +433,41 @@ export default function FirstStep(props: { product: Product } | any) {
                             textAlign: "right",
                         }}
                     >
-                        <Typography paragraph component={"div"}>
-                            Total HT :
+                        <Typography variant="h6" component={"span"}>
+                            Total HT:{" "}
                         </Typography>
-                        {Total.toLocaleString("fr-MA", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                        })}{" "}
-                        MAD
-                    </Div>
-
-                    <Div
-                        sx={{
-                            fontSize: 15,
-                            width: "100%",
-                            textAlign: "right",
-                            backgroundColor: "#000",
-                            color: "#fff",
-                        }}
-                    >
-                        <Typography paragraph component={"div"}>
-                            Prix Unitaire:
-                        </Typography>{" "}
-                        {(
-                            UnitPrice + OptionsPrice.TotalSelectedOptionsPrice
-                        ).toLocaleString("fr-MA", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                        })}
-                        {" MAD"}
+                        <Typography
+                            variant="h6"
+                            component={"span"}
+                            fontWeight={800}
+                        >
+                            {Total.toLocaleString("fr-MA", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                            })}{" "}
+                            MAD
+                        </Typography>
+                        <Div
+                            sx={{
+                                fontSize: 15,
+                                width: "100%",
+                                textAlign: "right",
+                            }}
+                        >
+                            <Typography variant="caption" component={"span"}>
+                                Prix Unitaire:{" "}
+                            </Typography>
+                            <Typography variant="caption" component={"span"}>
+                                {(
+                                    UnitPrice +
+                                    OptionsPrice.TotalSelectedOptionsPrice
+                                ).toLocaleString("fr-MA", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                })}
+                                {" MAD"}
+                            </Typography>
+                        </Div>
                     </Div>
                 </Stack>
 

@@ -8,8 +8,8 @@ export default function Order(props: { Product: Product | any } | any) {
     return (
         <div {...props}>
             <Catalogue
-                images={props.Product.images}
                 className={props.className + "__Catalogue"}
+                {...props.Product}
             />
             <Calculator
                 Product={props.Product}
