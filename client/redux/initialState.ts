@@ -1,10 +1,16 @@
+import { OrderInfo } from "./Types/Order"
+import { UserType } from "./Types/User"
 
 export const InitialState: {
-    User: any,
-    Order: any
-} = {
-    User: {
-        isLoggedIn: false,
+    Auth: {
+        isAuthenticated: boolean,
+        User: UserType | null,
     },
-    Order: null
+    Order: OrderInfo | null,
+} = {
+    Auth: {
+        isAuthenticated: false,
+        User: null,
+    },
+    Order: null,
 }

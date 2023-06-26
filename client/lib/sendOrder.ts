@@ -13,10 +13,10 @@ export async function sendOrder(Order: OrderInfo) {
     const Response = fetch(`${API_URL}/api/order`, requestOptions)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            return true;
         }).catch((error) => {
             console.log(error);
-            return null;
+            return false;
         });
 
     return Response;

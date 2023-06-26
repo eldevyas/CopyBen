@@ -47,7 +47,9 @@ export default function Navigation() {
 
     // Find the index of the product that matches the Product parameter value in the URL
     const activeIndex = Products.findIndex((product) => {
-        return product.name.toLowerCase().replace(/ /g, "-") === Product;
+        const Url = product.name.toLowerCase().replace(/ /g, "-");
+        Router.prefetch(Url);
+        return Url === Product;
     });
 
     const handleChange = () => {};

@@ -12,12 +12,12 @@ import {
     createTheme,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Logout from "@mui/icons-material/Logout";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { styled, alpha } from "@mui/material/styles";
-
-import { useAuth } from "@/context/AuthContext";
-import { Context } from "@/types/Context";
 import { ThemeProvider } from "@emotion/react";
+import { useAppDispatch, useAppSelector } from "@/redux/Hooks";
+import { Logout } from "@/redux/Slices/AuthSlice";
+import { LogoutCurve } from "iconsax-react";
 
 const darkTheme = createTheme({
     palette: {
@@ -26,7 +26,6 @@ const darkTheme = createTheme({
 });
 
 const UserAvatar = () => {
-    const { userInfo, logout } = useAuth() as Context;
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event: any) => {
@@ -37,11 +36,14 @@ const UserAvatar = () => {
         setAnchorEl(null);
     };
 
-    const user = {
-        name: userInfo?.fname
-            ? `${userInfo.fname} ${userInfo.lname}`
-            : "unknown",
-    };
+    // Redux Things
+    const Dispatch = useAppDispatch();
+    const isAuthenticated = useAppSelector(
+        (state) => state.Auth.isAuthenticated
+    );
+    const User = useAppSelector((state) => state.Auth.User);
+
+    const UserInfo = User ? User : null;
 
     return (
         <>
@@ -61,7 +63,7 @@ const UserAvatar = () => {
                 }}
             >
                 <Avatar
-                    alt={user.name}
+                    // alt={user.name}
                     onClick={handleClick}
                     sx={{
                         width: "2rem",
@@ -69,9 +71,9 @@ const UserAvatar = () => {
                         backgroundColor: "primary.main",
                         textTransform: "uppercase",
                     }}
-                    variant="square"
+                    variant="rounded"
                 >
-                    {user.name[0]}
+                    {/* {user.name[0]} */}
                 </Avatar>
                 <Typography
                     variant="subtitle1"
@@ -83,7 +85,9 @@ const UserAvatar = () => {
                     }}
                     onClick={handleClick}
                 >
-                    {user.name}
+                    {isAuthenticated
+                        ? `${User?.fname} ${User?.lname}`
+                        : "Utilisateur non connecté"}
                 </Typography>
                 <IconButton
                     aria-label="more"
@@ -106,9 +110,16 @@ const UserAvatar = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={logout}>
+                        <MenuItem
+                            onClick={() => {
+                                Dispatch(Logout());
+                            }}
+                        >
                             <ListItemIcon>
-                                <Logout fontSize="small" />
+                                <LogoutCurve
+                                    color="currentColor"
+                                    variant="Bulk"
+                                />
                             </ListItemIcon>
                             <Typography variant="body1">
                                 Se déconnecter

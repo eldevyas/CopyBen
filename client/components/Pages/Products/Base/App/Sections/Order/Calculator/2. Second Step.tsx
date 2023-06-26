@@ -54,7 +54,8 @@ const Div = styled("div")(({ theme }) => ({
 export default function SecondStep(props: { Product: Product } | any) {
     // Step States
     const [hasUploadedFiles, setHasUploadedFiles] = useState<boolean>(false);
-    const [Loading, setLoading] = useState<boolean>(false);
+    const Loading = props.isLoading;
+    const setLoading = props.setIsLoading;
     // Parent Values
     const ParentFiles = props.Files;
     const setParentFiles = props.setFiles;
@@ -139,13 +140,12 @@ export default function SecondStep(props: { Product: Product } | any) {
                         ...prevCompleted,
                         [file.name]: true,
                     }));
-                    // enable the button for this file here
                     // increment completedFiles state
                     completedFiles++;
                     if (response.data.success) {
-                        setFilesLink([
-                            ...filesLink,
-                            response.data["uploaded_files"],
+                        setFilesLink((prevFilesLink) => [
+                            ...prevFilesLink,
+                            ...response.data["uploaded_files"],
                         ]);
                     }
                     if (completedFiles === totalFiles) {

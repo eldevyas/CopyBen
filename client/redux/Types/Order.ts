@@ -11,11 +11,11 @@ type FormValues = {
 };
 
 type OrderInfo = {
-    orderID: string;
-    userInfo: any;
-    Product: Product;
+    orderID: string | null;
+    userInfo: any | null;
+    Product: Product | null;
     Customization: FormValues | null;
-    Files: string[];
+    Files: string[] | null;
 };
 
 export type { OrderInfo };

@@ -6,6 +6,9 @@ use App\Mail\OrderConfirmation;
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Events\MessageSent;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
@@ -84,9 +87,51 @@ class UploadController extends Controller
         $Order = ["Order ID" => $OrderID, "User Information" => $UserInfo, "Product Name" => $ProductName, "Order Details" => $OrderDetails, "Files" => $Files];
 
         // Send the email to the owner
-        Mail::to('yassinechettouch@gmail.com')->send(new OrderConfirmation($Order));
+        // Email from ENV
+        $OwnerEmail = env('OWNER_EMAIL');
 
-        // Return a response indicating success
-        return response()->json(['success' => true, "OrderConfirmation" => ["Order ID" => $OrderID, "User Information" => $UserInfo, "Product Name" => $ProductName, "Order Details" => $OrderDetails, "Files" => $Files]]);
+        // Mail::to('yassinechettouch@gmail.com')->send(new OrderConfirmation($Order));
+
+        // // Send the email to the Owner
+        // if ($OwnerEmail != null) {
+        //     Mail::to($OwnerEmail)->send(new OrderConfirmation($Order));
+        // }
+
+        $Emails = [
+            "yassinechettouch@gmail.com",
+            // "copy.ben1@gmail.com", 
+            "yassinechett3@gmail.com"
+        ];
+        $SentTo = [];
+
+        // Logging the emails sent
+        Log::info('Emails trying to send to: ', ['Emails' => $Emails]);
+
+        // Register the event listener
+        Event::listen(MessageSent::class, function (MessageSent $event) use ($Emails, &$SentTo) {
+            if (in_array($event->message->getTo(), $Emails) && $event->message->getSubject() === 'Your subject') {
+                $EmailSuccess = [
+                    'Email' => $event->message->getTo(),
+                    'Message' => 'Your order has been sent to this email.',
+                    'Success' => true
+                ];
+                // Log
+                Log::info('Email sent to: ', ['Email' => $event->message->getTo()]);
+
+                $SentTo[] = $EmailSuccess;
+            }
+        });
+
+        try {
+            foreach ($Emails as $Email) {
+                Mail::to($Email)->send(new OrderConfirmation($Order));
+                Log::info('Email sent to: ', ['Email' => $Email]);
+            }
+        } catch (\Exception $e) {
+            Log::error('Error sending email: ', ['Error' => $e->getMessage()]);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+
+        return response()->json(['success' => true, "Emails" => $SentTo, "OrderConfirmation" => ["Order ID" => $OrderID, "User Information" => $UserInfo, "Product Name" => $ProductName, "Order Details" => $OrderDetails, "Files" => $Files]]);
     }
 }

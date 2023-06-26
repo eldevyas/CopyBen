@@ -14,7 +14,9 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import NextLink from "next/link";
 
 import axios from "axios";
-import { useAuth } from "@/context/AuthContext";
+import { Login } from "@/redux/Slices/AuthSlice";
+import { useAppDispatch } from "@/redux/Hooks";
+import { useRouter } from "next/router";
 
 function Copyright(props: any) {
     return (
@@ -42,8 +44,11 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function Register() {
-    // Auth Context
-    const { isLoggedIn, login, logout, userInfo }: any = useAuth();
+    // Redux Things
+    const Dispatch = useAppDispatch();
+
+    // Router
+    const Router = useRouter();
 
     // Process States
     const [isSending, setSending] = useState<boolean>(false);
@@ -79,7 +84,8 @@ export default function Register() {
                 console.log(response);
                 setSending(false);
                 setSnackbarMessage("Inscrit avec succès!");
-                login(response.data.user);
+                Dispatch(Login(response.data.user));
+                Router.back();
                 setSnackbarSeverity("success");
                 setSnackbarOpen(true);
             })

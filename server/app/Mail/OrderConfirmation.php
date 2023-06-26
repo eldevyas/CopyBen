@@ -40,7 +40,7 @@ class OrderConfirmation extends Mailable
         // 
         // 
         if (isset($Order['Files']) && is_array($Order['Files']) && count($Order['Files']) > 0) {
-            $files = $Order['Files'][0];
+            $files = $Order['Files'];
             if (is_array($files)) {
                 foreach ($files as $file) {
                     $mail->attach(storage_path('app/' . $file), [

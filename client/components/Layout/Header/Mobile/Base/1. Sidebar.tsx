@@ -9,13 +9,14 @@ import {
 import React, { useEffect, useState } from "react";
 import Products from "@/data/Products";
 import { useRouter } from "next/router";
-import { Context } from "@/types/Context";
-import { useAuth } from "@/context/AuthContext";
+import { useAppDispatch, useAppSelector } from "@/redux/Hooks";
+import { Logout } from "@/redux/Slices/AuthSlice";
 
 const Sidebar = (props: any) => {
     const Router = useRouter();
-    const [Authenticated, setAuthenticated] = useState(false);
-    const { isLoggedIn, userInfo, logout } = useAuth() as Context;
+    const Dispatch = useAppDispatch();
+    const { Auth } = useAppSelector((state) => state);
+    const { User, isAuthenticated } = Auth;
 
     return (
         <MDBCollapse show={props.showNav} navbar style={{ userSelect: "none" }}>
@@ -36,16 +37,15 @@ const Sidebar = (props: any) => {
                 >
                     <MDBNavbarLink>Produits</MDBNavbarLink>
                 </li>
-                {isLoggedIn ? (
+                {isAuthenticated ? (
                     <>
                         <p className="nav-item text-primary">
-                            Connecté en tant que: {userInfo?.fname}{" "}
-                            {userInfo?.lname}
+                            Connecté en tant que: {User?.fname} {User?.lname}
                         </p>
                         <li
                             className="nav-item"
                             onClick={() => {
-                                logout();
+                                Dispatch(Logout());
                             }}
                         >
                             <MDBNavbarLink>Se Déconnecter</MDBNavbarLink>

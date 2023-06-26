@@ -3,17 +3,17 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { UserReducer } from "./Reducers/UserReducer";
 import { OrderReducer } from "./Reducers/OrderReducer";
-
+import AuthReducer from "./Slices/AuthSlice";
 
 // Configure Redux Persist
 const persistConfig = {
-    key: 'root',
+    key: 'Root',
     storage,
 };
 
 const rootReducer = combineReducers({
-    User: UserReducer,
     Order: OrderReducer,
+    Auth: AuthReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -31,8 +31,6 @@ export const store = configureStore({
 // Initialize Redux Persist
 export const persistor = persistStore(store);
 
-// Export the store and persistor
-export default { store, persistor } as any;
 // Root State 
 export type RootState = ReturnType<typeof store.getState>;
 

@@ -11,9 +11,8 @@ import { Alert, Snackbar, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ThankYouScreen from "./Calculator/3. Thank You";
 import axios from "axios";
-import { useAuth } from "@/context/AuthContext";
 import { useAppDispatch, useAppSelector } from "@/redux/Hooks";
-import { SetOrder } from "@/redux/Actions/OrderActions";
+import { ResetOrder, SetOrder } from "@/redux/Actions/OrderActions";
 import { sendOrder } from "@/lib/sendOrder";
 import { useRouter } from "next/router";
 
@@ -82,6 +81,7 @@ type OrderInfo = {
 
 export default function Calculator(props: { Product: Product } | any) {
     const Router = useRouter();
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
     // MUI states
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -97,26 +97,30 @@ export default function Calculator(props: { Product: Product } | any) {
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
     };
-    // Get Order Info from LoggenIn user
-    const { userInfo }: any = useAuth();
 
     const [value, setValue] = React.useState(0);
     let GeneratedID: string = generateOrderId("CB", "OD");
     const [orderID, setOrderID] = useState<string>(GeneratedID);
     const [FirstValues, setFirstValues] = useState<FormValues | null>(null);
     const [SecondValues, setSecondValues] = useState<FormValues | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // Redux Things
     const Dispatch = useAppDispatch();
     const Order = useAppSelector((state) => state.Order);
-    const User = useAppSelector((state) => state.User);
+    const isAuthenticated = useAppSelector(
+        (state) => state.Auth.isAuthenticated
+    );
+    const User = useAppSelector((state) => state.Auth.User);
 
     // Final Uplaod of Values
 
     const callFinalUpload = async (FinalLinks: string[]) => {
+        setIsLoading(true);
+
         const Info = {
             orderID: orderID,
-            userInfo: userInfo,
+            userInfo: User,
             Product: props.Product.name,
             Customization: FirstValues,
             Files: FinalLinks,
@@ -127,24 +131,34 @@ export default function Calculator(props: { Product: Product } | any) {
         console.log("Final Upload: ", Info);
         console.log("Dispatched: ", Order);
 
-        if (User.isLoggedIn === true) {
-            const SendOrder = await sendOrder(Info);
-
-            if (SendOrder) {
-                setSnackbarMessage("Votre commande s'est bien envoyée.");
-                setSnackbarSeverity("success");
-                handleSnackbarOpen();
-                setValue(value + 1);
-            } else {
-                setSnackbarMessage("Erreur lors de l'envoi de la commande.");
-                setSnackbarSeverity("error");
-                handleSnackbarOpen();
-            }
+        if (isAuthenticated) {
+            // Send Axios POST request
+            axios
+                .post(`${API_URL}/order`, Info)
+                .then((res) => {
+                    console.log("Response: ", res.data);
+                    setSnackbarMessage("Votre commande s'est bien envoyée.");
+                    setSnackbarSeverity("success");
+                    Dispatch(ResetOrder());
+                    handleSnackbarOpen();
+                    setValue(value + 1);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setSnackbarMessage(
+                        "Erreur lors de l'envoi de la commande."
+                    );
+                    setSnackbarSeverity("error");
+                    handleSnackbarOpen();
+                    setIsLoading(false);
+                });
         } else {
             setSnackbarMessage("Vous devez être connecté pour commander.");
             setSnackbarSeverity("info");
             handleSnackbarOpen();
             Router.push("/auth/login");
+            setIsLoading(false);
         }
     };
 
@@ -178,6 +192,8 @@ export default function Calculator(props: { Product: Product } | any) {
                     callPrevious={() => {
                         setValue(value - 1);
                     }}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
                 />
             </TabPanel>
             <TabPanel value={value} index={2}>

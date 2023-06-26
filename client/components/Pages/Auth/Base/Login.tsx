@@ -14,8 +14,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { useAuth } from "@/context/AuthContext";
 import axios from "axios";
+import { Login } from "@/redux/Slices/AuthSlice";
+import { useAppDispatch } from "@/redux/Hooks";
 
 function Copyright(props: any) {
     return (
@@ -42,9 +43,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function Login() {
-    // Auth Context
-    const { isLoggedIn, login, logout, userInfo }: any = useAuth();
+export default function LoginContainer() {
+    // Redux Things
+    const Dispatch = useAppDispatch();
 
     // Process States
     const [isSending, setSending] = React.useState<boolean>(false);
@@ -85,7 +86,7 @@ export default function Login() {
                     return;
                 }
                 setSending(false);
-                login(response.data.user);
+                Dispatch(Login(response.data.user));
                 setSnackbarMessage("Connexion réussie !");
                 setSnackbarSeverity("success");
                 setSnackbarOpen(true);

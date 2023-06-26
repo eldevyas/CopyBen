@@ -1,10 +1,12 @@
-import { SetOrder, ResetOrder } from "../Actions/OrderActions";
+import { OrderInfo } from '@/redux/Types/Order';
+import { SET_ORDER, RESET_ORDER } from "../Actions/OrderActions";
 import { InitialState } from "../initialState";
-export const OrderReducer = (state: any = InitialState.Order, action: { type: any, payload: any }) => {
+
+export const OrderReducer = (state: OrderInfo | null = InitialState.Order, action: { type: string, payload: OrderInfo }) => {
     switch (action.type) {
-        case SetOrder:
+        case SET_ORDER:
             return action.payload;
-        case ResetOrder:
+        case RESET_ORDER:
             return null;
         default:
             return state;
