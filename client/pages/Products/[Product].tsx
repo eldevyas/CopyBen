@@ -4,7 +4,6 @@ import ProductPage from "@/components/Pages/Products/ProductPage";
 import Products, { getProductByName } from "@/data/Products";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useAuth } from "@/context/AuthContext";
 
 interface ProductPageProps {
     Product: Product;
