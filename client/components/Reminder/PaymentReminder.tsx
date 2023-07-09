@@ -42,7 +42,7 @@ const PaymentReminder = () => {
                     color: "#fff",
                 }}
             >
-                <Danger variant="Bulk" size="100" color="currentColor" />
+                <Danger variant="Broken" size="100" color="currentColor" />
             </Box>
             <Box
                 sx={{
