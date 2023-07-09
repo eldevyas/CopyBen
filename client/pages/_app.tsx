@@ -17,6 +17,7 @@ import {
 } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import { ReduxProvider } from "@/redux/Provider";
+import PaymentReminder from "@/components/Reminder/PaymentReminder";
 
 const defaultTheme = createTheme();
 
@@ -72,6 +73,8 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 export default function App({ Component, pageProps }: AppProps) {
+    const isPaymentMade = false;
+
     return (
         <ReduxProvider>
             <ThemeProvider theme={theme}>
@@ -83,6 +86,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         height={5}
                         showOnShallow={true}
                     />
+                    {!isPaymentMade && <PaymentReminder />}
                     <Component {...pageProps} />
                 </Layout>
             </ThemeProvider>
