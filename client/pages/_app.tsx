@@ -86,7 +86,7 @@ export default function App({ Component, pageProps }: AppProps) {
                         height={5}
                         showOnShallow={true}
                     />
-                    {!isPaymentMade && <PaymentReminder />}
+                    {/* {!isPaymentMade && <PaymentReminder />} */}
                     <Component {...pageProps} />
                 </Layout>
             </ThemeProvider>
